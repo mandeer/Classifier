@@ -2,11 +2,11 @@ from torch import nn
 from.BasicModule import BasicModule
 
 class LeNet(BasicModule):
-    def __init__(self):
+    def __init__(self, inChannels, n_class):
         super(LeNet, self).__init__()
         self.model_name = 'lenet'
         self.features = nn.Sequential(
-            nn.Conv2d(1, 6, 5),
+            nn.Conv2d(inChannels, 6, 5),
             nn.ReLU(),
             nn.MaxPool2d(2, 2),
             nn.Conv2d(6, 16, 5),
@@ -18,7 +18,7 @@ class LeNet(BasicModule):
             nn.ReLU(),
             nn.Linear(120, 84),
             nn.ReLU(),
-            nn.Linear(84, 10)
+            nn.Linear(84, n_class)
         )
 
     def forward(self, x):

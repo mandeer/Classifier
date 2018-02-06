@@ -13,7 +13,10 @@ class Solver(object):
     def __init__(self, config, trainLoader, testLoader):
         self.trainLoader = trainLoader
         self.testLoader = testLoader
-        self.LeNet = getattr(models, 'LeNet')()
+        if config.dataset == 'MNIST':
+            self.LeNet = getattr(models, 'LeNet')(1, 10)
+        else:
+            self.LeNet = getattr(models, 'LeNet')(3, 10)
         if config.modelName != '':
             print('use pretrained model: ', config.modelName)
             self.LeNet.load(config.modelName)
@@ -79,7 +82,7 @@ class Solver(object):
             #     print('accuracy_', jj, ': ', val_accuracy[jj])
             print('accuracy total: ', val_accuracy[10])
 
-        LeNet.save(root=self.outPath, name='LeNet_mnist.pth')
+        LeNet.save(root=self.outPath, name='LeNet_cifar10.pth')
         return
 
     def test(self):
@@ -119,18 +122,20 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--imageSize', type=int, default=32)
-    parser.add_argument('--n_epochs', type=int, default=10)
+    parser.add_argument('--n_epochs', type=int, default=20)
     parser.add_argument('--batchSize', type=int, default=64)
     parser.add_argument('--n_workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
     parser.add_argument('--weightDecay', type=float, default=1e-4, help='')
     parser.add_argument('--outPath', type=str, default='./output')
-    parser.add_argument('--mnistPath', type=str, default='./data/mnist')
+
     parser.add_argument('--logStep', type=int, default=100)
     parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--mode', type=str, default='test', help='train, test')
-    parser.add_argument('--modelName', type=str, default='./pretrained_models/LeNet_mnist.pth', help='model for test or retrain')
+    parser.add_argument('--dataPath', type=str, default='./data/cifar10')
+    parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or MNIST')
+    parser.add_argument('--mode', type=str, default='train', help='train, test')
+    parser.add_argument('--modelName', type=str, default='./output/LeNet_cifar10.pth', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.cuda and not torch.cuda.is_available():
