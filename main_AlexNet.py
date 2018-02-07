@@ -14,9 +14,9 @@ class Solver(object):
         self.trainLoader = trainLoader
         self.testLoader = testLoader
         if config.dataset == 'CIFAR10':
-            self.AlexNet = getattr(models, 'AlexNet')(10)
+            self.AlexNet = getattr(models, 'AlexNet_CIFAR')(10)
         else:
-            self.AlexNet = getattr(models, 'AlexNet')(1000)
+            self.AlexNet = getattr(models, 'AlexNet_CIFAR')(100)
         if config.modelName != '':
             print('use pretrained model: ', config.modelName)
             self.AlexNet.load(config.modelName)
@@ -29,9 +29,9 @@ class Solver(object):
         AlexNet = self.AlexNet
         testLoader = self.testLoader
         AlexNet.eval()  # 验证模式
-        class_correct = list(0. for i in range(10))
-        class_total = list(0. for i in range(10))
-        accuracy = list(0. for i in range(10 + 1))
+        class_correct = list(0. for i in range(100))
+        class_total = list(0. for i in range(100))
+        accuracy = list(0. for i in range(100 + 1))
         for ii, (datas, labels) in enumerate(testLoader):
             val_inputs = Variable(datas, volatile=True)
             # print(labels)
@@ -82,7 +82,7 @@ class Solver(object):
             #     print('accuracy_', jj, ': ', val_accuracy[jj])
             print('accuracy total: ', val_accuracy[10])
 
-            AlexNet.save(root=self.outPath, name='AlexNet_cifar10.pth')
+            AlexNet.save(root=self.outPath, name='AlexNet_cifar100.pth')
         return
 
     def test(self):
@@ -131,10 +131,10 @@ if __name__ == '__main__':
     parser.add_argument('--logStep', type=int, default=100)
     parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--dataPath', type=str, default='./data/cifar10')
-    parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or imageNet')
-    parser.add_argument('--mode', type=str, default='test', help='train, test')
-    parser.add_argument('--modelName', type=str, default='./output/AlexNet_cifar10.pth', help='model for test or retrain')
+    parser.add_argument('--dataPath', type=str, default='./data/cifar100')
+    parser.add_argument('--dataset', type=str, default='CIFAR100', help='CIFAR10 or CIFAR100')
+    parser.add_argument('--mode', type=str, default='train', help='train, test')
+    parser.add_argument('--modelName', type=str, default='', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.cuda and not torch.cuda.is_available():

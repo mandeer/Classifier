@@ -1,3 +1,3 @@
 from .BasicModule import BasicModule
 from .LeNet import LeNet
-from .AlexNet import AlexNet
+from .AlexNet import AlexNet_CIFAR

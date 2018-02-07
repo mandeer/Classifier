@@ -17,6 +17,9 @@ def getDataLoader(config):
     elif config.dataset == 'CIFAR10':
         dataTrain = datasets.CIFAR10(root=config.dataPath, train=True, download=True, transform=transform)
         dataTest = datasets.CIFAR10(root=config.dataPath, train=False, download=True, transform=transform)
+    elif config.dataset == 'CIFAR100':
+        dataTrain = datasets.CIFAR100(root=config.dataPath, train=True, download=True, transform=transform)
+        dataTest = datasets.CIFAR100(root=config.dataPath, train=False, download=True, transform=transform)
 
     trainLoader = torch.utils.data.DataLoader(dataset=dataTrain,
                                               batch_size=config.batchSize,

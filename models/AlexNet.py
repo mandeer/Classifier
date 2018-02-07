@@ -11,10 +11,10 @@ model_urls = {
 }
 
 
-class AlexNet(BasicModule):
+class AlexNet_CIFAR(BasicModule):
 
-    def __init__(self, num_classes=1000):
-        super(AlexNet, self).__init__()
+    def __init__(self, num_classes=10):
+        super(AlexNet_CIFAR, self).__init__()
         self.model_name = 'alexnet'
         self.features = nn.Sequential(
             nn.Conv2d(3, 8, kernel_size=3, stride=1, padding=1),
@@ -48,8 +48,3 @@ class AlexNet(BasicModule):
         return x
 
 
-def alexnet(pretrained=False, **kwargs):
-    model = AlexNet(**kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['alexnet']))
-    return model
