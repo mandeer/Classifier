@@ -25,8 +25,8 @@
 2. S2中的每个特征图连接到了每个C3的特征图
 
 ### 训练结果
-1. 在mnist进行了10次迭代，最终在测试集上的识别结果为 0.983
-2. 在cifar10进行了40次迭代，最终测试集上的识别结果为 0.636
+1. 在mnist训练集进行了10次迭代，最终在测试集上的识别结果为 0.983
+2. 在cifar10训练集进行了40次迭代，最终测试集上的识别结果为 0.636
 
 
 ## 2. AlexNet [paper](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)

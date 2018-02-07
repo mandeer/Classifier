@@ -20,7 +20,9 @@ class Solver(object):
         if config.modelName != '':
             print('use pretrained model: ', config.modelName)
             self.AlexNet.load(config.modelName)
-        self.optimizer = torch.optim.SGD(self.AlexNet.parameters(), lr=config.lr,momentum=0.9 ,weight_decay=0.0005)
+        self.lr = config.lr
+        self.optimizer = torch.optim.SGD(self.AlexNet.parameters(), lr=self.lr, momentum=0.9, weight_decay=0.0005)
+        self.criterion = torch.nn.CrossEntropyLoss()
         self.n_epochs = config.n_epochs
         self.logStep = config.logStep
         self.outPath = config.outPath
@@ -32,11 +34,14 @@ class Solver(object):
         class_correct = list(0. for i in range(100))
         class_total = list(0. for i in range(100))
         accuracy = list(0. for i in range(100 + 1))
+        loss = 0.0
         for ii, (datas, labels) in enumerate(testLoader):
             val_inputs = Variable(datas, volatile=True)
+            target = Variable(labels)
             # print(labels)
-            outputs = AlexNet(val_inputs)
-            _, predicted = torch.max(outputs.data, 1)
+            score = AlexNet(val_inputs)
+            loss += self.criterion(score, target)
+            _, predicted = torch.max(score.data, 1)
             c = (predicted == labels).squeeze()
             for jj in range(labels.size()[0]):
                 label = labels[jj]
@@ -55,38 +60,42 @@ class Solver(object):
         accuracy[10] = correct / total
 
         AlexNet.train()  # 训练模式
-        return accuracy
+        return accuracy, loss.data.numpy()
 
     def train(self):
-        val_accuracy = self.val()
+        val_accuracy, val_loss = self.val()
         print('begin with accuracy: ', val_accuracy[10])
 
         AlexNet = self.AlexNet
-        criterion = torch.nn.CrossEntropyLoss()
         for epoch in range(self.n_epochs):
             for ii, (data, label) in enumerate(self.trainLoader):
                 input = Variable(data)
                 target = Variable(label)
                 self.optimizer.zero_grad()
-
                 score = AlexNet(input)
-                loss = criterion(score, target)
+                loss = self.criterion(score, target)
                 loss.backward()
                 self.optimizer.step()
 
                 if (ii + 1) % self.logStep == 0:
-                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy())
+                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy()[0])
 
-            val_accuracy = self.val()
-            # for jj in range(10):
-            #     print('accuracy_', jj, ': ', val_accuracy[jj])
+            per_val_loss = val_loss
+            val_accuracy, val_loss = self.val()
             print('accuracy total: ', val_accuracy[10])
+            print('val loss: ', val_loss[0])
 
-            AlexNet.save(root=self.outPath, name='AlexNet_cifar100.pth')
+            if per_val_loss <= val_loss:
+                self.lr *= 0.1
+                self.optimizer = torch.optim.SGD(self.AlexNet.parameters(), lr=self.lr, momentum=0.9,
+                                                 weight_decay=0.0005)
+                print('now lr is: ', self.lr)
+
+        AlexNet.save(root=self.outPath, name='AlexNet_cifar100.pth')
         return
 
     def test(self):
-        accuracy = self.val()
+        accuracy, loss = self.val()
 
         for jj in range(10):
             print('accuracy_', jj, ': ', accuracy[jj])
@@ -123,7 +132,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--imageSize', type=int, default=32)
     parser.add_argument('--n_epochs', type=int, default=50)
-    parser.add_argument('--batchSize', type=int, default=64)
+    parser.add_argument('--batchSize', type=int, default=128)
     parser.add_argument('--n_workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
     parser.add_argument('--outPath', type=str, default='./output')
@@ -131,8 +140,8 @@ if __name__ == '__main__':
     parser.add_argument('--logStep', type=int, default=100)
     parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--dataPath', type=str, default='./data/cifar100')
-    parser.add_argument('--dataset', type=str, default='CIFAR100', help='CIFAR10 or CIFAR100')
+    parser.add_argument('--dataPath', type=str, default='./data/cifar10')
+    parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode', type=str, default='train', help='train, test')
     parser.add_argument('--modelName', type=str, default='', help='model for test or retrain')
 
