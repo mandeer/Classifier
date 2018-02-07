@@ -39,14 +39,15 @@ AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年�
 3. 大数据训练: imageNet
 4. 高性能计算平台: GPU
 5. 重叠Pooling: kernel_size=3, stride=2
-6. 局部相应归一化(LRN, Local Response Normalization), VGG说这个没什么用
+6. 局部相应归一化(LRN, Local Response Normalization), 
+[VGG](https://arxiv.org/abs/1409.1556)说这个没什么用
 
 ### 本工程实现的AlexNet与原始的AlexNet略有区别
 1. 没有使用LRN
 2. 没有使用group
 
 ### 训练结果
-1. 在cifar10数据集上没有达到论文中给出的结果
+1. 在cifar10数据集上没有达到论文中给出的结果, 50次epochs才达到0.706
 
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
 
