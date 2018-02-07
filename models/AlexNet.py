@@ -98,8 +98,8 @@ class AlexNet_CIFAR(BasicModule):
 
 class CIFAR10(BasicModule):
     def __init__(self, num_classes=10):
-        super(AlexNet_CIFAR, self).__init__()
-        self.model_name = 'alexnet_cifar'
+        super(CIFAR10, self).__init__()
+        self.model_name = 'cifar10'
         self.features = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=5, stride=1, padding=2),
             nn.ReLU(inplace=True),
@@ -112,7 +112,7 @@ class CIFAR10(BasicModule):
             nn.AvgPool2d(3, 2)
         )
         self.classifier = nn.Sequential(
-            nn.Linear(64 * 4 * 4, 64),
+            nn.Linear(64 * 3 * 3, 64),
             nn.ReLU(inplace=True),
             nn.Linear(64, num_classes),
             nn.ReLU(inplace=True),
@@ -120,6 +120,6 @@ class CIFAR10(BasicModule):
 
     def forward(self, x):
         x = self.features(x)
-        x = x.view(x.size(0), 64 * 4 * 4)
+        x = x.view(x.size(0), 64 * 3 * 3)
         x = self.classifier(x)
         return x
