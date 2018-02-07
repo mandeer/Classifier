@@ -82,8 +82,8 @@ class Solver(object):
 
             per_val_loss = val_loss
             val_accuracy, val_loss = self.val()
-            print('accuracy total: ', val_accuracy[10])
-            print('val loss: ', val_loss[0])
+            print('val accuracy: ', val_accuracy[10])
+            print('val loss:     ', val_loss[0])
 
             if per_val_loss <= val_loss:
                 self.lr *= 0.1
