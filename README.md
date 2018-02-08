@@ -1,23 +1,23 @@
 # Classifier
 
-使用Pytorch实现了经典的分类算法
-1. [**LeNet**](#LeNet)
-2. [**AlexNet**](#AlexNet)
-3. [VGG](#VGG)
-4. GoogLeNet
-5. ResNet
-6. DenseNet
-7. SqueezeNet
-8. MobileNet
+使用Pytorch实现了经典的分类算法  
+    * [**LeNet**](#leNet)  
+    * [**AlexNet**](#AlexNet)  
+    * [VGG](#VGG)  
+    * GoogLeNet  
+    * ResNet  
+    * DenseNet  
+    * SqueezeNet  
+    * MobileNet
 
 ## Prerequisites:
-* anaconda
-* pytorch-0.3.0
-* torchvision
-* visdom
+    * anaconda
+    * pytorch-0.3.0
+    * torchvision
+    * visdom
 
+### lenet
 ## LeNet [paper](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
---------------------
 卷积神经网络的开山之作，麻雀虽小但五脏俱全。
 ![LeNet-5](./imgs/LeNet-5.png)
 ### 主要贡献
