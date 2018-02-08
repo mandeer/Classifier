@@ -16,7 +16,7 @@
 * torchvision
 * visdom
 
-## 1. LeNet [paper](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
+## LeNet [paper](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
 卷积神经网络的开山之作，麻雀虽小但五脏俱全。
 ![LeNet-5](./imgs/LeNet-5.png)
 ### 主要贡献
@@ -34,7 +34,7 @@
 1. 在mnist训练集进行了10次迭代，最终在测试集上的识别结果为 0.983
 2. 在cifar10训练集进行了40次迭代，最终测试集上的识别结果为 0.636
 
-## 2. AlexNet [paper](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+## AlexNet [paper](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
 且远远超过当年的第二名。将沉寂多年的神经网络重新引入大众的视野。
 ![AlexNet](./imgs/AlexNet.png)
@@ -58,4 +58,4 @@ AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年�
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
 
 
-## 3. VGG [paper](https://arxiv.org/abs/1409.1556)
+## VGG [paper](https://arxiv.org/abs/1409.1556)
