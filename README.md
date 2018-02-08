@@ -1,21 +1,21 @@
 # Classifier
 
 使用Pytorch实现了经典的分类算法：  
-* [**LeNet**](#leNet)  
-* [**AlexNet**](#AlexNet)  
-* [VGG](#VGG)  
+* [**LeNet**](#lenet)
+* [**AlexNet**](#alexnet)
+* [VGG](#vgg)
 * GoogLeNet  
-* ResNet  
-* DenseNet  
-* SqueezeNet  
+* ResNet
+* DenseNet
+* SqueezeNet
 * MobileNet
 
 ------
 ## Prerequisites:
-    * anaconda
-    * pytorch-0.3.0
-    * torchvision
-    * visdom
+* anaconda
+* pytorch-0.3.0
+* torchvision
+* visdom
 
 ------
 ## LeNet [paper](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
@@ -61,3 +61,6 @@ AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年�
 
 ------
 ## VGG [paper](https://arxiv.org/abs/1409.1556)
+
+
+[返回顶部](#classifier)
