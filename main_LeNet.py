@@ -14,9 +14,9 @@ class Solver(object):
         self.trainLoader = trainLoader
         self.testLoader = testLoader
         if config.dataset == 'MNIST':
-            self.LeNet = getattr(models, 'LeNet')(1, 10)
+            self.LeNet = getattr(models, 'LeNet')(1, 10, config.use_ReLU)
         else:
-            self.LeNet = getattr(models, 'LeNet')(3, 10)
+            self.LeNet = getattr(models, 'LeNet')(3, 10, config.use_ReLU)
         if config.modelName != '':
             print('use pretrained model: ', config.modelName)
             self.LeNet.load(config.modelName)
@@ -75,7 +75,7 @@ class Solver(object):
                 self.optimizer.step()
 
                 if (ii + 1) % self.logStep == 0:
-                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy())
+                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy()[0])
 
             val_accuracy = self.val()
             # for jj in range(10):
@@ -128,14 +128,15 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.01)
     parser.add_argument('--weightDecay', type=float, default=1e-4, help='')
     parser.add_argument('--outPath', type=str, default='./output')
+    parser.add_argument('--use_ReLU', type=str2bool, default=False, help='use ReLU or not')
 
     parser.add_argument('--logStep', type=int, default=100)
     parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--dataPath', type=str, default='./data/cifar10')
-    parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or MNIST')
-    parser.add_argument('--mode', type=str, default='test', help='train, test')
-    parser.add_argument('--modelName', type=str, default='./output/LeNet_cifar10.pth', help='model for test or retrain')
+    parser.add_argument('--dataPath', type=str, default='./data/mnist')
+    parser.add_argument('--dataset', type=str, default='MNIST', help='CIFAR10 or MNIST')
+    parser.add_argument('--mode', type=str, default='train', help='train, test')
+    parser.add_argument('--modelName', type=str, default='', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.cuda and not torch.cuda.is_available():
