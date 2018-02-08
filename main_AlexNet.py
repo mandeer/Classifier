@@ -131,7 +131,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--imageSize', type=int, default=32)
-    parser.add_argument('--n_epochs', type=int, default=50)
+    parser.add_argument('--n_epochs', type=int, default=20)
     parser.add_argument('--batchSize', type=int, default=128)
     parser.add_argument('--n_workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
