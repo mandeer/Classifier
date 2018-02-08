@@ -1,10 +1,10 @@
 # Classifier
 
-使用Pytorch实现了经典的分类算法：  
+使用PyTorch实现了经典的分类算法：  
 * [**LeNet**](#lenet)
 * [**AlexNet**](#alexnet)
 * [VGG](#vgg)
-* GoogLeNet  
+* GoogLeNet
 * ResNet
 * DenseNet
 * SqueezeNet
@@ -41,7 +41,7 @@
 ## AlexNet
 [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
-且远远超过当年的第二名。将沉寂多年的神经网络重新引入大众的视野。
+且远远超过当年的第二名。将沉寂多年的神经网络重新引入了大众的视野。
 ![AlexNet](./imgs/AlexNet.png)
 ### 主要贡献
 * 非线性激活函数: ReLU
@@ -50,7 +50,7 @@
 * 高性能计算平台: GPU
 * 重叠Pooling: kernel_size=3, stride=2
 * 局部相应归一化(LRN, Local Response Normalization), 
-[VGG](https://arxiv.org/abs/1409.1556)说这个没什么用
+[VGG](#vgg)说这个没什么用
 
 ### 本工程实现的AlexNet与原始的AlexNet略有区别
 * 没有使用LRN
@@ -58,7 +58,7 @@
 
 ### 训练结果
 * 在cifar10数据集上没有达到论文中给出的结果, 50次epochs才达到0.706
-* cifarNet在5个epochs后达到了0.509，最终在20次epochs后达到了0.750  
+* cifarNet在5个epochs后达到了0.632，最终在20次epochs后达到了0.784
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
 
 ------

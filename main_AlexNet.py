@@ -13,36 +13,42 @@ class Solver(object):
     def __init__(self, config, trainLoader, testLoader):
         self.trainLoader = trainLoader
         self.testLoader = testLoader
-        if config.dataset == 'CIFAR10':
-            self.AlexNet = getattr(models, 'CIFAR10')(10)
-        else:
-            self.AlexNet = getattr(models, 'CIFAR10')(100)
-        if config.modelName != '':
-            print('use pretrained model: ', config.modelName)
-            self.AlexNet.load(config.modelName)
+        self.n_class = config.n_class
+        self.use_cuda = config.use_cuda
+        self.AlexNet = getattr(models, 'CIFAR10')(self.n_class)
+        if config.model_name != '':
+            print('use pretrained model: ', config.model_name)
+            self.AlexNet.load(config.model_name)
         self.lr = config.lr
         self.optimizer = torch.optim.SGD(self.AlexNet.parameters(), lr=self.lr, momentum=0.9, weight_decay=0.0005)
         self.criterion = torch.nn.CrossEntropyLoss()
+        if self.use_cuda:
+            self.AlexNet = self.AlexNet.cuda()
+            self.criterion = self.criterion.cuda()
+
         self.n_epochs = config.n_epochs
-        self.logStep = config.logStep
-        self.outPath = config.outPath
+        self.log_step = config.log_step
+        self.out_path = config.out_path
 
     def val(self):
         AlexNet = self.AlexNet
         testLoader = self.testLoader
         AlexNet.eval()  # 验证模式
-        class_correct = list(0. for i in range(100))
-        class_total = list(0. for i in range(100))
-        accuracy = list(0. for i in range(100 + 1))
+        class_correct = list(0. for i in range(self.n_class))
+        class_total = list(0. for i in range(self.n_class))
+        accuracy = list(0. for i in range(self.n_class + 1))
         loss = 0.0
         for ii, (datas, labels) in enumerate(testLoader):
             val_inputs = Variable(datas, volatile=True)
             target = Variable(labels)
+            if self.use_cuda:
+                val_inputs = val_inputs.cuda()
+                target = target.cuda()
             # print(labels)
             score = AlexNet(val_inputs)
             loss += self.criterion(score, target)
             _, predicted = torch.max(score.data, 1)
-            c = (predicted == labels).squeeze()
+            c = (predicted.cpu() == labels).squeeze()
             for jj in range(labels.size()[0]):
                 label = labels[jj]
                 class_correct[label] += c[jj]
@@ -60,7 +66,7 @@ class Solver(object):
         accuracy[10] = correct / total
 
         AlexNet.train()  # 训练模式
-        return accuracy, loss.data.numpy()
+        return accuracy, loss.cpu().data.numpy()
 
     def train(self):
         val_accuracy, val_loss = self.val()
@@ -71,14 +77,17 @@ class Solver(object):
             for ii, (data, label) in enumerate(self.trainLoader):
                 input = Variable(data)
                 target = Variable(label)
+                if self.use_cuda:
+                    input = input.cuda()
+                    target = target.cuda()
                 self.optimizer.zero_grad()
                 score = AlexNet(input)
                 loss = self.criterion(score, target)
                 loss.backward()
                 self.optimizer.step()
 
-                if (ii + 1) % self.logStep == 0:
-                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy()[0])
+                if (ii + 1) % self.log_step == 0:
+                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
 
             per_val_loss = val_loss
             val_accuracy, val_loss = self.val()
@@ -91,7 +100,7 @@ class Solver(object):
                                                  weight_decay=0.0005)
                 print('now lr is: ', self.lr)
 
-        AlexNet.save(root=self.outPath, name='CIFAR10.pth')
+        AlexNet.save(root=self.out_path, name='CIFAR10.pth')
         return
 
     def test(self):
@@ -104,15 +113,15 @@ class Solver(object):
 
 
 def main(config):
-    if config.cuda:
+    if config.use_cuda:
         from torch.backends import cudnn
         cudnn.benchmark = True
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     # create directories if not exist
-    if not os.path.exists(config.outPath):
-        os.makedirs(config.outPath)
+    if not os.path.exists(config.out_path):
+        os.makedirs(config.out_path)
 
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
@@ -130,24 +139,25 @@ def main(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--imageSize', type=int, default=32)
-    parser.add_argument('--n_epochs', type=int, default=20)
-    parser.add_argument('--batchSize', type=int, default=128)
-    parser.add_argument('--n_workers', type=int, default=4)
+    parser.add_argument('--image-size', type=int, default=32)
+    parser.add_argument('--n-epochs', type=int, default=20)
+    parser.add_argument('--batch-size', type=int, default=128)
+    parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
-    parser.add_argument('--outPath', type=str, default='./output')
+    parser.add_argument('--out-path', type=str, default='./output')
 
-    parser.add_argument('--logStep', type=int, default=100)
-    parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
+    parser.add_argument('--log-step', type=int, default=100)
+    parser.add_argument('--use-cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--dataPath', type=str, default='./data/cifar10')
+    parser.add_argument('--data-path', type=str, default='./data/cifar10')
+    parser.add_argument('--n-class', type=int, default=10, help='10, 100, or 1000')
     parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode', type=str, default='train', help='train, test')
-    parser.add_argument('--modelName', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--model-name', type=str, default='', help='model for test or retrain')
 
     config = parser.parse_args()
-    if config.cuda and not torch.cuda.is_available():
-        config.cuda = False
+    if config.use_cuda and not torch.cuda.is_available():
+        config.use_cuda = False
         print("WARNING: You have no CUDA device")
 
     args = vars(config)
