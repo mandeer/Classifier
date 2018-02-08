@@ -13,17 +13,23 @@ class Solver(object):
     def __init__(self, config, trainLoader, testLoader):
         self.trainLoader = trainLoader
         self.testLoader = testLoader
+        self.use_cuda = config.use_cuda
         if config.dataset == 'MNIST':
             self.LeNet = getattr(models, 'LeNet')(1, 10, config.use_ReLU)
         else:
             self.LeNet = getattr(models, 'LeNet')(3, 10, config.use_ReLU)
-        if config.modelName != '':
-            print('use pretrained model: ', config.modelName)
-            self.LeNet.load(config.modelName)
-        self.optimizer = torch.optim.SGD(self.LeNet.parameters(), lr=config.lr, weight_decay=config.weightDecay)
+        if config.model_name != '':
+            print('use pretrained model: ', config.model_name)
+            self.LeNet.load(config.model_name)
+        self.optimizer = torch.optim.SGD(self.LeNet.parameters(), lr=config.lr, weight_decay=config.weight_decay)
+        self.criterion = torch.nn.CrossEntropyLoss()
+        if self.use_cuda:
+            self.LeNet = self.LeNet.cuda()
+            self.criterion = self.criterion.cuda()
+
         self.n_epochs = config.n_epochs
-        self.logStep = config.logStep
-        self.outPath = config.outPath
+        self.log_step = config.log_step
+        self.out_path = config.out_path
 
     def val(self):
         LeNet = self.LeNet
@@ -32,12 +38,17 @@ class Solver(object):
         class_correct = list(0. for i in range(10))
         class_total = list(0. for i in range(10))
         accuracy = list(0. for i in range(10 + 1))
+        loss = 0.0
         for ii, (datas, labels) in enumerate(testLoader):
             val_inputs = Variable(datas, volatile=True)
-            # print(labels)
+            target = Variable(labels)
+            if self.use_cuda:
+                val_inputs = val_inputs.cuda()
+                target = target.cuda()
             outputs = LeNet(val_inputs)
+            loss += self.criterion(outputs, target)
             _, predicted = torch.max(outputs.data, 1)
-            c = (predicted == labels).squeeze()
+            c = (predicted.cpu() == labels).squeeze()
             for jj in range(labels.size()[0]):
                 label = labels[jj]
                 class_correct[label] += c[jj]
@@ -55,38 +66,38 @@ class Solver(object):
         accuracy[10] = correct / total
 
         LeNet.train()  # 训练模式
-        return accuracy
+        return accuracy, loss.cpu().data.numpy()
 
     def train(self):
-        val_accuracy = self.val()
+        val_accuracy, val_loss = self.val()
         print('begin with accuracy: ', val_accuracy[10])
 
         LeNet = self.LeNet
-        criterion = torch.nn.CrossEntropyLoss()
         for epoch in range(self.n_epochs):
             for ii, (data, label) in enumerate(self.trainLoader):
                 input = Variable(data)
                 target = Variable(label)
+                if self.use_cuda:
+                    input = input.cuda()
+                    target = target.cuda()
                 self.optimizer.zero_grad()
-
                 score = LeNet(input)
-                loss = criterion(score, target)
+                loss = self.criterion(score, target)
                 loss.backward()
                 self.optimizer.step()
 
-                if (ii + 1) % self.logStep == 0:
-                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.data.numpy()[0])
+                if (ii + 1) % self.log_step == 0:
+                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
 
-            val_accuracy = self.val()
-            # for jj in range(10):
-            #     print('accuracy_', jj, ': ', val_accuracy[jj])
-            print('accuracy total: ', val_accuracy[10])
+            val_accuracy, val_loss = self.val()
+            print('val accuracy: ', val_accuracy[10])
+            print('val loss:     ', val_loss[0])
 
-        LeNet.save(root=self.outPath, name='LeNet_cifar10.pth')
+        LeNet.save(root=self.out_path, name='LeNet_cifar10.pth')
         return
 
     def test(self):
-        accuracy = self.val()
+        accuracy, loss = self.val()
 
         for jj in range(10):
             print('accuracy_', jj, ': ', accuracy[jj])
@@ -95,15 +106,15 @@ class Solver(object):
 
 
 def main(config):
-    if config.cuda:
+    if config.use_cuda:
         from torch.backends import cudnn
         cudnn.benchmark = True
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     # create directories if not exist
-    if not os.path.exists(config.outPath):
-        os.makedirs(config.outPath)
+    if not os.path.exists(config.out_path):
+        os.makedirs(config.out_path)
 
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
@@ -121,26 +132,26 @@ def main(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--imageSize', type=int, default=32)
-    parser.add_argument('--n_epochs', type=int, default=20)
-    parser.add_argument('--batchSize', type=int, default=64)
-    parser.add_argument('--n_workers', type=int, default=4)
+    parser.add_argument('--image-size', type=int, default=32)
+    parser.add_argument('--n-epochs', type=int, default=30)
+    parser.add_argument('--batch-size', type=int, default=64)
+    parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
-    parser.add_argument('--weightDecay', type=float, default=1e-4, help='')
-    parser.add_argument('--outPath', type=str, default='./output')
-    parser.add_argument('--use_ReLU', type=str2bool, default=False, help='use ReLU or not')
+    parser.add_argument('--weight-decay', type=float, default=1e-4, help='')
+    parser.add_argument('--out-path', type=str, default='./output')
+    parser.add_argument('--use-ReLU', type=str2bool, default=False, help='use ReLU or not')
 
-    parser.add_argument('--logStep', type=int, default=100)
-    parser.add_argument('--cuda', type=str2bool, default=True, help='enables cuda')
+    parser.add_argument('--log-step', type=int, default=100)
+    parser.add_argument('--use-cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--dataPath', type=str, default='./data/mnist')
+    parser.add_argument('--data-path', type=str, default='./data/mnist')
     parser.add_argument('--dataset', type=str, default='MNIST', help='CIFAR10 or MNIST')
-    parser.add_argument('--mode', type=str, default='train', help='train, test')
-    parser.add_argument('--modelName', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--mode', type=str, default='test', help='train, test')
+    parser.add_argument('--model-name', type=str, default='./pretrained_models/LeNet_sigmoid_mnist.pth', help='model for test or retrain')
 
     config = parser.parse_args()
-    if config.cuda and not torch.cuda.is_available():
-        config.cuda = False
+    if config.use_cuda and not torch.cuda.is_available():
+        config.use_cuda = False
         print("WARNING: You have no CUDA device")
 
     args = vars(config)

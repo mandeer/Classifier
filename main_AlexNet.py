@@ -56,21 +56,21 @@ class Solver(object):
 
         correct = 0
         total = 0
-        for ii in range(10):
+        for ii in range(self.n_class):
             if class_total[ii] == 0:
                 accuracy[ii] = 0
             else:
                 correct = correct + class_correct[ii]
                 total = total + class_total[ii]
                 accuracy[ii] = class_correct[ii] / class_total[ii]
-        accuracy[10] = correct / total
+        accuracy[self.n_class] = correct / total
 
         AlexNet.train()  # 训练模式
         return accuracy, loss.cpu().data.numpy()
 
     def train(self):
         val_accuracy, val_loss = self.val()
-        print('begin with accuracy: ', val_accuracy[10])
+        print('begin with accuracy: ', val_accuracy[self.n_class])
 
         AlexNet = self.AlexNet
         for epoch in range(self.n_epochs):
@@ -91,7 +91,7 @@ class Solver(object):
 
             per_val_loss = val_loss
             val_accuracy, val_loss = self.val()
-            print('val accuracy: ', val_accuracy[10])
+            print('val accuracy: ', val_accuracy[self.n_class])
             print('val loss:     ', val_loss[0])
 
             if per_val_loss <= val_loss:
@@ -106,9 +106,9 @@ class Solver(object):
     def test(self):
         accuracy, loss = self.val()
 
-        for jj in range(10):
+        for jj in range(self.n_class):
             print('accuracy_', jj, ': ', accuracy[jj])
-        print('accuracy total: ', accuracy[10])
+        print('accuracy total: ', accuracy[self.n_class])
         return
 
 
@@ -152,8 +152,8 @@ if __name__ == '__main__':
     parser.add_argument('--data-path', type=str, default='./data/cifar10')
     parser.add_argument('--n-class', type=int, default=10, help='10, 100, or 1000')
     parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
-    parser.add_argument('--mode', type=str, default='train', help='train, test')
-    parser.add_argument('--model-name', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--mode', type=str, default='test', help='train, test')
+    parser.add_argument('--model-name', type=str, default='./pretrained_models/CIFAR10.pth', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():
