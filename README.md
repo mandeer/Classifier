@@ -18,8 +18,9 @@
 * visdom
 
 ------
-## LeNet    [paper](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
-卷积神经网络的开山之作，麻雀虽小但五脏俱全。
+## LeNet
+[LeNet](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
+是卷积神经网络的开山之作，麻雀虽小但五脏俱全。
 ![LeNet-5](./imgs/LeNet-5.png)
 ### 主要贡献
 * 局部感受野(local receptive fields)
@@ -38,8 +39,8 @@
 
 ------
 ## AlexNet
-[paper](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
-AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
+[AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
 且远远超过当年的第二名。将沉寂多年的神经网络重新引入大众的视野。
 ![AlexNet](./imgs/AlexNet.png)
 ### 主要贡献
@@ -62,7 +63,7 @@ AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年�
 
 ------
 ## VGG
-[paper](https://arxiv.org/abs/1409.1556)
+[VGG](https://arxiv.org/abs/1409.1556)
 
 
 [返回顶部](#classifier)
