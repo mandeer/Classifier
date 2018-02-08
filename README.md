@@ -48,6 +48,7 @@ AlexNet在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年�
 
 ### 训练结果
 1. 在cifar10数据集上没有达到论文中给出的结果, 50次epochs才达到0.706
+2. cifarNet在13个epochs后达到了0.761，最终在20次epochs后达到了0.764
 
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
 

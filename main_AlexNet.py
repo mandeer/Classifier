@@ -91,7 +91,7 @@ class Solver(object):
                                                  weight_decay=0.0005)
                 print('now lr is: ', self.lr)
 
-        AlexNet.save(root=self.outPath, name='AlexNet_cifar100.pth')
+        AlexNet.save(root=self.outPath, name='CIFAR10.pth')
         return
 
     def test(self):
