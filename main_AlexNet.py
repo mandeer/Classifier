@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import random
 import torch
 from torch.autograd import Variable
 
@@ -113,11 +114,21 @@ class Solver(object):
 
 
 def main(config):
+    # cuda
     if config.use_cuda:
         from torch.backends import cudnn
         cudnn.benchmark = True
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
+
+        # seed
+        if config.seed == 0:
+            config.seed = random.randint(1, 10000)  # fix seed
+        print("Random Seed: ", config.seed)
+        random.seed(config.seed)
+        torch.manual_seed(config.seed)
+        if config.use_cuda:
+            torch.cuda.manual_seed_all(config.seed)
 
     # create directories if not exist
     if not os.path.exists(config.out_path):
@@ -145,10 +156,9 @@ if __name__ == '__main__':
     parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--lr', type=float, default=0.01)
     parser.add_argument('--out-path', type=str, default='./output')
-
+    parser.add_argument('--seed', type=int, default=0, help='random seed for all')
     parser.add_argument('--log-step', type=int, default=100)
     parser.add_argument('--use-cuda', type=str2bool, default=True, help='enables cuda')
-
     parser.add_argument('--data-path', type=str, default='./data/cifar10')
     parser.add_argument('--n-class', type=int, default=10, help='10, 100, or 1000')
     parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
