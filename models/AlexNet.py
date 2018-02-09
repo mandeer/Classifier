@@ -14,7 +14,7 @@ model_urls = {
 class AlexNet(BasicModule):
     def __init__(self, num_classes=1000):
         super(AlexNet, self).__init__()
-        self.model_name = 'alexnet_cifar'
+        self.model_name = 'alexnet'
         self.features = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
             nn.ReLU(inplace=True),
