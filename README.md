@@ -68,6 +68,16 @@
 ------
 ## ZFNet
 [ZFNet](https://arxiv.org/abs/1311.2901v3)
+是2013年ILSVRC的冠军。其网络结构是在[AlexNet](#alexnet)上进行了微调：
+![ZFNet](./imgs/ZFNet.png)
+### 主要贡献
+* 卷积网络的可视化技术: 反卷积(Deconvolution), 也被称作转置卷积(Transpose convolution)
+* 依据可视化的结果，优化了[AlexNet](#alexnet):
+    * 第一层卷积的kernel从11改成7; stride从4改称2
+    * 去掉了[AlexNet](#alexnet)中的group
+
+![Conv2D](./imgs/Conv2D.gif) ![ConvTrans2D](./imgs/ConvTrans2D.gif)  
+图片来自[这里](#https://github.com/vdumoulin/conv_arithmetic)
 
 ------
 ## VGG
