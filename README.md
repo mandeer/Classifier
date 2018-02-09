@@ -61,6 +61,7 @@
 * 在cifar10数据集上没有达到论文中给出的结果, 50次epochs才达到0.706
 * cifarNet在5个epochs后达到了0.632，最终在20次epochs后达到了0.784
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
+* 使用预训练好的模型，在imageNet2012验证集上测试结果为：top1 = 0.565， top5 = 0.791
 
 ------
 ## VGG
