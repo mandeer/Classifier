@@ -77,7 +77,7 @@
     * 去掉了[AlexNet](#alexnet)中的group
 
 ![Conv2D](./imgs/Conv2D.gif) ![ConvTrans2D](./imgs/ConvTrans2D.gif)  
-图片来自[这里](#https://github.com/vdumoulin/conv_arithmetic)
+图片来自[这里](https://github.com/vdumoulin/conv_arithmetic)
 
 ------
 ## VGG
