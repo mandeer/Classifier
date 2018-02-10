@@ -73,7 +73,8 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 ### ReLU
 修正线性单元([ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf), Rectified linear unit)
 能够有效缓解梯度消失的问题，从而直接以监督的方式训练深度神经网络，无需依赖无监督的逐层预训练。  
-![sigmoid](./imgs/Sigmoid_Tanh.png) ![ReLu](./imgs/Softplus_ReLU.png)
+![AvtFunc](./imgs/ActFunc.png)
+
 #### 优点
 * 收敛速度快:  
 sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造成梯度消失的问题，减缓收敛速度。
