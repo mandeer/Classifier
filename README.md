@@ -6,7 +6,7 @@
     * [ReLU](#relu)
 * [ZFNet](#zfnet)
 * [**VGG**](#vgg)
-* [NIN](#nin)
+* [**NIN**](#nin)
 * GoogLeNet
 * ResNet
 * DenseNet
