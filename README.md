@@ -37,7 +37,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 
 #### 卷积
 ![conv](./imgs/conv.gif)
-#### pooling
+#### max pooling
 ![pooling](./imgs/pooling.gif)
 
 ### 本工程实现的LeNet与原始的LeNet-5略有区别

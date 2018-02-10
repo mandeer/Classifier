@@ -3,9 +3,9 @@
 import torch.nn as nn
 from .BasicModule import BasicModule
 
-class Net(BasicModule):
+class NIN(BasicModule):
     def __init__(self):
-        super(Net, self).__init__()
+        super(NIN, self).__init__()
         self.model_name = 'nin'
         self.classifer = nn.Sequential(
                 nn.Conv2d(3, 192, kernel_size=5, stride=1, padding=2),
