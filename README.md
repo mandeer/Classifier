@@ -3,6 +3,7 @@
 使用PyTorch实现了经典的分类算法：  
 * [**LeNet**](#lenet)
 * [**AlexNet**](#alexnet)
+    * [ReLU](#relu)
 * [ZFNet](#zfnet)
 * [VGG](#vgg)
 * GoogLeNet
@@ -64,6 +65,9 @@
 ![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
 * 使用预训练好的[AlexNet](https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth)，
 在imageNet2012验证集上测试结果为：top1 = 0.565， top5 = 0.791
+
+### ReLU
+[ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf)
 
 ------
 ## ZFNet
