@@ -25,11 +25,14 @@
 是卷积神经网络的开山之作，麻雀虽小但五脏俱全。
 ![LeNet-5](./imgs/LeNet-5.png)
 ### 主要贡献
-* 局部感受野(local receptive fields)
-* 权值共享(shared weights)
-* 下采样(sub-sampling)
-
-简化了网络参数并使网络具有一定程度的位移、尺度、形状不变性
+* 局部感受野(local receptive fields):  
+卷积层, 用于提取特征
+* 权值共享(shared weights):  
+因为目标可能出现在图像的任何位置，所以同一特征图中不同的节点需要在图像的不同位置执行相同的操作。
+即，同一层的不同节点拥有相同的权重。该操作使提取的特征拥有了位移不变性，同时大大降低了参数的数量。
+* 下采样(sub-sampling)  
+pooling层，下采样可以有效的降低输出对尺度和形变的敏感性。
+特征图的个数通常随着空间分辨率的降低而增加
 
 ### 本工程实现的LeNet与原始的LeNet-5略有区别
 * 使用了ReLU而不是sigmoid函数
@@ -66,8 +69,21 @@
 * 使用预训练好的[AlexNet](https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth)，
 在imageNet2012验证集上测试结果为：top1 = 0.565， top5 = 0.791
 
+------
 ### ReLU
-[ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf)
+修正线性单元([ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf), Rectified linear unit)
+能够有效缓解梯度消失的问题，从而直接以监督的方式训练深度神经网络，无需依赖无监督的逐层预训练。
+
+#### 优点
+* 单侧抑制
+* 相对宽阔的兴奋边界
+* 稀疏激活性
+
+#### 缺点
+* 神经元死亡: 随着训练的推进，部分输入会落入硬饱和区，导致对应权重无法更新。
+(这个问题可以用Leaky ReLu解决)
+* 输出偏移: 即输出均值恒大于零。(可以使用Batch Normalization进行改善)  
+偏移现象和神经元死亡会共同影响网络的收敛性。
 
 ------
 ## ZFNet
