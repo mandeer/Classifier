@@ -3,9 +3,6 @@ import torch.utils.model_zoo as model_zoo
 from.BasicModule import BasicModule
 
 
-__all__ = ['AlexNet', 'alexnet']
-
-
 model_urls = {
     'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',
 }
@@ -45,19 +42,6 @@ class AlexNet(BasicModule):
         x = x.view(x.size(0), 256 * 6 * 6)
         x = self.classifier(x)
         return x
-
-
-def alexnet(pretrained=False, **kwargs):
-    r"""AlexNet model architecture from the
-    `"One weird trick..." <https://arxiv.org/abs/1404.5997>`_ paper.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = AlexNet(**kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['alexnet']))
-    return model
 
 
 class AlexNet_CIFAR(BasicModule):
