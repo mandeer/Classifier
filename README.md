@@ -120,6 +120,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 [VGG](https://arxiv.org/abs/1409.1556)
 在2014年ILSVRC挑战中获得了定位问题的第一和分类问题的第二。
 该模型可以很好的推广到其他数据集上，是最常用的base网络之一。
+本工程实现了ABDE 4个网络及其添加了Batch Normalization的ABDE网络。
 
 ![VGG](./imgs/VGG.png)
 
