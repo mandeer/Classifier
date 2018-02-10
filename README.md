@@ -34,6 +34,10 @@
 pooling层，下采样可以有效的降低输出对尺度和形变的敏感性。
 特征图的个数通常随着空间分辨率的降低而增加
 
+#### 卷积与pooling
+![conv](./imgs/conv.gif) 
+![pooling](./imgs/pooling.gif)
+
 ### 本工程实现的LeNet与原始的LeNet-5略有区别
 * 使用了ReLU而不是sigmoid函数
 * S2中的每个特征图连接到了每个C3的特征图
@@ -105,6 +109,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
     * 第一层卷积的kernel从11改成7; stride从4改称2
     * 去掉了[AlexNet](#alexnet)中的group
 
+#### 卷积与转置卷积
 ![Conv2D](./imgs/Conv2D.gif) ![ConvTrans2D](./imgs/ConvTrans2D.gif)  
 图片来自[这里](https://github.com/vdumoulin/conv_arithmetic)
 
