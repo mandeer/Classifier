@@ -5,9 +5,10 @@ import torch.nn as nn
 from .BasicModule import BasicModule
 
 class NIN(BasicModule):
-    def __init__(self, init_weights=True):
+    def __init__(self, n_class, init_weights=True):
         super(NIN, self).__init__()
         self.model_name = 'nin'
+        self.n_class = n_class
         self.classifer = nn.Sequential(
             nn.Conv2d(3, 192, kernel_size=5, stride=1, padding=2),
             nn.BatchNorm2d(192),
@@ -19,7 +20,6 @@ class NIN(BasicModule):
             nn.BatchNorm2d(96),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=3, stride=2, padding=1),
-            nn.Dropout(0.5),
 
             nn.Conv2d(96, 192, kernel_size=5, stride=1, padding=2),
             nn.BatchNorm2d(192),
@@ -31,7 +31,6 @@ class NIN(BasicModule):
             nn.BatchNorm2d(192),
             nn.ReLU(inplace=True),
             nn.AvgPool2d(kernel_size=3, stride=2, padding=1),
-            nn.Dropout(0.5),
 
             nn.Conv2d(192, 192, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(192),
@@ -39,7 +38,7 @@ class NIN(BasicModule):
             nn.Conv2d(192, 192, kernel_size=1, stride=1, padding=0),
             nn.BatchNorm2d(192),
             nn.ReLU(inplace=True),
-            nn.Conv2d(192,  10, kernel_size=1, stride=1, padding=0),
+            nn.Conv2d(192, self.n_class, kernel_size=1, stride=1, padding=0),
             nn.ReLU(inplace=True),
             nn.AvgPool2d(kernel_size=8, stride=1, padding=0),
         )
@@ -49,7 +48,7 @@ class NIN(BasicModule):
 
     def forward(self, x):
         x = self.classifer(x)
-        x = x.view(x.size(0), 10)
+        x = x.view(x.size(0), self.n_class)
         return x
 
     def _initialize_weights(self):

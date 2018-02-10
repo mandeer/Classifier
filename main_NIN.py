@@ -16,7 +16,7 @@ class Solver(object):
         self.testLoader = testLoader
         self.n_class = config.n_class
         self.use_cuda = config.use_cuda
-        self.NIN = getattr(models, 'NIN')()
+        self.NIN = getattr(models, 'NIN')(config.n_class)
         if config.model_name != '':
             print('use pretrained model: ', config.model_name)
             self.NIN.load(config.model_name)
@@ -162,8 +162,8 @@ if __name__ == '__main__':
     parser.add_argument('--data-path', type=str, default='./data/cifar10')
     parser.add_argument('--n-class', type=int, default=10, help='10, 100, or 1000')
     parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
-    parser.add_argument('--mode', type=str, default='train', help='train, test')
-    parser.add_argument('--model-name', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--mode', type=str, default='test', help='train, test')
+    parser.add_argument('--model-name', type=str, default='./pretrained_models/NIN_cifar10.pth', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():
