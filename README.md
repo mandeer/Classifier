@@ -5,7 +5,7 @@
 * [**AlexNet**](#alexnet)
     * [ReLU](#relu)
 * [ZFNet](#zfnet)
-* [VGG](#vgg)
+* [**VGG**](#vgg)
 * GoogLeNet
 * ResNet
 * DenseNet
@@ -117,6 +117,27 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 ------
 ## VGG
 [VGG](https://arxiv.org/abs/1409.1556)
+在2014年ILSVRC挑战中获得了定位问题的第一和分类问题的第二。
+该模型可以很好的推广到其他数据集上，是最常用的base网络之一。
+
+![VGG](./imgs/VGG.png)
+
+### 主要贡献
+* 具有小过滤器的深度网络优于具有较大过滤器的浅层网络
+* 使用多种尺度的图像进行训练和测试
+* deep, very deep, very very deep
+
+### 模型精度
+pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结果
+
+|VGG|use_BN|no_BN|
+|---|---|---|
+|VGG11|0.704(0.898)|0.690(0.886)|
+|VGG13|0.716(0.904)|0.699(0.892)|
+|VGG16|0.734(0.915)|0.716(0.904)|
+|VGG19|0.742(0.918)|0.724(0.909)|
+
+
 
 
 [返回顶部](#classifier)
