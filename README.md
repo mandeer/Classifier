@@ -73,15 +73,23 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 ### ReLU
 修正线性单元([ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf), Rectified linear unit)
 能够有效缓解梯度消失的问题，从而直接以监督的方式训练深度神经网络，无需依赖无监督的逐层预训练。
-
+![sigmoid](./imgs/Sigmoid_Tanh.png) ![ReLu](./imgs/Softplus_ReLU.png)
 #### 优点
-* 单侧抑制
-* 相对宽阔的兴奋边界
-* 稀疏激活性
+* 收敛速度快:  
+sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造成梯度消失的问题，减缓收敛速度。
+而ReLu激活函数的梯度为1，而且只有在x的右半轴才饱和，这样使梯度可以很好的反向传播中传递，
+不但提高了网络的训练速度也避免了因为梯度消失导致的网络退化。  
+另外，如果涉及到概率问题，如DBN, RNN, LSTM中的一些gate，就不能使用ReLU了，需要使用sigmoid, 
+不然，概率表达就错了。
+* 稀疏激活性:  
+激活稀疏性上匹配了生物学概念，大脑同时被激活的神经元只有4%左右。
+早期Bengio教授认为稀疏激活性是网络性能提升的原因之一，
+但后来的研究发现稀疏性并非是性能提升的必要条件。
+如[PReLU](https://arxiv.org/abs/1502.01852), [ELU](https://arxiv.org/abs/1511.07289)等。
 
 #### 缺点
 * 神经元死亡: 随着训练的推进，部分输入会落入硬饱和区，导致对应权重无法更新。
-(这个问题可以用Leaky ReLu解决)
+(这个问题可以用[Leaky ReLu](http://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf)解决)
 * 输出偏移: 即输出均值恒大于零。(可以使用Batch Normalization进行改善)  
 偏移现象和神经元死亡会共同影响网络的收敛性。
 
