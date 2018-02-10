@@ -121,14 +121,14 @@ def main(config):
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
-        # seed
-        if config.seed == 0:
-            config.seed = random.randint(1, 10000)  # fix seed
-        print("Random Seed: ", config.seed)
-        random.seed(config.seed)
-        torch.manual_seed(config.seed)
-        if config.use_cuda:
-            torch.cuda.manual_seed_all(config.seed)
+    # seed
+    if config.seed == 0:
+        config.seed = random.randint(1, 10000)  # fix seed
+    print("Random Seed: ", config.seed)
+    random.seed(config.seed)
+    torch.manual_seed(config.seed)
+    if config.use_cuda:
+        torch.cuda.manual_seed_all(config.seed)
 
     # create directories if not exist
     if not os.path.exists(config.out_path):

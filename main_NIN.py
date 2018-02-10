@@ -95,13 +95,13 @@ class Solver(object):
             print('val accuracy: ', val_accuracy[self.n_class])
             print('val loss:     ', val_loss[0])
 
-            if per_val_loss <= val_loss and per_val_loss < 100:
+            if (epoch + 1) % 10 == 0:
                 self.lr *= 0.1
                 self.optimizer = torch.optim.SGD(self.NIN.parameters(), lr=self.lr, momentum=0.9,
                                                  weight_decay=0.0005)
                 print('now lr is: ', self.lr)
 
-        NIN.save(root=self.out_path, name='NIN.pth')
+        NIN.save(root=self.out_path, name='NIN_cifar10.pth')
         return
 
     def test(self):
@@ -121,14 +121,14 @@ def main(config):
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
-        # seed
-        if config.seed == 0:
-            config.seed = random.randint(1, 10000)  # fix seed
-        print("Random Seed: ", config.seed)
-        random.seed(config.seed)
-        torch.manual_seed(config.seed)
-        if config.use_cuda:
-            torch.cuda.manual_seed_all(config.seed)
+    # seed
+    if config.seed == 0:
+        config.seed = random.randint(1, 10000)  # fix seed
+    print("Random Seed: ", config.seed)
+    random.seed(config.seed)
+    torch.manual_seed(config.seed)
+    if config.use_cuda:
+        torch.cuda.manual_seed_all(config.seed)
 
     # create directories if not exist
     if not os.path.exists(config.out_path):

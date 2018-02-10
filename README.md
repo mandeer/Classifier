@@ -146,5 +146,15 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
 ![NIN](./imgs/NIN.png)
 ![NIN](./imgs/NINs.png)
 
+### 主要贡献
+* 1*1的卷积
+* 均值池化
+
+### 本工程实现的NIN与原始的NIN略有区别
+* 添加了Batch Norm层， 若不添加则很难收敛。
+
+### 训练结果
+* 在cifar10数据集上，迭代50次后达到了0.885
+
 
 [返回顶部](#classifier)
