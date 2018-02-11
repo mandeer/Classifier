@@ -8,7 +8,7 @@
 * [**VGG**](#vgg)
 * [**NIN**](#nin)
 * [GoogLeNet](#googlenet)
-    * [Batch Norm](#batchnorm)
+    * [BatchNorm](#batchnorm)
 * ResNet
 * DenseNet
 * SqueezeNet
@@ -98,7 +98,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 #### 缺点
 * 神经元死亡: 随着训练的推进，部分输入会落入硬饱和区，导致对应权重无法更新。
 (这个问题可以用[Leaky ReLu](http://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf)解决)
-* 输出偏移: 即输出均值恒大于零。(可以使用[Batch Norm](#batch norm)进行改善)  
+* 输出偏移: 即输出均值恒大于零。(可以使用[BatchNorm](#batchnorm)进行改善)  
 偏移现象和神经元死亡会共同影响网络的收敛性。
 
 ------
@@ -121,7 +121,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 [VGG](https://arxiv.org/abs/1409.1556)
 在2014年ILSVRC挑战中获得了定位问题的第一和分类问题的第二。
 该模型可以很好的推广到其他数据集上，是最常用的base网络之一。
-本工程实现了ABDE 4个网络及其添加了[Batch Norm](#batch norm)的ABDE网络。
+本工程实现了ABDE 4个网络及其添加了[BatchNorm](#batchnorm)的ABDE网络。
 
 ![VGG](./imgs/VGG.png)
 
@@ -163,7 +163,7 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
     使用全链接层的cnn容易过拟合，且严重依赖dropout进行规则化。
 
 ### 本工程实现的NIN与原始的NIN略有区别
-* 添加了[Batch Norm](#batch norm)层， 若不添加则很难收敛。
+* 添加了[BatchNorm](#batchnorm)层， 若不添加则很难收敛。
 * 去掉了dropout层
 
 ### 训练结果
@@ -183,6 +183,6 @@ GoogLeNet包括V1-V4共四个版本
 ### [Inception V4](https://arxiv.org/abs/1602.07261)
 
 ------
-### Batch Norm
+### BatchNorm
 
 [返回顶部](#classifier)
