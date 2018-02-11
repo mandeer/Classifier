@@ -7,7 +7,7 @@
 * [ZFNet](#zfnet)
 * [**VGG**](#vgg)
 * [**NIN**](#nin)
-* GoogLeNet
+* [GoogLeNet](#googlenet)
 * ResNet
 * DenseNet
 * SqueezeNet
@@ -25,7 +25,7 @@
 [LeNet](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
 是卷积神经网络的开山之作，麻雀虽小但五脏俱全。
 ![LeNet-5](./imgs/LeNet-5.png)
-### 主要贡献
+### 主要创新点
 * 局部感受野(local receptive fields):  
 卷积层, 用于提取特征
 * 权值共享(shared weights):  
@@ -55,7 +55,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
 且远远超过当年的第二名。将沉寂多年的神经网络重新引入了大众的视野。
 ![AlexNet](./imgs/AlexNet.png)
-### 主要贡献
+### 主要创新点
 * 非线性激活函数: ReLU
 * 防止过拟合的方法: Dropout, Data augmentation
 * 大数据训练: imageNet
@@ -105,7 +105,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 [ZFNet](https://arxiv.org/abs/1311.2901v3)
 是2013年ILSVRC的冠军。其网络结构是在[AlexNet](#alexnet)上进行了微调：
 ![ZFNet](./imgs/ZFNet.png)
-### 主要贡献
+### 主要创新点
 * 卷积网络的可视化技术: 反卷积(Deconvolution), 也被称作转置卷积(Transpose convolution)
 * 依据可视化的结果，优化了[AlexNet](#alexnet):
     * 第一层卷积的kernel从11改成7; stride从4改称2
@@ -124,7 +124,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 
 ![VGG](./imgs/VGG.png)
 
-### 主要贡献
+### 主要创新点
 * 具有小过滤器的深度网络优于具有较大过滤器的浅层网络
 * 使用多种尺度的图像进行训练和测试
 * deep, very deep, very very deep
@@ -142,14 +142,24 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
 ------
 ## NIN
 [NIN](https://arxiv.org/abs/1312.4400)
+对cnn的结构进行了改进。其提出的1*1卷积和全局均值池化已经成为了后来网络设计的标准结构。
 
+![NIN](./imgs/Mlpconv.png)
 ![NIN](./imgs/NIN.png)
-![NIN](./imgs/NINs.png)
 
-### 主要贡献
-* 1*1的卷积
-* 去掉了全连接层
-* 均值池化
+### 主要创新点
+* 使用Mlpconv替代卷积：
+    * cnn的高层特征其实是低层特征通过某种运算的组合，作者换了个思路，在局部感受野中进行更加复杂的运算。
+    * Mlpconv等价于1*1的卷积层。
+    * 1*1卷积核可以起到一个跨通道聚合的作用。进一步可以起到降维（或者升维）的作用，起到减少参数的目的。
+     [GoogLeNet](#googlenet)
+    * Mlpconv能够提取感受野中的非线性特征，增强了局部模型的表达能力。这样就可以使用均值池化来进行分类。
+    
+* 使用全局均值池化替代全链接层：
+    * 大大降低了参数的数量：原来的cnn参数主要集中在全链接层，特别是与卷积层相连的第一个全链接层。
+    * 强化了最后一层特征图与类别的关系：最后一层输出的特征图的空间平均值可以解释为相应类别的置信度。
+    * 降低了overfitting：因为均值池化本身就是一种结构性的规则项，且没有参数需要优化。
+    使用全链接层的cnn容易过拟合，且严重依赖dropout进行规则化。
 
 ### 本工程实现的NIN与原始的NIN略有区别
 * 添加了Batch Norm层， 若不添加则很难收敛。
@@ -158,6 +168,10 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
 ### 训练结果
 * 在cifar10数据集上，迭代50次后达到了0.887
 * 在cifar100数据集上，迭代50次后达到了0.666
+
+------
+# GoogLeNet
+
 
 
 [返回顶部](#classifier)
