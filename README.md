@@ -7,7 +7,7 @@
 * [ZFNet](#zfnet)
 * [**VGG**](#vgg)
 * [**NIN**](#nin)
-* [GoogLeNet](#googlenet)
+* [**GoogLeNet**](#googlenet)
     * [BatchNorm](#batchnorm)
 * ResNet
 * DenseNet
@@ -62,7 +62,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 * 大数据训练: imageNet
 * 高性能计算平台: GPU
 * 重叠Pooling: kernel_size=3, stride=2
-* 局部相应归一化(LRN, Local Response Normalization), 
+* 局部响应归一化(LRN, Local Response Normalization), 
 [VGG](#vgg)说这个没什么用
 
 ### 本工程实现的AlexNet与原始的AlexNet略有区别
