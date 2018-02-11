@@ -100,8 +100,8 @@ class Solver(object):
                 self.optimizer = torch.optim.SGD(self.NIN.parameters(), lr=self.lr, momentum=0.9,
                                                  weight_decay=0.0005)
                 print('now lr is: ', self.lr)
-
-        NIN.save(root=self.out_path, name='NIN_cifar10.pth')
+            if (epoch + 1) % 10 == 0:
+                NIN.save(root=self.out_path, name='NIN_cifar100.pth')
         return
 
     def test(self):
@@ -160,9 +160,9 @@ if __name__ == '__main__':
     parser.add_argument('--log-step', type=int, default=100)
     parser.add_argument('--use-cuda', type=str2bool, default=True, help='enables cuda')
 
-    parser.add_argument('--data-path', type=str, default='./data/cifar10')
-    parser.add_argument('--n-class', type=int, default=10, help='10, 100, or 1000')
-    parser.add_argument('--dataset', type=str, default='CIFAR10', help='CIFAR10 or CIFAR100')
+    parser.add_argument('--data-path', type=str, default='./data/cifar100')
+    parser.add_argument('--n-class', type=int, default=100, help='10, 100, or 1000')
+    parser.add_argument('--dataset', type=str, default='CIFAR100', help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode', type=str, default='train', help='train, test')
     parser.add_argument('--model-name', type=str, default='', help='model for test or retrain')
 
