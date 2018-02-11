@@ -163,8 +163,8 @@ if __name__ == '__main__':
     parser.add_argument('--data-path', type=str, default='./data/cifar100')
     parser.add_argument('--n-class', type=int, default=100, help='10, 100, or 1000')
     parser.add_argument('--dataset', type=str, default='CIFAR100', help='CIFAR10 or CIFAR100')
-    parser.add_argument('--mode', type=str, default='train', help='train, test')
-    parser.add_argument('--model-name', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--mode', type=str, default='test', help='train, test')
+    parser.add_argument('--model-name', type=str, default='./pretrained_models/NIN_cifar100.pth', help='model for test or retrain')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():

@@ -8,7 +8,7 @@
 * [**VGG**](#vgg)
 * [**NIN**](#nin)
 * [GoogLeNet](#googlenet)
-    * [Batch Norm](#batch norm)
+    * [Batch Norm](#batchnorm)
 * ResNet
 * DenseNet
 * SqueezeNet
