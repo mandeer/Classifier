@@ -172,7 +172,7 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
 
 ------
 ## GoogLeNet
-GoogLeNet包括V1-V4共四个版本
+GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 
 ### [Inception V1](https://arxiv.org/abs/1409.4842)
 
