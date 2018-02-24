@@ -131,7 +131,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 * deep, very deep, very very deep
 
 ### 模型测试
-pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结果
+pytorch中给出的VGG模型在imageNet2012验证集上的测试结果
 
 |VGG|use_BN|no_BN|
 |---|---|---|
@@ -211,7 +211,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 ### 主要创新点
 
 ### 模型测试
-pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结果
+pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果
 
 
 ------
