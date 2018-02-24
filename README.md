@@ -189,6 +189,9 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
  [2015.2]
+ ### 主要创新点
+ * 提出了[BatchNorm](#batchnorm)
+ ![BatchNorm](./imgs/BatchNorm.png)
 
 * [Inception V3](https://arxiv.org/abs/1512.00567)
 : Rethinking the Inception Architecture for Computer Vision [2015.12]
