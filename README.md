@@ -57,7 +57,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 且远远超过当年的第二名。将沉寂多年的神经网络重新引入了大众的视野。
 ![AlexNet](./imgs/AlexNet.png)
 ### 主要创新点
-* 非线性激活函数: [ReLU](#relu)
+* 非线性激活函数: [**ReLU**](#relu)
 * 防止过拟合的方法: Dropout, Data augmentation
 * 大数据训练: imageNet
 * 高性能计算平台: GPU
@@ -193,7 +193,14 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
  [2015.2] [top5: 4.8%]
  ![GoogLeNetV2](./imgs/GoogLeNetV2.png)
  ### 主要创新点
- * 提出了[BatchNorm](#batchnorm)  
+ * 提出了[**BatchNorm**](#batchnorm)
+    * 提高SGD中的初始学习率： 加快了学习速度，而没有引入梯度弥散
+    * 去掉了Dropout层： BN也可以降低过拟合，去掉dropout可以加快学习速度
+    * 减小了L2正则化项： L2正则项也是为了降低过拟合，减小L2正则项可以提高准确率
+    * 加快了学习率的衰退速度： 因为BN大大加快了学习速度
+    * 去掉了LRN层： 都是Normalization
+    * 更彻底地打乱训练样本： why？？
+    * 减少图像扭曲的使用： epoch数减少，需要多学习真实的数据
  ![BatchNorm](./imgs/BatchNorm.png)
 
 ------
