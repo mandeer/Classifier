@@ -206,10 +206,12 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 ------
 * [Inception V3](https://arxiv.org/abs/1512.00567)
 : Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]
-
 ![Mini-network](./imgs/Mini-network.png)
 ![Inception-V3](./imgs/Inception-V3.png)
+### 主要创新点
 
+### 模型测试
+pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结果
 
 
 ------
