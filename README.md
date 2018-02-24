@@ -194,7 +194,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
  ![GoogLeNetV2](./imgs/GoogLeNetV2.png)
  ### 主要创新点
  * 提出了[**BatchNorm**](#batchnorm)
-    * 提高SGD中的初始学习率： 加快了学习速度，而没有引入梯度弥散
+    * 提高SGD中的初始学习率： 加快了学习速度，而不会发生梯度弥散
     * 去掉了Dropout层： BN也可以降低过拟合，去掉dropout可以加快学习速度
     * 减小了L2正则化项： L2正则项也是为了降低过拟合，减小L2正则项可以提高准确率
     * 加快了学习率的衰退速度： 因为BN大大加快了学习速度
@@ -206,6 +206,14 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 ------
 * [Inception V3](https://arxiv.org/abs/1512.00567)
 : Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]
+
+![Mini-network](./imgs/Mini-network.png)
+![ori-inception](./imgs/ori-inception.png)
+![figure5](./imgs/5*5=3*3+3*3.png)
+![figure6](./imgs/n*1orn*1.png)
+![figure7](./imgs/n*1orn*1.png)
+![Inception-V3](./imgs/Inception-V3.png)
+
 
 ------
 * [Inception V4](https://arxiv.org/abs/1602.07261)
