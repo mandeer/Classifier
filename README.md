@@ -119,7 +119,7 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 ------
 ## VGG
 [VGG](https://arxiv.org/abs/1409.1556)
-在2014年ILSVRC挑战中获得了定位问题的第一和分类问题的第二。
+在2014年ILSVRC挑战中获得了定位问题的第一和分类问题的第二(第一是[GoogLeNet](#googlenet))。
 该模型可以很好的推广到其他数据集上，是最常用的base网络之一。
 本工程实现了ABDE 4个网络及其添加了[BatchNorm](#batchnorm)的ABDE网络。
 
@@ -177,7 +177,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * [Inception V1](https://arxiv.org/abs/1409.4842) 
 : Going Deeper with Convolutions [2014.9]
 ![Inception module](./imgs/Inception_module.png)
-![GoogLeNet](./imgs/GoogLenet.png)
+![GoogLeNet](./imgs/GoogLeNet.png)
 ![architecture](./imgs/GoogLeNet_architecture.png)
 
 * [Inception V2](https://arxiv.org/abs/1502.03167)
