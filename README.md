@@ -63,7 +63,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 * 高性能计算平台: GPU
 * 重叠Pooling: kernel_size=3, stride=2
 * 局部响应归一化(LRN, Local Response Normalization), 
-[VGG](#vgg)说这个没什么用
+[VGG](#vgg)说这个没什么用，可以使用更强大的[BatchNorm](#batchnorm)代替。
 
 ### 本工程实现的AlexNet与原始的AlexNet略有区别
 * 没有使用LRN
@@ -191,8 +191,9 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
  [2015.2] [top5: 4.8%]
+ ![GoogLeNetV2](./imgs/GoogLeNetV2.png)
  ### 主要创新点
- * 提出了[BatchNorm](#batchnorm)
+ * 提出了[BatchNorm](#batchnorm)  
  ![BatchNorm](./imgs/BatchNorm.png)
 
 ------
