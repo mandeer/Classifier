@@ -174,13 +174,21 @@ pytorch中给出的VGG的预训练模型在imageNet2012验证集上的测试结�
 ## GoogLeNet
 GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 
-### [Inception V1](https://arxiv.org/abs/1409.4842)
+* [Inception V1](https://arxiv.org/abs/1409.4842) 
+: Going Deeper with Convolutions [2014.9]
+![Inception module](./imgs/Inception_module.png)
+![googLeNet](./imgs/googLenet.png)
 
-### [Inception V2](https://arxiv.org/abs/1502.03167)
+* [Inception V2](https://arxiv.org/abs/1502.03167)
+: Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
+ [2015.2]
 
-### [Inception V3](https://arxiv.org/abs/1512.00567)
+* [Inception V3](https://arxiv.org/abs/1512.00567)
+: Rethinking the Inception Architecture for Computer Vision [2015.12]
 
-### [Inception V4](https://arxiv.org/abs/1602.07261)
+* [Inception V4](https://arxiv.org/abs/1602.07261)
+: Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning
+ [2016.2]
 
 ------
 ### BatchNorm
