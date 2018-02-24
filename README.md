@@ -177,7 +177,8 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * [Inception V1](https://arxiv.org/abs/1409.4842) 
 : Going Deeper with Convolutions [2014.9]
 ![Inception module](./imgs/Inception_module.png)
-![googLeNet](./imgs/googLenet.png)
+![GoogLeNet](./imgs/GoogLenet.png)
+![architecture](./imgs/GoogLeNet_architecture.png)
 
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
