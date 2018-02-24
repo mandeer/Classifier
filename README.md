@@ -179,6 +179,12 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 ![Inception module](./imgs/Inception_module.png)
 ![GoogLeNet](./imgs/GoogLeNet.png)
 ![architecture](./imgs/GoogLeNet_architecture.png)
+### 主要创新点
+* 提出了Inception， 在利用密集矩阵的高计算性能的基础上，保持了网络结构的稀疏性。
+22层网络，参数却只有AlexNet的约1/12。
+* 使用不同大小的卷积核提取不同大小感受野的特征，然后对不同尺度的特征进行拼接融合。
+* 使用1x1卷积核来进行降维。
+* 训练时为了避免梯度消失，增加了辅助的softmax用于向前传导梯度（测试时可以忽略）。
 
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
