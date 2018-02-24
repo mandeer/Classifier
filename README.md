@@ -208,11 +208,8 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 : Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]
 
 ![Mini-network](./imgs/Mini-network.png)
-![ori-inception](./imgs/ori-inception.png)
-![figure5](./imgs/5*5=3*3+3*3.png)
-![figure6](./imgs/n*1orn*1.png)
-![figure7](./imgs/n*1orn*1.png)
 ![Inception-V3](./imgs/Inception-V3.png)
+
 
 
 ------
