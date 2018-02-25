@@ -253,4 +253,4 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 甚至达到了1001层之多。
 
-[返回顶部](#Classifier)
+[返回顶部](#classifier)
