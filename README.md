@@ -185,7 +185,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 22层网络，参数却只有AlexNet的约1/12。
 * 使用不同大小的卷积核提取不同大小感受野的特征，然后对不同尺度的特征进行拼接融合。
 * 使用1x1卷积核来进行降维。
-* 训练时为了避免梯度消失，增加了辅助的softmax用于向前传导梯度（测试时可以忽略）。
+* 训练时为了避免梯度消失，增加了辅助分类器用于向前传导梯度（测试时可以忽略，V3中有了新的解释）。
 
 ------
 * [Inception V2](https://arxiv.org/abs/1502.03167)
@@ -199,7 +199,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
     * 减小了L2正则化项： L2正则项也是为了降低过拟合，减小L2正则项可以提高准确率
     * 加快了学习率的衰退速度： 因为BN大大加快了学习速度
     * 去掉了LRN层： 都是Normalization
-    * 更彻底地打乱训练样本： why？？
+    * 更彻底地打乱训练样本： why??
     * 减少图像扭曲的使用： epoch数减少，需要多学习真实的数据
  ![BatchNorm](./imgs/BatchNorm.png)
 
@@ -208,7 +208,21 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 : Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]
 ![Mini-network](./imgs/Mini-network.png)
 ![Inception-V3](./imgs/Inception-V3.png)
+
 ### 主要创新点
+* 网络设计的通用原则
+    * 避免表示瓶颈，尤其是在前面的网络: pooling后特征图变小了，会造成有用的信息丢失。
+    * 后面的网络适合使用较小的卷积核
+    * 空间聚合可以以低纬度嵌入进行，这样不会降低网络的识别能力
+    * 平衡好网络的宽度与深度
+* 将大的卷积拆分成若干个小的卷积：降低计算量的同时增加了空间的多样性。
+在每个卷积层后面添加激活函数会比不添加更好。
+* 非对称卷积：n\*n的卷积核可以分解成1\*n和n\*1非的卷积核。
+在中等大小的feature map中效果比较好。
+* 优化辅助分类器：辅助分类器起到了正则化(??)的作用，而不是V1中提到的作用。
+* 混合poolong：避免了表示瓶颈(representational bottleneck)  
+![new-pooling](./imgs/PCReduction.png)
+* 标签平滑(Label Smoothing): 
 
 ### 模型测试
 pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果
