@@ -98,7 +98,7 @@ def main(config):
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     # model
-    model = getattr(models, config.model)(depth=19, use_BN=False)
+    model = getattr(models, config.model)(transform_input=False)
     print(model)
     model.load(config.model_name)
     criterion = torch.nn.CrossEntropyLoss().cuda()
@@ -110,7 +110,7 @@ def main(config):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
     test_data = datasets.ImageFolder(config.data_path, transforms.Compose([
-        transforms.Resize(256),
+        transforms.Resize(config.image_size),
         transforms.CenterCrop(config.image_size),
         transforms.ToTensor(),
         normalize]))
@@ -124,7 +124,7 @@ def main(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--image-size', type=int, default=224)
+    parser.add_argument('--image-size', type=int, default=299)
     parser.add_argument('--batch-size', type=int, default=128)
     parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--out-path', type=str, default='./output')
@@ -133,9 +133,9 @@ if __name__ == '__main__':
 
     parser.add_argument('--data-path', type=str, default='../data/imageNet2012/val')
     parser.add_argument('--dataset', type=str, default='ImageNet2012', help='ImageNet2012')
-    parser.add_argument('--model', type=str, default='VGG', help='train, test')
+    parser.add_argument('--model', type=str, default='Inception3', help='train, test')
     parser.add_argument('--model-name', type=str,
-                        default='./pretrained_models/models_pretrained/vgg19-dcbb9e9d.pth', help='model for test or retrain')
+                        default='./pretrained_models/models_pretrained/inception_v3_google-1a9a5a14.pth', help='model for test')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():

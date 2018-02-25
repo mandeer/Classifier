@@ -228,8 +228,11 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 低分辨率的网络需要更长的时间去训练，但最终的结果与高分辨率网络的差别不大。
 
 ### 模型测试
-pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果
-
+pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果为：
+ 
+|top1|top5|
+|---|---|
+|77.486|93.546|
 
 ------
 * [Inception V4](https://arxiv.org/abs/1602.07261)
