@@ -205,8 +205,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 
 ------
 * [Inception V3](https://arxiv.org/abs/1512.00567)
-: Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]
-![Mini-network](./imgs/Mini-network.png)
+: Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]  
 ![Inception-V3](./imgs/Inception-V3.png)
 
 ### 主要创新点
@@ -218,10 +217,11 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * 将大的卷积拆分成若干个小的卷积：降低计算量的同时增加了空间的多样性。
 在每个卷积层后面添加激活函数会比不添加更好。
 * 非对称卷积：n\*n的卷积核可以分解成1\*n和n\*1非的卷积核。
-在中等大小的feature map中效果比较好。
+在中等大小的feature map中效果比较好。  
+![Mini-network](./imgs/Mini-network.png)
 * 优化辅助分类器：辅助分类器起到了正则化(??)的作用，而不是V1中提到的作用。
 * 混合poolong：避免了表示瓶颈(representational bottleneck)  
-![new-pooling](./imgs/PCReduction.png)
+![new-pooling](./imgs/new-pooling.png)
 * 标签平滑(Label Smoothing): 
 
 ### 模型测试
