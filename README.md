@@ -1,6 +1,6 @@
 # Classifier
+使用PyTorch实现了经典的深度学习分类算法：  
 
-使用PyTorch实现了经典的分类算法：  
 * [**LeNet**](#lenet)
 * [**AlexNet**](#alexnet)
     * [ReLU](#relu)
@@ -260,7 +260,17 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 
 ------
 ### BatchNorm
+批规范化(Batch Normalization, Inception-V2)通过使深度神经网络训练过程中的每一层神经网络的
+输入保持相同分布，解决了反向传播过程中梯度消失(0.9^100 = 2.66 * 10e-5)和
+梯度爆炸(1.1^100 = 1.38*10e5)的问题。大大加快了训练的速度，并缓解了过拟合问题。
 
+#### 优点
+
+#### 缺点
+
+#### 原因
+
+#### 其他规范化方式
 
 [返回顶部](#classifier)
 
