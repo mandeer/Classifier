@@ -49,6 +49,8 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 * 在cifar10训练集进行了40次迭代，最终测试集上的识别结果为 0.636
 * sigmoid版LeNet在mnist训练集上迭代30次后，识别率达到了0.975
 
+[返回顶部](#classifier)
+
 ------
 ## AlexNet
 [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
@@ -75,6 +77,8 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 * 使用预训练好的[AlexNet](https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth)，
 在imageNet2012验证集上测试结果为：top1 = 0.565， top5 = 0.791
 
+[返回顶部](#classifier)
+
 ------
 ### ReLU
 修正线性单元([ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf), Rectified linear unit)
@@ -100,6 +104,8 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 * 输出偏移: 即输出均值恒大于零。(可以使用[BatchNorm](#batchnorm)进行改善)  
 偏移现象和神经元死亡会共同影响网络的收敛性。
 
+[返回顶部](#classifier)
+
 ------
 ## ZFNet
 [ZFNet](https://arxiv.org/abs/1311.2901v3)
@@ -114,6 +120,8 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 #### 卷积与转置卷积
 ![Conv2D](./imgs/Conv2D.gif) ![ConvTrans2D](./imgs/ConvTrans2D.gif)  
 图片来自[这里](https://github.com/vdumoulin/conv_arithmetic)
+
+[返回顶部](#classifier)
 
 ------
 ## VGG
@@ -138,6 +146,8 @@ pytorch中给出的VGG模型在imageNet2012验证集上的测试结果
 |VGG13|0.716(0.904)|0.699(0.892)|
 |VGG16|0.734(0.915)|0.716(0.904)|
 |VGG19|0.742(0.918)|0.724(0.909)|
+
+[返回顶部](#classifier)
 
 ------
 ## NIN
@@ -169,6 +179,8 @@ pytorch中给出的VGG模型在imageNet2012验证集上的测试结果
 * 在cifar10数据集上，迭代30次后达到了0.897
 * 在cifar100数据集上，迭代30次后达到了0.665
 
+[返回顶部](#classifier)
+
 ------
 ## GoogLeNet
 GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
@@ -186,6 +198,8 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 * 使用1x1卷积核来进行降维。
 * 训练时为了避免梯度消失，增加了辅助分类器用于向前传导梯度（测试时可以忽略，V3中有了新的解释）。
 
+[返回顶部](#classifier)
+
 ------
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
@@ -201,6 +215,8 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
     * 更彻底地打乱训练样本： why??
     * 减少图像扭曲的使用： epoch数减少，需要多学习真实的数据
  ![BatchNorm](./imgs/BatchNorm.png)
+ 
+ [返回顶部](#classifier)
 
 ------
 * [Inception V3](https://arxiv.org/abs/1512.00567)
@@ -233,14 +249,20 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 |---|---|
 |77.560|93.694|
 
+[返回顶部](#classifier)
+
 ------
 * [Inception V4](https://arxiv.org/abs/1602.07261)
 : Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning
  [2016.2] [top5: 3.08%]
 
+[返回顶部](#classifier)
+
 ------
 ### BatchNorm
 
+
+[返回顶部](#classifier)
 
 ------
 ## ResNet
@@ -252,11 +274,13 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 甚至达到了1001层之多。
 
+[返回顶部](#classifier)
 
 ------
 ## DenseNet
 [DenseNet](https://arxiv.org/abs/1608.06993)
 
+[返回顶部](#classifier)
 
 ------
 ## DiracNets
