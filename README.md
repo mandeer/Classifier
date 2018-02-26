@@ -10,9 +10,8 @@
 * [**GoogLeNet**](#googlenet)
     * [BatchNorm](#batchnorm)
 * [**ResNet**](#resnet)
-* DenseNet
-* SqueezeNet
-* MobileNet
+* [DenseNet](#densenet)
+* [DiracNets](#diracnets)
 
 ------
 ## Prerequisites:
@@ -257,5 +256,10 @@ ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 ------
 ## DenseNet
 [DenseNet](https://arxiv.org/abs/1608.06993)
+
+
+------
+## DiracNets
+[DiracNets](https://arxiv.org/abs/1706.00388)
 
 [返回顶部](#classifier)
