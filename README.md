@@ -274,13 +274,13 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
     * 可以使用比较小的L2正则化项
     * 可以弃用LRN
 * 降低了网络对初始化权重的敏感性
-* 减小了优化优化算法参数对结果的影响
+* 减小了优化算法参数对结果的影响
 * 提高了模型的容纳能力
 
 #### 缺点
 * 计算代价：有文章称使用Batch Norm会带来30%的额外计算开销。
 * 对浅层网络效果不理想
-* RNN、LSTM等动态网络上效果不理想
+* RNN、LSTM上效果不理想
 * GANs上效果不理想
 * 不适合在线学习：mini-batch=1
 
@@ -306,7 +306,7 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
     * LN不需要保存mini-batch的均值和方差，节省了额外的存储空间。
 * [Weight Normalization](https://arxiv.org/abs/1602.07868)
 通过重写网络权重W的方式来进行正则化。
-    * 不依赖mini-batch，适用于RNN、LSTM等动态网络
+    * 不依赖mini-batch，适用于RNN、LSTM
     * 不基于mini-batch，引入的噪声少于BN
     * WN也不需要保存mini-batch的均值和方差，节省了额外的存储空间
     * WN没有规范化输入，因此需要特别注意网络参数的初始化
