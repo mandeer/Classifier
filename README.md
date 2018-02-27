@@ -328,7 +328,7 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 localization以及COCO的detection和segmentation上均斩获了第一名的成绩，
 且获得了CVPR2016的best paper。
 ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
-甚至达到了1001层之多。 
+甚至达到了1001层之多。  
 ![ResNet](./imgs/ResNet.png)
 ![ResBlock](./imgs/Res-block.png)
 ![ResBlock2](./imgs/Res-block-V2.png)
