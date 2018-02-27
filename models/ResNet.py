@@ -1,10 +1,6 @@
 import torch.nn as nn
 import math
-import torch.utils.model_zoo as model_zoo
-
-
-__all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
-           'resnet152']
+from.BasicModule import BasicModule
 
 
 model_urls = {
@@ -24,7 +20,6 @@ def conv3x3(in_planes, out_planes, stride=1):
 
 class BasicBlock(nn.Module):
     expansion = 1
-
     def __init__(self, inplanes, planes, stride=1, downsample=None):
         super(BasicBlock, self).__init__()
         self.conv1 = conv3x3(inplanes, planes, stride)
@@ -56,7 +51,6 @@ class BasicBlock(nn.Module):
 
 class Bottleneck(nn.Module):
     expansion = 4
-
     def __init__(self, inplanes, planes, stride=1, downsample=None):
         super(Bottleneck, self).__init__()
         self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=False)
@@ -92,12 +86,35 @@ class Bottleneck(nn.Module):
 
         return out
 
+config = {
+    'A': [2, 2, 2, 2],
+    'B': [3, 4, 6, 3],
+    'C': [3, 4, 23, 3],
+    'D': [3, 8, 36, 3],
+}
 
-class ResNet(nn.Module):
-
-    def __init__(self, block, layers, num_classes=1000):
+class ResNet(BasicModule):
+    def __init__(self, depth, num_classes=1000):
         self.inplanes = 64
         super(ResNet, self).__init__()
+        self.model_name = 'resnet'
+        assert (depth == 18 or depth == 34 or depth == 50 or depth == 101 or depth == 152)
+        if depth == 18:
+            block = BasicBlock
+            layers = config['A']
+        elif depth == 34:
+            block = BasicBlock
+            layers = config['B']
+        elif depth == 50:
+            block = Bottleneck
+            layers = config['B']
+        elif depth == 101:
+            block = Bottleneck
+            layers = config['C']
+        else:
+            block = Bottleneck
+            layers = config['D']
+
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)
@@ -151,63 +168,3 @@ class ResNet(nn.Module):
         x = self.fc(x)
 
         return x
-
-
-def resnet18(pretrained=False, **kwargs):
-    """Constructs a ResNet-18 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['resnet18']))
-    return model
-
-
-def resnet34(pretrained=False, **kwargs):
-    """Constructs a ResNet-34 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(BasicBlock, [3, 4, 6, 3], **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['resnet34']))
-    return model
-
-
-def resnet50(pretrained=False, **kwargs):
-    """Constructs a ResNet-50 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
-    return model
-
-
-def resnet101(pretrained=False, **kwargs):
-    """Constructs a ResNet-101 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(Bottleneck, [3, 4, 23, 3], **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['resnet101']))
-    return model
-
-
-def resnet152(pretrained=False, **kwargs):
-    """Constructs a ResNet-152 model.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = ResNet(Bottleneck, [3, 8, 36, 3], **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['resnet152']))
-    return model
