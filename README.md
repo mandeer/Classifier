@@ -324,12 +324,13 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 ------
 ## ResNet
 [ResNet](https://arxiv.org/abs/1512.03385)
-在2015年ImageNet上大放异彩，
-在ImageNet的classification、detection、localization
-以及COCO的detection和segmentation上均斩获了第一名的成绩，
-并获得了CVPR2016的best paper。
+解决了深层网络训练困难的问题，并在2015年ImageNet的classification、detection、
+localization以及COCO的detection和segmentation上均斩获了第一名的成绩，
+且获得了CVPR2016的best paper。
 ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 甚至达到了1001层之多。
+![ResNet](./imgs/ResNet.png)
+![ResBlock](./imgs/Res-block.png)
 
 [返回顶部](#classifier)
 
