@@ -340,7 +340,7 @@ ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 比使用一组堆叠的非线性层来拟合恒等映射要容易的多。
 
 ### 集成(ensemble)
-![Res-ensemble](./imgs/Res-ensemble.png)
+![Res-ensemble](./imgs/Res-ensemble.png)  
 [残差网络单元可以分解成右图的形式](https://arxiv.org/abs/1605.06431)。
 从图中可以看出，残差网络其实是由多种路径组合的一个网络，
 换句话说，残差网络其实是很多并行子网络的组合，残差网络其实相当于一个多人投票系统。
@@ -348,6 +348,14 @@ ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
 
 ### 模型测试
 pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
+
+|ResNet|top1|top5|
+|---|---|---|
+|ResNet18|00|00|
+|ResNet34|00|00|
+|ResNet50|00|00|
+|ResNet101|00|00|
+|ResNet152|00|00|
 
 
 [返回顶部](#classifier)
