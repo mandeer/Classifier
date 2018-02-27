@@ -98,7 +98,7 @@ def main(config):
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
     # model
-    model = getattr(models, config.model)(depth=18)
+    model = getattr(models, config.model)(depth=152)
     print(model)
     model.load(config.model_name)
     criterion = torch.nn.CrossEntropyLoss().cuda()
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', type=str, default='ImageNet2012', help='ImageNet2012')
     parser.add_argument('--model', type=str, default='ResNet', help='train, test')
     parser.add_argument('--model-name', type=str,
-                        default='./pretrained_models/models_pretrained/resnet18-5c106cde.pth', help='model for test')
+                        default='./pretrained_models/models_pretrained/resnet152-b121ed2d.pth', help='model for test')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():

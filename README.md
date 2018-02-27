@@ -351,11 +351,11 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 
 |ResNet|top1|top5|
 |---|---|---|
-|ResNet18|00|00|
-|ResNet34|00|00|
-|ResNet50|00|00|
-|ResNet101|00|00|
-|ResNet152|00|00|
+|ResNet18|69.224|88.808|
+|ResNet34|72.820|91.076|
+|ResNet50|75.692|92.770|
+|ResNet101|76.968|93.530|
+|ResNet152|78.142|93.944|
 
 ### ResNet-V2
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
