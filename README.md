@@ -357,6 +357,12 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 |ResNet101|00|00|
 |ResNet152|00|00|
 
+### ResNet-V2
+[ResNet-V2](https://arxiv.org/abs/1603.05027)
+
+### ResNeXt
+[ResNeXt](https://arxiv.org/abs/1611.05431)
+
 
 [返回顶部](#classifier)
 
