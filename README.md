@@ -342,7 +342,7 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 解决了深层网络训练困难的问题，并在2015年ImageNet的classification、detection、
 localization以及COCO的detection和segmentation上均斩获了第一名的成绩，
 且获得了CVPR2016的best paper。
-ResNet有152层，之后的[改进版](https://arxiv.org/abs/1603.05027)
+ResNet有152层，之后的[改进版](#resnet-v2)
 甚至达到了1001层之多。  
 ![ResNet](./imgs/ResNet.png)
 ![ResBlock](./imgs/Res-block.png)
@@ -374,7 +374,16 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 
 ### ResNet-V2
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
+重新设计了一种残差网络基本单元（预激活），使得网络更易于训练并且泛化性能也得到了提升。
+![Res-Unit-V2](./imgs/Res-Unit-V2.png)
 
+#### 主要创新点
+* 深层单元的特征可以由浅层单元的特征和残差函数相加得到。残差网络是连加，普通网络是连乘。
+* 任意深层单元的特征都可以由起始特征x0与先前所有残差函数相加得到。
+* 回传的梯度不会消失。
+* 使用gating或1x1卷积作为快捷链接，其表达能力更强，但是它们的训练误差反而比恒等映射更大，
+造成这种结果的原因是优化问题，而不是表达能力的问题。
+![Res-equ](./imgs/Res-equ.png)
 
 ### ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
