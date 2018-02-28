@@ -9,7 +9,9 @@
 * [**NIN**](#nin)
 * [**GoogLeNet**](#googlenet)
     * [BatchNorm](#batchnorm)
+    * [Xception](#xception)
 * [**ResNet**](#resnet)
+    * [ResNeXt](#resnext)
 * [DenseNet](#densenet)
 * [DiracNets](#diracnets)
 
@@ -19,6 +21,10 @@
 * pytorch-0.3.0
 * torchvision
 * visdom
+
+分类网络的发展历程参考[这里](https://www.leiphone.com/news/201802/31oWxcSnayBIUJhE.html)
+
+预训练模型参考[这里](https://github.com/Cadene/pretrained-models.pytorch)
 
 ------
 ## LeNet
@@ -322,6 +328,13 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 [返回顶部](#classifier)
 
 ------
+### Xception
+[Xception](https://arxiv.org/abs/1610.02357v2)
+
+
+[返回顶部](#classifier)
+
+------
 ## ResNet
 [ResNet](https://arxiv.org/abs/1512.03385)
 解决了深层网络训练困难的问题，并在2015年ImageNet的classification、detection、
@@ -359,6 +372,7 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 
 ### ResNet-V2
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
+
 
 ### ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
