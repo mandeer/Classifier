@@ -382,11 +382,13 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 * 任意深层单元的特征都可以由起始特征x0与先前所有残差函数相加得到。
 * 回传的梯度不会消失。
 * 使用gating或1x1卷积作为快捷链接，其表达能力更强，但是它们的训练误差反而比恒等映射更大，
-造成这种结果的原因是优化问题，而不是表达能力的问题。
+造成这种结果的原因是优化问题，而不是表达能力的问题。  
 ![Res-equ](./imgs/Res-equ.png)
 
 ### ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
+
+![ResNeXt](./imgs/ResNeXt.png)
 
 
 [返回顶部](#classifier)
