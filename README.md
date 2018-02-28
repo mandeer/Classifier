@@ -22,7 +22,9 @@
 * torchvision
 * visdom
 
+------
 分类网络的发展历程参考[这里](https://www.leiphone.com/news/201802/31oWxcSnayBIUJhE.html)
+![发展历程](./imgs/time.jpeg)
 
 预训练模型参考[这里](https://github.com/Cadene/pretrained-models.pytorch)
 
