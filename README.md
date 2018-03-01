@@ -263,6 +263,13 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 * [Inception V4](https://arxiv.org/abs/1602.07261)
 : Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning
  [2016.2] [top5: 3.08%]
+ 
+ ### 主要创新点
+ * 在v3的基础上提出了更复杂(复杂plus plus)的Inception-v4
+ * 结合ResNet，提出了Inception-ResNet-v1和Inception-ResNet-v2
+ * 残差链接可以加快训练速度，但不使用残差链接也可以训练很深的网络
+ * "Although the residual version converges faster, 
+ the final accuracy seems to mainly depend on the model size."
 
 [返回顶部](#classifier)
 
