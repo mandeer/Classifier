@@ -2,11 +2,7 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.init as init
-import torch.utils.model_zoo as model_zoo
-
-
-__all__ = ['SqueezeNet', 'squeezenet1_0', 'squeezenet1_1']
-
+from.BasicModule import BasicModule
 
 model_urls = {
     'squeezenet1_0': 'https://download.pytorch.org/models/squeezenet1_0-a815701f.pth',
@@ -15,7 +11,6 @@ model_urls = {
 
 
 class Fire(nn.Module):
-
     def __init__(self, inplanes, squeeze_planes,
                  expand1x1_planes, expand3x3_planes):
         super(Fire, self).__init__()
@@ -37,10 +32,10 @@ class Fire(nn.Module):
         ], 1)
 
 
-class SqueezeNet(nn.Module):
-
+class SqueezeNet(BasicModule):
     def __init__(self, version=1.0, num_classes=1000):
         super(SqueezeNet, self).__init__()
+        self.model_name = 'squeezenet'
         if version not in [1.0, 1.1]:
             raise ValueError("Unsupported SqueezeNet version {version}:"
                              "1.0 or 1.1 expected".format(version=version))
@@ -100,31 +95,3 @@ class SqueezeNet(nn.Module):
         x = self.classifier(x)
         return x.view(x.size(0), self.num_classes)
 
-
-def squeezenet1_0(pretrained=False, **kwargs):
-    r"""SqueezeNet model architecture from the `"SqueezeNet: AlexNet-level
-    accuracy with 50x fewer parameters and <0.5MB model size"
-    <https://arxiv.org/abs/1602.07360>`_ paper.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = SqueezeNet(version=1.0, **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['squeezenet1_0']))
-    return model
-
-
-def squeezenet1_1(pretrained=False, **kwargs):
-    r"""SqueezeNet 1.1 model from the `official SqueezeNet repo
-    <https://github.com/DeepScale/SqueezeNet/tree/master/SqueezeNet_v1.1>`_.
-    SqueezeNet 1.1 has 2.4x less computation and slightly fewer parameters
-    than SqueezeNet 1.0, without sacrificing accuracy.
-
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-    """
-    model = SqueezeNet(version=1.1, **kwargs)
-    if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['squeezenet1_1']))
-    return model

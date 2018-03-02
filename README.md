@@ -461,6 +461,13 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
     * squeeze层，大幅度减小feature map的数量
     * expand层，使用更小的卷积核：使用1*1的卷积核替换掉部分3*3的卷积核
 * 推迟降采样：大的feature map有助于提升分类的准确率
+#### 模型测试
+pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
+
+|SqueezeNet|top1|top5|
+|---|---|---|
+|SqueezeNet1_0|57.140|79.722|
+|Squeezenet1_1|57.332|80.016|
 
 [返回顶部](#classifier)
 

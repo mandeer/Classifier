@@ -5,3 +5,4 @@ from .VGG import VGG
 from .NIN import NIN
 from .Inception3 import Inception3
 from .ResNet import ResNet
+from .SqueezeNet import SqueezeNet
