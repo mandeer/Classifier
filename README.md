@@ -13,17 +13,17 @@
         * [BatchNorm](#batchnorm)
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
-    * [Xception](#xception)(2016.10)
+* [Xception](#xception)(2016.10)
 * [**ResNet**](#resnet)(2015.12, 2016.3)
     * [ResNeXt](#resnext)(2016.11)
 * [WRN](#wrn)(2016.5)
 * [DenseNet](#densenet)(2016.8)
 * [DPN](#dpn)(2017.7)
 * [SENet](#senet)(2017.9)
-* [NASnet](#nesnet)(2017.7)
+* [NASnet](#nasnet)(2017.7)
 * [轻量化网络](#轻量化网络)
     * [SqueezeNet](#squeezenet)(2016.2)
-    * [MobileNet](#mobilenet)(2017.4)
+    * [MobileNets](#mobilenets)(2017.4)
     * [ShuffleNet](#shufflenet)(2017.4)
 
 ------
@@ -352,7 +352,7 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 [返回顶部](#classifier)
 
 ------
-### Xception
+## Xception
 [Xception](https://arxiv.org/abs/1610.02357v2)
 
 
@@ -407,6 +407,9 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 造成这种结果的原因是优化问题，而不是表达能力的问题。  
 ![Res-equ](./imgs/Res-equ.png)
 
+[返回顶部](#classifier)
+
+------
 ## ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
 
@@ -451,16 +454,16 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ### SqueezeNet
 [SqueezeNet](https://arxiv.org/abs/1602.07360)
 
+[返回顶部](#classifier)
 
 ------
 ### MobileNets
 [MobileNets](https://arxiv.org/abs/1704.04861)
 
+[返回顶部](#classifier)
 
 ------
 ### ShuffleNet
 [ShuffleNet](https://arxiv.org/abs/1707.01083)
-
-
 
 [返回顶部](#classifier)
