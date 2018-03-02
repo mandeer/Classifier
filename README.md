@@ -1,19 +1,30 @@
 # Classifier
 使用PyTorch实现了经典的深度学习分类算法：  
 
-* [**LeNet**](#lenet)
-* [**AlexNet**](#alexnet)
-    * [ReLU](#relu)
-* [ZFNet](#zfnet)
-* [**VGG**](#vgg)
-* [**NIN**](#nin)
-* [**GoogLeNet**](#googlenet)
-    * [BatchNorm](#batchnorm)
-    * [Xception](#xception)
-* [**ResNet**](#resnet)
-    * [ResNeXt](#resnext)
-* [DenseNet](#densenet)
-* [DiracNets](#diracnets)
+* [**LeNet**](#lenet)(1998)
+* [**AlexNet**](#alexnet)(2012)
+    * [ReLU](#relu)(2010)
+* [ZFNet](#zfnet)(2013.11)
+* [**VGG**](#vgg)(2014.9)
+* [**NIN**](#nin)(2013.12)
+* [GoogLeNet](#googlenet)
+    * [Inception-V1](#inception1)(2014.9)
+    * [Inception-V2](#inception2)(2015.2)
+        * [BatchNorm](#batchnorm)
+    * [**Inception-V3**](#inception3)(2015.12)
+    * [Inception-V4](#inception4)(2016.2)
+    * [Xception](#xception)(2016.10)
+* [**ResNet**](#resnet)(2015.12, 2016.3)
+    * [ResNeXt](#resnext)(2016.11)
+* [WRN](#wrn)(2016.5)
+* [DenseNet](#densenet)(2016.8)
+* [DPN](#dpn)(2017.7)
+* [SENet](#senet)(2017.9)
+* [NASnet](#nesnet)(2017.7)
+* [轻量化网络](#轻量化网络)
+    * [SqueezeNet](#squeezenet)(2016.2)
+    * [MobileNet](#mobilenet)(2017.4)
+    * [ShuffleNet](#shufflenet)(2017.4)
 
 ------
 ## Prerequisites:
@@ -194,12 +205,13 @@ pytorch中给出的VGG模型在imageNet2012验证集上的测试结果
 GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 
 ------
+### Inception1
 * [Inception V1](https://arxiv.org/abs/1409.4842) 
 : Going Deeper with Convolutions [2014.9] [top5: 6.67%]
 ![Inception module](./imgs/Inception_module.png)
 ![GoogLeNet](./imgs/GoogLeNet.png)
 ![architecture](./imgs/GoogLeNet_architecture.png)
-### 主要创新点
+#### 主要创新点
 * 提出了Inception， 在利用密集矩阵的高计算性能的基础上，保持了网络结构的稀疏性。
 22层网络，参数却只有AlexNet的约1/12。
 * 使用不同大小的卷积核提取不同大小感受野的特征，然后对不同尺度的特征进行拼接融合。
@@ -209,11 +221,12 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 [返回顶部](#classifier)
 
 ------
+### inception2
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
  [2015.2] [top5: 4.8%]
  ![GoogLeNetV2](./imgs/GoogLeNetV2.png)
- ### 主要创新点
+ #### 主要创新点
  * 提出了[**BatchNorm**](#batchnorm)
     * 提高SGD中的初始学习率： 加快了学习速度，而不会发生梯度弥散
     * 去掉了Dropout层： BN也可以降低过拟合，去掉dropout可以加快学习速度
@@ -225,55 +238,8 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
  ![BatchNorm](./imgs/BatchNorm.png)
  
  [返回顶部](#classifier)
-
-------
-* [Inception V3](https://arxiv.org/abs/1512.00567)
-: Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]  
-![Inception-V3](./imgs/Inception-V3.png)
-
-### 主要创新点
-* 网络设计的通用原则
-    * 避免表示瓶颈，尤其是在前面的网络：pooling后特征图变小了，会造成信息丢失。
-    * 高维的特征更容易处理，在高维特征上训练更快，更容易收敛。
-    * 空间聚合可以通过较低维度嵌入上完成，而不会在表示能力上造成多少损失：
-    相邻的神经单元之间具有很强的相关性，信息有冗余。
-    * 平衡好网络的宽度与深度
-* 将大的卷积拆分成若干个小的卷积：降低计算量的同时增加了空间的多样性。
-在每个卷积层后面添加激活函数会比不添加更好。
-* 非对称卷积：n\*n的卷积核可以分解成1\*n和n\*1非的卷积核。
-在中等大小的feature map中效果比较好。  
-![Mini-network](./imgs/Mini-network.png)
-* 优化辅助分类器：辅助分类器起到了正则化(??)的作用，而不是V1中提到的作用。
-* 混合poolong：避免了表示瓶颈(representational bottleneck)  
-![new-pooling](./imgs/new-pooling.png)
-* 标签平滑(Label Smoothing): 对网络输出进行正则化。
-* 低分辨率图像的识别；在相同计算量的前提下，
-低分辨率的网络需要更长的时间去训练，但最终的结果与高分辨率网络的差别不大。
-
-### 模型测试
-pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果为：
  
-|top1|top5|
-|---|---|
-|77.560|93.694|
-
-[返回顶部](#classifier)
-
-------
-* [Inception V4](https://arxiv.org/abs/1602.07261)
-: Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning
- [2016.2] [top5: 3.08%]
- 
- ### 主要创新点
- * 在v3的基础上提出了更复杂(复杂plus plus)的Inception-v4
- * 结合ResNet，提出了Inception-ResNet-v1和Inception-ResNet-v2
- * 残差链接可以加快训练速度，但不使用残差链接也可以训练很深的网络
- * "Although the residual version converges faster, 
- the final accuracy seems to mainly depend on the model size."
-
-[返回顶部](#classifier)
-
-------
+ ------
 ### BatchNorm
 批规范化(Batch Normalization, Inception-V2)通过使深度神经网络训练过程中的每一层神经网络的
 输入保持相同分布，解决了反向传播过程中梯度消失(0.9^100 = 2.66 * 10e-5)和
@@ -337,6 +303,55 @@ pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果�
 [返回顶部](#classifier)
 
 ------
+### inception3
+* [Inception V3](https://arxiv.org/abs/1512.00567)
+: Rethinking the Inception Architecture for Computer Vision [2015.12] [top5: 3.5%]  
+![Inception-V3](./imgs/Inception-V3.png)
+
+#### 主要创新点
+* 网络设计的通用原则
+    * 避免表示瓶颈，尤其是在前面的网络：pooling后特征图变小了，会造成信息丢失。
+    * 高维的特征更容易处理，在高维特征上训练更快，更容易收敛。
+    * 空间聚合可以通过较低维度嵌入上完成，而不会在表示能力上造成多少损失：
+    相邻的神经单元之间具有很强的相关性，信息有冗余。
+    * 平衡好网络的宽度与深度
+* 将大的卷积拆分成若干个小的卷积：降低计算量的同时增加了空间的多样性。
+在每个卷积层后面添加激活函数会比不添加更好。
+* 非对称卷积：n\*n的卷积核可以分解成1\*n和n\*1非的卷积核。
+在中等大小的feature map中效果比较好。  
+![Mini-network](./imgs/Mini-network.png)
+* 优化辅助分类器：辅助分类器起到了正则化(??)的作用，而不是V1中提到的作用。
+* 混合poolong：避免了表示瓶颈(representational bottleneck)  
+![new-pooling](./imgs/new-pooling.png)
+* 标签平滑(Label Smoothing): 对网络输出进行正则化。
+* 低分辨率图像的识别；在相同计算量的前提下，
+低分辨率的网络需要更长的时间去训练，但最终的结果与高分辨率网络的差别不大。
+
+#### 模型测试
+pytorch中给出的Inception-V3模型在imageNet2012验证集上的测试结果为：
+ 
+|top1|top5|
+|---|---|
+|77.560|93.694|
+
+[返回顶部](#classifier)
+
+------
+### inception4
+* [Inception V4](https://arxiv.org/abs/1602.07261)
+: Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning
+ [2016.2] [top5: 3.08%]
+ 
+ #### 主要创新点
+ * 在v3的基础上提出了更复杂(复杂plus plus)的Inception-v4
+ * 结合ResNet，提出了Inception-ResNet-v1和Inception-ResNet-v2
+ * 残差链接可以加快训练速度，但不使用残差链接也可以训练很深的网络
+ * "Although the residual version converges faster, 
+ the final accuracy seems to mainly depend on the model size."
+
+[返回顶部](#classifier)
+
+------
 ### Xception
 [Xception](https://arxiv.org/abs/1610.02357v2)
 
@@ -392,11 +407,17 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 造成这种结果的原因是优化问题，而不是表达能力的问题。  
 ![Res-equ](./imgs/Res-equ.png)
 
-### ResNeXt
+## ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
 
 ![ResNeXt](./imgs/ResNeXt.png)
 
+
+[返回顶部](#classifier)
+
+------
+## WRN
+[WRN](https://arxiv.org/abs/1605.07146)
 
 [返回顶部](#classifier)
 
@@ -407,7 +428,39 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 [返回顶部](#classifier)
 
 ------
-## DiracNets
-[DiracNets](https://arxiv.org/abs/1706.00388)
+## DPN
+[DPN](https://arxiv.org/abs/1707.01629)
+
+[返回顶部](#classifier)
+
+------
+## SENet
+[SENet](https://arxiv.org/abs/1709.01507)
+
+[返回顶部](#classifier)
+
+------
+## NASNet
+[NASNet](https://arxiv.org/abs/1707.07012)
+
+[返回顶部](#classifier)
+
+------
+## 轻量化网络
+------
+### SqueezeNet
+[SqueezeNet](https://arxiv.org/abs/1602.07360)
+
+
+------
+### MobileNets
+[MobileNets](https://arxiv.org/abs/1704.04861)
+
+
+------
+### ShuffleNet
+[ShuffleNet](https://arxiv.org/abs/1707.01083)
+
+
 
 [返回顶部](#classifier)
