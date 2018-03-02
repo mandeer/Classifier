@@ -453,6 +453,14 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ### SqueezeNet
 [SqueezeNet](https://arxiv.org/abs/1602.07360)
+使用[AlexNet](#alexnet)1/50的参数，实现了近似的准确率。
+
+![FireModule](./imgs/FireModule.png)  
+#### 主要创新点
+* Fire Module
+    * squeeze层，大幅度减小feature map的数量
+    * expand层，使用更小的卷积核：使用1*1的卷积核替换掉部分3*3的卷积核
+* 推迟降采样：大的feature map有助于提升分类的准确率
 
 [返回顶部](#classifier)
 
