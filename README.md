@@ -3,7 +3,7 @@
 
 * [**LeNet**](#lenet)(1998)
 * [**AlexNet**](#alexnet)(2012)
-    * [ReLU](#relu)(2010)
+    * [ReLU](#relu)
 * [ZFNet](#zfnet)(2013.11)
 * [**VGG**](#vgg)(2014.9)
 * [**NIN**](#nin)(2013.12)
@@ -421,6 +421,8 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ## WRN
 [WRN](https://arxiv.org/abs/1605.07146)
+
+![WRN](./imgs/WRN.png)
 
 [返回顶部](#classifier)
 
