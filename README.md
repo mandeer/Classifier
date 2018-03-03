@@ -4,6 +4,7 @@
 * [**LeNet**](#lenet)(1998)
 * [**AlexNet**](#alexnet)(2012)
     * [ReLU](#relu)
+    * [Dropout](#dropout)
 * [ZFNet](#zfnet)(2013.11)
 * [**VGG**](#vgg)(2014.9)
 * [**NIN**](#nin)(2013.12)
@@ -125,6 +126,12 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 (这个问题可以用[Leaky ReLu](http://ai.stanford.edu/~amaas/papers/relu_hybrid_icml2013_final.pdf)解决)
 * 输出偏移: 即输出均值恒大于零。(可以使用[BatchNorm](#batchnorm)进行改善)  
 偏移现象和神经元死亡会共同影响网络的收敛性。
+
+[返回顶部](#classifier)
+
+------
+## Dropout
+[Dropout](https://arxiv.org/abs/1207.0580)
 
 [返回顶部](#classifier)
 
