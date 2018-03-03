@@ -22,7 +22,7 @@
 * [SENet](#senet)(2017.9)
 * [NASnet](#nasnet)(2017.7)
 * [轻量化网络](#轻量化网络)
-    * [SqueezeNet](#squeezenet)(2016.2)
+    * [**SqueezeNet**](#squeezenet)(2016.2)
     * [MobileNets](#mobilenets)(2017.4)
     * [ShuffleNet](#shufflenet)(2017.4)
 
@@ -421,8 +421,14 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ## WRN
 [WRN](https://arxiv.org/abs/1605.07146)
-
+从“宽度”的角度入手，提出了wide residual networks。
 ![WRN](./imgs/WRN.png)
+
+### 主要创新点
+* 增加深度和宽度都有好处
+* 相同参数时，宽度比深度更好训练
+* ResNet性能的提升主要是参数与计算量，而不是深度！！
+* Wide ResNet Blocks中间使用dropout
 
 [返回顶部](#classifier)
 
