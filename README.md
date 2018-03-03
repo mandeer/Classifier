@@ -17,6 +17,7 @@
 * [**ResNet**](#resnet)(2015.12, 2016.3)
     * [ResNeXt](#resnext)(2016.11)
 * [WRN](#wrn)(2016.5)
+* [Stochastic Depth](#stochasticdepth)(2016.3)
 * [DenseNet](#densenet)(2016.8)
 * [DPN](#dpn)(2017.7)
 * [SENet](#senet)(2017.9)
@@ -25,6 +26,7 @@
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [MobileNets](#mobilenets)(2017.4)
     * [ShuffleNet](#shufflenet)(2017.4)
+    * [CondenseNet](#condensenet)(2017.11)
 
 ------
 ## Prerequisites:
@@ -427,14 +429,24 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ### 主要创新点
 * 增加深度和宽度都有好处
 * 相同参数时，宽度比深度更好训练
-* ResNet性能的提升主要是参数与计算量，而不是深度！！
-* Wide ResNet Blocks中间使用dropout
+* ResNet性能的提升主要靠的是参数与计算量，而不是深度！！
+* Wide ResNet Blocks中间使用dropout：因为参数太多
+
+[返回顶部](#classifier)
+
+------
+## StochasticDepth
+[Stochastic Depth](https://arxiv.org/abs/1603.09382)
 
 [返回顶部](#classifier)
 
 ------
 ## DenseNet
 [DenseNet](https://arxiv.org/abs/1608.06993)
+将输出与输入相并联，每一层都能直接得到之前所有层的输出。
+
+![DenseBlock](./imgs/DenseBlock.png)
+![DenseNet](./imgs/DenseNet.png)
 
 [返回顶部](#classifier)
 
@@ -488,5 +500,11 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ### ShuffleNet
 [ShuffleNet](https://arxiv.org/abs/1707.01083)
+
+[返回顶部](#classifier)
+
+------
+### CondenseNet
+[CondenseNet](https://arxiv.org/abs/1711.09224)
 
 [返回顶部](#classifier)
