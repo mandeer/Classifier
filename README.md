@@ -19,6 +19,7 @@
 * [WRN](#wrn)(2016.5)
 * [Stochastic Depth](#stochasticdepth)(2016.3)
 * [**DenseNet**](#densenet)(2016.8)
+    * [MSDNet](#msdnet)(2017.3)
 * [DPN](#dpn)(2017.7)
 * [SENet](#senet)(2017.9)
 * [NASnet](#nasnet)(2017.7)
@@ -474,6 +475,12 @@ pytorch中给出的DenseNet模型在imageNet2012验证集上的测试结果为�
 |DenseNet169|75.188|92.532|
 |DenseNet201|76.260|93.004|
 |DenseNet161|76.844|93.450|
+
+[返回顶部](#classifier)
+
+------
+### MSDNet
+[MSDNet](https://arxiv.org/abs/1703.09844)
 
 [返回顶部](#classifier)
 
