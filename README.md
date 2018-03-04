@@ -132,6 +132,20 @@ sigmoid和tanh的梯度在饱和区域非常平缓，接近于0，很容易造�
 ------
 ## Dropout
 [Dropout](https://arxiv.org/abs/1207.0580)
+是CNN中防止过拟合，提高模型泛华能力的重要方法之一。
+dropout是指在深度学习网络的训练过程中，对于神经网络单元，
+按照一定的概率将其**暂时**从网络中丢弃。
+对于随机梯度下降来说，每一个mini-batch都是在训练不同的网络。
+
+![dropout](./imgs/dropout.png)
+
+### dropout有效的原因
+1. 集成论  
+每次做完dropout，相当于从原始的网络中找到一个更‘瘦’的网络，
+因此，对于一个有N个节点的神经网络，使用了dropout后，可以看做是2^n个模型的集合。
+2. 噪声论  
+使用dropout的网络，在进行训练时，相当于做了数据增强。
+因为，总可以找到一个样本，使得在原始的网络上也能达到dropout单元后的效果。
 
 [返回顶部](#classifier)
 
@@ -454,7 +468,7 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 * 训练过程中减少了前向传播步骤和梯度计算链，前面的网络可以学到更有用的信息且加快了训练速度
 * StochasticDepth可以看做是不同深度网络的集成
 * StochasticDepth类似dropout(dropout让网络变瘦，而StochasticDepths让网络变浅)，
-可以看做是一种正则化方法，且可以和[batch norm](batchnorm)结合使用
+可以看做是一种正则化方法，且可以和[batch norm](#batchnorm)结合使用
 * 使用StochasticDepth可以训练非常深的网络
 
 [返回顶部](#classifier)
