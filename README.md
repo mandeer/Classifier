@@ -436,8 +436,17 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ## ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
+引入了一个新的维度——“基数（cardinality）”，即同属一个block变换的数量，
+提供了一种新的方式来调整模型容量。这是一个和网络深度、宽度同等重要的因素。
 
 ![ResNeXt](./imgs/ResNeXt.png)
+![](imgs/ResNeXt-Blocks-Equ.png)
+### 主要创新点
+* 提出了一个新的维度——基数, 实验证明通过增大基数来提升网络性能比深度、宽度更有效，
+尤其是当深度/宽度的影响开始出现衰减时。
+* 重复使用拆分-变换-合并的同结构模块来简明的构建深层网络
+* 內积操作可以分为拆分、变换、合并三步，ResNeXt可以看做是恒等链接 + Network-in-Neuron。
+
 
 
 [返回顶部](#classifier)
