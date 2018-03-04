@@ -405,7 +405,11 @@ ResNet有152层，之后的[改进版](#resnet-v2)
 [残差网络单元可以分解成右图的形式](https://arxiv.org/abs/1605.06431)。
 从图中可以看出，残差网络其实是由多种路径组合的一个网络，
 换句话说，残差网络其实是很多并行子网络的组合，残差网络其实相当于一个多人投票系统。
-删除一个基本的残差单元，对最后的分类结果影响很小。
+删除一个基本的残差单元，对最后的分类结果影响很小。  
+[StochasticDepth](#stochasticdepth)表明，训练时也可以随机丢弃掉一些层。  
+[ResNeXt](#resnext)中，作者回应说：“But we argue that it is imprecise 
+to view our method as ensembling, because the members to be aggregated 
+are trained jointly, not independently.”
 
 ### 模型测试
 pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
@@ -446,8 +450,7 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 尤其是当深度/宽度的影响开始出现衰减时。
 * 重复使用拆分-变换-合并的同结构模块来简明的构建深层网络
 * 內积操作可以分为拆分、变换、合并三步，ResNeXt可以看做是恒等链接 + Network-in-Neuron。
-
-
+* ResNeXt-Blocks可以使用卷积中的group来实现：equivalent c
 
 [返回顶部](#classifier)
 
