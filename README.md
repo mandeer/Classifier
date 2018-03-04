@@ -23,7 +23,7 @@
     * [MSDNet](#msdnet)(2017.3)
 * [DPN](#dpn)(2017.7)
 * [SENet](#senet)(2017.9)
-* [NASnet](#nasnet)(2017.7)
+* [NASNet](#nasnet)(2017.7)
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [MobileNets](#mobilenets)(2017.4)
@@ -445,6 +445,17 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ## StochasticDepth
 [Stochastic Depth](https://arxiv.org/abs/1603.09382)
+提出了一种类似于[Dropout](#dropout)的方法来改进[ResNet](#resnet)。
+在训练过程中的每一步都随机地「扔掉」（drop）一些层，可以显著的提高ResNet的泛化性能。
+
+![StochasticDepth](imgs/StochasticDepth.png)
+
+### 主要创新点
+* 训练过程中减少了前向传播步骤和梯度计算链，前面的网络可以学到更有用的信息且加快了训练速度
+* StochasticDepth可以看做是不同深度网络的集成
+* StochasticDepth类似dropout(dropout让网络变瘦，而StochasticDepths让网络变浅)，
+可以看做是一种正则化方法，且可以和[batch norm](batchnorm)结合使用
+* 使用StochasticDepth可以训练非常深的网络
 
 [返回顶部](#classifier)
 
