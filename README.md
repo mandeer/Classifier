@@ -31,7 +31,7 @@
     * [CondenseNet](#condensenet)(2017.11)
 
 ------
-## Prerequisites:
+## Requisites:
 * anaconda
 * pytorch-0.3.0
 * torchvision
@@ -73,12 +73,12 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 ![AlexNet](./imgs/AlexNet.png)
 ### 主要创新点
 * 非线性激活函数: [**ReLU**](#relu)
-* 防止过拟合的方法: Dropout, Data augmentation
+* 防止过拟合的方法: [Dropout](#dropout), Data augmentation
 * 大数据训练: imageNet
 * 高性能计算平台: GPU
 * 重叠Pooling: kernel_size=3, stride=2
 * 局部响应归一化(LRN, Local Response Normalization), 
-[VGG](#vgg)说这个没什么用，可以使用更强大的[BatchNorm](#batchnorm)代替。
+[VGG](#vgg)说这个没什么用，现在一般使用更强大的[BatchNorm](#batchnorm)代替。
 
 ### 本工程实现的AlexNet与原始的AlexNet略有区别
 * 没有使用LRN
@@ -192,14 +192,6 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
     * 强化了最后一层特征图与类别的关系：最后一层输出的特征图的空间平均值可以解释为相应类别的置信度。
     * 降低了overfitting：因为均值池化本身就是一种结构性的规则项，且没有参数需要优化。
     使用全链接层的cnn容易过拟合，且严重依赖dropout进行规则化。
-
-### 本工程实现的NIN与原始的NIN略有区别
-* 添加了[BatchNorm](#batchnorm)层， 若不添加则很难收敛。
-* 去掉了dropout层
-
-### 训练结果
-* 在cifar10数据集上，迭代30次后达到了0.897
-* 在cifar100数据集上，迭代30次后达到了0.665
 
 [返回顶部](#classifier)
 
@@ -571,10 +563,11 @@ are trained jointly, not independently.”
     * std  = [0.229, 0.224, 0.225]
 
 ------
-## cifar数据集测试结果
+## cifar数据集上测试结果
 |model|params|FLOPs|cifar10|cifar100|
 |---|---|---|---|---|
 |LeNet|244K|00|0.674|0.344|
+|NIN|3.8M|00|0.867|0.604|
 
 数据预处理：
 1. RandomHorizontalFlip()
