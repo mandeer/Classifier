@@ -457,7 +457,8 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ------
 ## WRN
 [WRN](https://arxiv.org/abs/1605.07146)
-从“宽度”的角度入手，提出了wide residual networks。
+从“宽度”的角度入手，提出了wide residual networks。作者提供了PyTorch的
+[源码](https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch)
 ![WRN](./imgs/WRN.png)
 
 ### 主要创新点
@@ -586,3 +587,15 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 [CondenseNet](https://arxiv.org/abs/1711.09224)
 
 [返回顶部](#classifier)
+
+
+------
+## imageNet测试结果
+|model|params|FLOPs|top1|top5|
+|---|---|---|---|---|
+
+------
+## cifar数据集测试结果
+|model|params|FLOPs|cifar10|cifar100|
+|---|---|---|---|---|
+
