@@ -86,11 +86,11 @@ class VGG(BasicModule):
                 m.bias.data.zero_()
 
 class VGG_CIFAR(BasicModule):
-    def __init__(self, vgg_name):
+    def __init__(self, num_classes=10):
         super(VGG_CIFAR, self).__init__()
         self.model_name = 'vgg_cifar'
         self.features = make_layers(cfg['D'], use_BN=True)
-        self.classifier = nn.Linear(512, 10)
+        self.classifier = nn.Linear(512, num_classes)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):

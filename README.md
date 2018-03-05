@@ -568,6 +568,7 @@ are trained jointly, not independently.”
 |---|---|---|---|---|
 |LeNet|244K|00|0.674|0.344|
 |NIN|3.8M|00|0.867|0.604|
+|VGG16_BN|57M|00|0.888|0.590|
 
 数据预处理：
 1. RandomHorizontalFlip()

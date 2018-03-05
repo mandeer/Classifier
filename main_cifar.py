@@ -85,7 +85,7 @@ class Solver(object):
                 self.optimizer.step()
 
                 if (ii + 1) % self.log_step == 0:
-                    print('epoch: ', epoch, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
+                    print('epoch: ', epoch + 1, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
 
             val_accuracy, val_loss = self.val()
             print('val accuracy: ', val_accuracy[self.n_class])
@@ -129,7 +129,7 @@ def main(config):
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    model = getattr(models, config.model)(n_class=config.n_class)
+    model = getattr(models, config.model)(num_classes=config.n_class)
     if config.model_preTrained != '':
         print('use pretrained model: ', config.model_preTrained)
         model.load(config.model_preTrained)
@@ -160,7 +160,7 @@ if __name__ == '__main__':
     parser.add_argument('--n-class',    type=int,      default=100, help='10, 100')
     parser.add_argument('--dataset',    type=str,      default='CIFAR100', help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode',       type=str,      default='train', help='train, test')
-    parser.add_argument('--model',      type=str,      default='NIN', help='model')
+    parser.add_argument('--model',      type=str,      default='VGG_CIFAR', help='model')
     parser.add_argument('--model-preTrained', type=str, default='', help='model for test or retrain')
 
     config = parser.parse_args()
