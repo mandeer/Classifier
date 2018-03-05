@@ -63,15 +63,6 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 #### max pooling
 ![pooling](./imgs/pooling.gif)
 
-### 本工程实现的LeNet与原始的LeNet-5略有区别
-* 使用了ReLU而不是sigmoid函数
-* S2中的每个特征图连接到了每个C3的特征图
-
-### 训练结果
-* 在mnist训练集进行了10次迭代，最终在测试集上的识别结果为 0.983
-* 在cifar10训练集进行了40次迭代，最终测试集上的识别结果为 0.636
-* sigmoid版LeNet在mnist训练集上迭代30次后，识别率达到了0.975
-
 [返回顶部](#classifier)
 
 ------
@@ -598,4 +589,5 @@ pytorch中给出的ResNet模型在imageNet2012验证集上的测试结果为：
 ## cifar数据集测试结果
 |model|params|FLOPs|cifar10|cifar100|
 |---|---|---|---|---|
+|LeNet|00|00|0.674|0.344|
 

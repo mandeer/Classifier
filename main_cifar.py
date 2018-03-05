@@ -129,7 +129,7 @@ def main(config):
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    model = getattr(models, config.model)()
+    model = getattr(models, config.model)(3, config.n_class)
     if config.model_preTrained != '':
         print('use pretrained model: ', config.model_preTrained)
         model.load(config.model_preTrained)
@@ -157,10 +157,10 @@ if __name__ == '__main__':
     parser.add_argument('--use-cuda',   type=str2bool, default=True,        help='enables cuda')
 
     parser.add_argument('--data-path',  type=str,      default='./data/cifar10')
-    parser.add_argument('--n-class',    type=int,      default=10,          help='10, 100')
-    parser.add_argument('--dataset',    type=str,      default='CIFAR10',   help='CIFAR10 or CIFAR100')
-    parser.add_argument('--mode',       type=str,      default='train',     help='train, test')
-    parser.add_argument('--model',      type=str,      default='ResNeXt',  help='model')
+    parser.add_argument('--n-class',    type=int,      default=10, help='10, 100')
+    parser.add_argument('--dataset',    type=str,      default='CIFAR10', help='CIFAR10 or CIFAR100')
+    parser.add_argument('--mode',       type=str,      default='train', help='train, test')
+    parser.add_argument('--model',      type=str,      default='LeNet', help='model')
     parser.add_argument('--model-preTrained', type=str, default='', help='model for test or retrain')
 
     config = parser.parse_args()

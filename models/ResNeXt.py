@@ -1,4 +1,5 @@
 import torch.nn as nn
+import math
 from.BasicModule import BasicModule
 
 
@@ -62,6 +63,14 @@ class ResNeXt(BasicModule):
         self.layer3 = self._make_layer(num_blocks[2], 2)
         self.apool  = nn.AvgPool2d(8, stride=1)
         self.linear = nn.Linear(cardinality*bottleneck_width*8, num_classes)
+
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
+                m.weight.data.normal_(0, math.sqrt(2. / n))
+            elif isinstance(m, nn.BatchNorm2d):
+                m.weight.data.fill_(1)
+                m.bias.data.zero_()
 
     def _make_layer(self, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
