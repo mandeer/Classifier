@@ -110,7 +110,7 @@ def main(config):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
     test_data = datasets.ImageFolder(config.data_path, transforms.Compose([
-        transforms.Resize(config.image_size),
+        transforms.Resize(256),
         transforms.CenterCrop(config.image_size),
         transforms.ToTensor(),
         normalize]))
