@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--data-path', type=str, default='../data/imageNet2012/val')
     parser.add_argument('--dataset', type=str, default='ImageNet2012', help='ImageNet2012')
-    parser.add_argument('--model', type=str, default='DenseNet', help='train, test')
+    parser.add_argument('--model', type=str, default='DenseNet', help='model')
     parser.add_argument('--model-name', type=str,
                         default='./pretrained_models/models_pretrained/densenet161-8d451a50.pth', help='model for test')
 
