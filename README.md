@@ -572,13 +572,18 @@ are trained jointly, not independently.”
 |AlexNet|459K|00|0.791|0.373|cifarNet|
 |NIN|3.8M|00|0.856|0.592|模型来自caffe|
 |VGG13_BN|41M|00|0.878|0.576|有删改|
-|GoogLeNet_BN|5.8M|00|0.|0.623|懒得调参|
+|GoogLeNet_BN|5.6M|00|0.873|0.623|懒得调参|
 |ResNet|00|00|0.|0.|
 |PerAct_ResNet|00|00|0.|0.|
-|ResNeXt|00|00|0.|0.|
+|ResNeXt|00|00|0.|0.|ResNeXt29_32x4d|
+|Xception|00|00|0.|0.|
 |DenseNet|00|00|0.|0.|
+|DPN|00|00|0.|0.|
+|SENet|00|00|0.|0.|
 |SqueezeNet|00|00|0.|0.|
-
+|MobileNets_V2|00|00|0.|0.|
+|ShuffleNet|00|00|0.|0.|
+|CondenseNet|00|00|0.|0.|
 
 数据预处理：
 1. RandomHorizontalFlip()
@@ -586,7 +591,8 @@ are trained jointly, not independently.”
     * mean = [0.4914, 0.4822, 0.4465]
     * std  = [0.2023, 0.1994, 0.2010]
     
-优化器：Adam()  
-损失函数：CrossEntropyLoss(weight_decay=1e-4)
+batch size: 128  
+优化器：Adam(weight_decay=1e-4)  
+损失函数：CrossEntropyLoss()
 
 [返回顶部](#classifier)
