@@ -1,6 +1,6 @@
 from .BasicModule import BasicModule
 from .LeNet import LeNet
-from .AlexNet import AlexNet, AlexNet_CIFAR, CIFAR10
+from .AlexNet import AlexNet, AlexNet_CIFAR
 from .VGG import VGG
 from .VGG import VGG_CIFAR
 from .NIN import NIN

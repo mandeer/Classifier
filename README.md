@@ -29,6 +29,7 @@
     * [MobileNets](#mobilenets)(2017.4)
     * [ShuffleNet](#shufflenet)(2017.4)
     * [CondenseNet](#condensenet)(2017.11)
+* [实验结果](#实验结果)
 
 ------
 ## Requisites:
@@ -40,8 +41,6 @@
 ------
 分类网络的发展历程参考[这里](https://www.leiphone.com/news/201802/31oWxcSnayBIUJhE.html)
 ![发展历程](./imgs/time.jpeg)
-
-预训练模型参考[这里](https://github.com/Cadene/pretrained-models.pytorch)
 
 ------
 ## LeNet
@@ -526,7 +525,9 @@ are trained jointly, not independently.”
 
 
 ------
-## imageNet2012验证集(5W)上测试结果
+## 实验结果
+
+### imageNet2012验证集(5W)上测试结果
 |model|params|FLOPs|top1|top5|
 |---|---|---|---|---|
 |AlexNet|234M|00|0.565|0.791|
@@ -551,6 +552,7 @@ are trained jointly, not independently.”
 |Inception_V3|104M|00|0.779|0.939|
 |ResNet152|231M|00|0.783|0.940|
 
+更多预训练模型参考[这里](https://github.com/Cadene/pretrained-models.pytorch)  
 使用imageNet2012的验证集，预处理为：
 1. Resize();
     * Inception_V3: 320
@@ -563,12 +565,19 @@ are trained jointly, not independently.”
     * std  = [0.229, 0.224, 0.225]
 
 ------
-## cifar数据集上测试结果
+### cifar数据集上测试结果
 |model|params|FLOPs|cifar10|cifar100|
 |---|---|---|---|---|
-|LeNet|244K|00|0.674|0.344|
-|NIN|3.8M|00|0.867|0.604|
-|VGG16_BN|57M|00|0.888|0.590|
+|LeNet|244K|00|0.682|0.345|
+|AlexNet|00|00|0.|0.|
+|NIN|3.8M|00|0.|0.592|
+|VGG16_BN|00|00|0.|0.|
+|GoogLeNet_BN|00|00|0.|0.|
+|ResNet|00|00|0.|0.|
+|PerAct_ResNet|00|00|0.|0.|
+|ResNeXt|00|00|0.|0.|
+|DenseNet|00|00|0.|0.|
+
 
 数据预处理：
 1. RandomHorizontalFlip()
@@ -577,6 +586,6 @@ are trained jointly, not independently.”
     * std  = [0.2023, 0.1994, 0.2010]
     
 优化器：Adam()  
-损失函数：CrossEntropyLoss()
+损失函数：CrossEntropyLoss(weight_decay=1e-4)
 
 [返回顶部](#classifier)

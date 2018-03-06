@@ -49,42 +49,6 @@ class AlexNet_CIFAR(BasicModule):
         super(AlexNet_CIFAR, self).__init__()
         self.model_name = 'alexnet_cifar'
         self.features = nn.Sequential(
-            nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2, 2),
-            nn.Conv2d(16, 48, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2, 2),
-            nn.Conv2d(48, 96, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(96, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-        )
-        self.classifier = nn.Sequential(
-            nn.Dropout(),
-            nn.Linear(64 * 4 * 4, 256),
-            nn.ReLU(inplace=True),
-            nn.Dropout(),
-            nn.Linear(256, 256),
-            nn.ReLU(inplace=True),
-            nn.Linear(256, num_classes),
-        )
-
-    def forward(self, x):
-        x = self.features(x)
-        x = x.view(x.size(0), 64 * 4 * 4)
-        x = self.classifier(x)
-        return x
-
-
-class CIFAR10(BasicModule):
-    def __init__(self, num_classes=10):
-        super(CIFAR10, self).__init__()
-        self.model_name = 'cifar10'
-        self.features = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=5, stride=1, padding=2),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(3, 2),

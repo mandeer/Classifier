@@ -19,6 +19,7 @@ cfg = {
     'B': [64, 64, 'M', 128, 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
     'D': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M'],
     'E': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M'],
+    'CIFAR': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512],
 }
 
 
@@ -89,7 +90,8 @@ class VGG_CIFAR(BasicModule):
     def __init__(self, num_classes=10):
         super(VGG_CIFAR, self).__init__()
         self.model_name = 'vgg_cifar'
-        self.features = make_layers(cfg['D'], use_BN=True)
+        self.features   = make_layers(cfg['CIFAR'], use_BN=True)
+        self.avgpool    = nn.AvgPool2d(4, stride=1)
         self.classifier = nn.Linear(512, num_classes)
 
         for m in self.modules():
@@ -107,6 +109,7 @@ class VGG_CIFAR(BasicModule):
 
     def forward(self, x):
         out = self.features(x)
+        out = self.avgpool(x)
         out = out.view(out.size(0), -1)
         out = self.classifier(out)
         return out
