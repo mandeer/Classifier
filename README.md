@@ -10,7 +10,7 @@
 * [**NIN**](#nin)(2013.12)
 * [GoogLeNet](#googlenet)
     * [Inception-V1](#inception1)(2014.9)
-    * [Inception-V2](#inception2)(2015.2)
+    * [**Inception-V2**](#inception2)(2015.2)
         * [BatchNorm](#batchnorm)
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
@@ -572,11 +572,12 @@ are trained jointly, not independently.”
 |AlexNet|459K|00|0.791|0.373|cifarNet|
 |NIN|3.8M|00|0.856|0.592|模型来自caffe|
 |VGG13_BN|41M|00|0.878|0.576|有删改|
-|GoogLeNet_BN|00|00|0.|0.|
+|GoogLeNet_BN|5.8M|00|0.|0.623|懒得调参|
 |ResNet|00|00|0.|0.|
 |PerAct_ResNet|00|00|0.|0.|
 |ResNeXt|00|00|0.|0.|
 |DenseNet|00|00|0.|0.|
+|SqueezeNet|00|00|0.|0.|
 
 
 数据预处理：
