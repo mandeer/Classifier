@@ -571,7 +571,7 @@ are trained jointly, not independently.”
 |LeNet|244K|00|0.682|0.345|有修改|
 |AlexNet|00|00|0.|0.|cifarNet|
 |NIN|3.8M|00|0.856|0.592|模型来自caffe|
-|VGG13_BN|00|00|0.|0.|有删改|
+|VGG13_BN|41M|00|0.878|0.576|有删改|
 |GoogLeNet_BN|00|00|0.|0.|
 |ResNet|00|00|0.|0.|
 |PerAct_ResNet|00|00|0.|0.|

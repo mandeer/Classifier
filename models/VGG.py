@@ -91,7 +91,7 @@ class VGG_CIFAR(BasicModule):
         super(VGG_CIFAR, self).__init__()
         self.model_name = 'vgg_cifar'
         self.features   = make_layers(cfg['CIFAR'], use_BN=True)
-        self.avgpool    = nn.AvgPool2d(4, stride=1)
+        self.avgpool    = nn.AvgPool2d(kernel_size=4, stride=1)
         self.classifier = nn.Linear(512, num_classes)
 
         for m in self.modules():
@@ -109,7 +109,7 @@ class VGG_CIFAR(BasicModule):
 
     def forward(self, x):
         out = self.features(x)
-        out = self.avgpool(x)
+        out = self.avgpool(out)
         out = out.view(out.size(0), -1)
         out = self.classifier(out)
         return out
