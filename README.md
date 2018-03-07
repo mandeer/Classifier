@@ -375,6 +375,9 @@ ResNet有152层，之后的[改进版](#resnet-v2)
 to view our method as ensembling, because the members to be aggregated 
 are trained jointly, not independently.”
 
+[返回顶部](#classifier)
+
+------
 ### PerActResNet
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
 重新设计了一种残差网络基本单元（预激活），使得网络更易于训练并且泛化性能也得到了提升。
