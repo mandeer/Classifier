@@ -6,6 +6,7 @@ from .NIN import NIN
 from .Inception2 import Inception2
 from .Inception3 import Inception3
 from .ResNet import ResNet
+from .PreActResNet import PreActResNet
+from .ResNeXt import ResNeXt
 from .SqueezeNet import SqueezeNet
 from .DenseNet import DenseNet
-from .ResNeXt import ResNeXt

@@ -15,9 +15,10 @@
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
 * [Xception](#xception)(2016.10)
-* [**ResNet**](#resnet)(2015.12, 2016.3)
+* [**ResNet**](#resnet)(2015.12)
+    * [**PerActResNet**](#peractresnet)(2016.3)
     * [**ResNeXt**](#resnext)(2016.11)
-* [WRN](#wrn)(2016.5)
+    * [WRN](#wrn)(2016.5)
 * [Stochastic Depth](#stochasticdepth)(2016.3)
 * [**DenseNet**](#densenet)(2016.8)
     * [MSDNet](#msdnet)(2017.3)
@@ -374,7 +375,7 @@ ResNet有152层，之后的[改进版](#resnet-v2)
 to view our method as ensembling, because the members to be aggregated 
 are trained jointly, not independently.”
 
-### ResNet-V2
+### PerActResNet
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
 重新设计了一种残差网络基本单元（预激活），使得网络更易于训练并且泛化性能也得到了提升。
 ![Res-Unit-V2](./imgs/Res-Unit-V2.png)
@@ -390,14 +391,14 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
-## ResNeXt
+### ResNeXt
 [ResNeXt](https://arxiv.org/abs/1611.05431)
 引入了一个新的维度——“基数（cardinality）”，即同属一个block变换的数量，
 提供了一种新的方式来调整模型容量。这是一个和网络深度、宽度同等重要的因素。
 
 ![ResNeXt](./imgs/ResNeXt.png)
 ![](imgs/ResNeXt-Blocks-Equ.png)
-### 主要创新点
+#### 主要创新点
 * 提出了一个新的维度——基数, 实验证明通过增大基数来提升网络性能比深度、宽度更有效，
 尤其是当深度/宽度的影响开始出现衰减时。
 * 重复使用拆分-变换-合并的同结构模块来简明的构建深层网络
@@ -407,13 +408,13 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
-## WRN
+### WRN
 [WRN](https://arxiv.org/abs/1605.07146)
 从“宽度”的角度入手，提出了wide residual networks。作者提供了PyTorch的
 [源码](https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch)
 ![WRN](./imgs/WRN.png)
 
-### 主要创新点
+#### 主要创新点
 * 增加深度和宽度都有好处
 * 相同参数时，宽度比深度更好训练
 * ResNet性能的提升主要靠的是参数与计算量，而不是深度！！
