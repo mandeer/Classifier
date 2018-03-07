@@ -581,7 +581,7 @@ are trained jointly, not independently.”
 |PerAct_ResNet|20M|00|0.|0.604|[3, 3, 3]|
 |ResNeXt|19M|00|0.891|0.650|ResNeXt29_32x4d|
 |Xception|00|00|0.|0.|
-|DenseNet|00|00|0.|0.|
+|DenseNet|4.2M|00|0.|0.623|DenseNet121|
 |DPN|00|00|0.|0.|
 |SENet|00|00|0.|0.|
 |SqueezeNet|00|00|0.|0.|
