@@ -1,6 +1,7 @@
 import math
 import torch
 import torch.nn as nn
+from.BasicModule import BasicModule
 
 class Bottleneck(nn.Module):
     def __init__(self, in_planes, growth_rate):
@@ -30,7 +31,7 @@ class Transition(nn.Module):
         self.bn      = nn.BatchNorm2d(in_planes)
         self.relu    = nn.ReLU(inplace=True)
         self.conv    = nn.Conv2d(in_planes, out_planes, kernel_size=1, bias=False)
-        self.avgpool = nn.AvgPool2d(2, stride=1)
+        self.avgpool = nn.AvgPool2d(kernel_size=2, stride=2)
 
     def forward(self, x):
         out = self.bn(x)
@@ -40,9 +41,10 @@ class Transition(nn.Module):
         return out
 
 
-class DenseNet(nn.Module):
-    def __init__(self, block, nblocks, growth_rate=12, reduction=0.5, num_classes=10):
-        super(DenseNet, self).__init__()
+class DenseNet_CIFAR(BasicModule):
+    def __init__(self, block=Bottleneck, nblocks=[6,12,24,16], growth_rate=12, reduction=0.5, num_classes=10):
+        super(DenseNet_CIFAR, self).__init__()
+        self.model_name = 'densenet_cifar'
         self.growth_rate = growth_rate
 
         num_planes = 2*growth_rate
@@ -51,19 +53,19 @@ class DenseNet(nn.Module):
         self.dense1 = self._make_dense_layers(block, num_planes, nblocks[0])
         num_planes += nblocks[0]*growth_rate
         out_planes = int(math.floor(num_planes*reduction))
-        self.trans1 = Transition(num_planes, out_planes)
+        self.trans1 = self._make_trans_layers(num_planes, out_planes)
         num_planes = out_planes
 
         self.dense2 = self._make_dense_layers(block, num_planes, nblocks[1])
         num_planes += nblocks[1]*growth_rate
         out_planes = int(math.floor(num_planes*reduction))
-        self.trans2 = Transition(num_planes, out_planes)
+        self.trans2 = self._make_trans_layers(num_planes, out_planes)
         num_planes = out_planes
 
         self.dense3 = self._make_dense_layers(block, num_planes, nblocks[2])
         num_planes += nblocks[2]*growth_rate
         out_planes = int(math.floor(num_planes*reduction))
-        self.trans3 = Transition(num_planes, out_planes)
+        self.trans3 = self._make_trans_layers(num_planes, out_planes)
         num_planes = out_planes
 
         self.dense4 = self._make_dense_layers(block, num_planes, nblocks[3])
@@ -89,6 +91,10 @@ class DenseNet(nn.Module):
             layers.append(block(in_planes, self.growth_rate))
             in_planes += self.growth_rate
         return nn.Sequential(*layers)
+    def _make_trans_layers(self, in_planes, out_planes):
+        layers = []
+        layers.append(Transition(in_planes, out_planes))
+        return nn.Sequential(*layers)
 
     def forward(self, x):
         out = self.conv1(x)
@@ -106,17 +112,17 @@ class DenseNet(nn.Module):
 
 
 def DenseNet121():
-    return DenseNet(Bottleneck, [6,12,24,16], growth_rate=32)
+    return DenseNet_CIFAR(Bottleneck, [6,12,24,16], growth_rate=32)
 
 def DenseNet169():
-    return DenseNet(Bottleneck, [6,12,32,32], growth_rate=32)
+    return DenseNet_CIFAR(Bottleneck, [6,12,32,32], growth_rate=32)
 
 def DenseNet201():
-    return DenseNet(Bottleneck, [6,12,48,32], growth_rate=32)
+    return DenseNet_CIFAR(Bottleneck, [6,12,48,32], growth_rate=32)
 
 def DenseNet161():
-    return DenseNet(Bottleneck, [6,12,36,24], growth_rate=48)
+    return DenseNet_CIFAR(Bottleneck, [6,12,36,24], growth_rate=48)
 
 def densenet_cifar():
-    return DenseNet(Bottleneck, [6,12,24,16], growth_rate=12)
+    return DenseNet_CIFAR(Bottleneck, [6,12,24,16], growth_rate=12)
 
