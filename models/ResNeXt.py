@@ -55,7 +55,7 @@ class ResNeXt(BasicModule):
         self.bottleneck_width = bottleneck_width
         self.in_planes = 64
 
-        self.conv1  = nn.Conv2d(3, 64, kernel_size=1, bias=False)
+        self.conv1  = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn1    = nn.BatchNorm2d(64)
         self.relu   = nn.ReLU(inplace=True)
         self.layer1 = self._make_layer(num_blocks[0], 1)

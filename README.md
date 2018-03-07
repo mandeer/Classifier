@@ -578,7 +578,7 @@ are trained jointly, not independently.”
 |VGG13_BN|41M|00|0.878|0.576|有删改|
 |GoogLeNet_BN|5.6M|00|0.873|0.623|懒得调参|
 |ResNet|00|00|0.|0.|
-|PerAct_ResNet|00|00|0.|0.|
+|PerAct_ResNet|20M|00|0.|0.604|
 |ResNeXt|19M|00|0.891|0.650|ResNeXt29_32x4d|
 |Xception|00|00|0.|0.|
 |DenseNet|00|00|0.|0.|
