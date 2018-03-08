@@ -14,7 +14,7 @@
         * [BatchNorm](#batchnorm)
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
-* [Xception](#xception)(2016.10)
+    * [**Xception**](#xception)(2016.10)
 * [**ResNet**](#resnet)(2015.12)
     * [**PerActResNet**](#peractresnet)(2016.3)
     * [**ResNeXt**](#resnext)(2016.11)
@@ -340,12 +340,18 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 [返回顶部](#classifier)
 
 ------
-## Xception
+### Xception
 [Xception](https://arxiv.org/abs/1610.02357v2)
+表示Extreme Inception(极致的Inception)。使用深度可分类卷积替换掉了原来的
+Inception Module并获得了更好的性能。
 
 ![Xception1](./imgs/Xception_1.png)
 ![Xception2](./imgs/Xception_2.png)
-
+#### 主要创新点
+* 深度可分离卷积：在输入的每个通道独立执行空间卷积，然后进行逐点卷积，即1×1卷积，
+将深度卷积的通道输出映射到新的通道空间。
+* Inception Module是介于普通卷积和深度可分离卷积的中间结构
+* 深度可分离卷积之间不使用非线性激活层的效果会更好。
 
 [返回顶部](#classifier)
 
