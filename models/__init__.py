@@ -11,3 +11,4 @@ from .ResNeXt import ResNeXt
 from .SqueezeNet import SqueezeNet
 from .DenseNet import DenseNet
 from .DenseNet_CIFAR import DenseNet_CIFAR
+from .xception import Xception
