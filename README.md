@@ -576,8 +576,8 @@ are trained jointly, not independently.”
 |AlexNet|459K|00|0.791|0.373|cifarNet|
 |NIN|3.8M|00|0.856|0.592|模型来自caffe|
 |VGG13_BN|41M|00|0.878|0.576|有删改|
-|GoogLeNet_BN|5.6M|00|0.873|0.623|懒得调参|
-|ResNet|20M|00|0.|0.641|[3, 3, 3]|
+|GoogLeNet_BN|5.6M|00|0.885|0.623|懒得调参|
+|ResNet|20M|00|0.871|0.641|[3, 3, 3]|
 |PerAct_ResNet|20M|00|0.866|0.604|[3, 3, 3]|
 |ResNeXt|19M|00|0.888|0.653|ResNeXt29_32x4d|
 |Xception|00|00|0.|0.|
