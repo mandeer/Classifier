@@ -343,6 +343,9 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V3版本。
 ## Xception
 [Xception](https://arxiv.org/abs/1610.02357v2)
 
+![Xception1](./imgs/Xception_1.png)
+![Xception2](./imgs/Xception_2.png)
+
 
 [返回顶部](#classifier)
 
@@ -577,8 +580,8 @@ are trained jointly, not independently.”
 |NIN|3.8M|00|0.856|0.592|模型来自caffe|
 |VGG13_BN|41M|00|0.878|0.576|有删改|
 |GoogLeNet_BN|5.6M|00|0.885|0.623|懒得调参|
-|ResNet|20M|00|0.871|0.641|[3, 3, 3]|
-|PerAct_ResNet|20M|00|0.866|0.604|[3, 3, 3]|
+|ResNet|19M|00|0.871|0.641|[3, 3, 3]|
+|PerAct_ResNet|19M|00|0.866|0.604|[3, 3, 3]|
 |ResNeXt|19M|00|0.888|0.653|ResNeXt29_32x4d|
 |Xception|00|00|0.|0.|
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
