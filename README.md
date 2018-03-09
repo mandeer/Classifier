@@ -589,7 +589,7 @@ are trained jointly, not independently.”
 |ResNet|19M|00|0.871|0.641|[3, 3, 3]|
 |PerAct_ResNet|19M|00|0.866|0.604|[3, 3, 3]|
 |ResNeXt|19M|00|0.888|0.653|ResNeXt29_32x4d|
-|Xception|2.2M|00|0.863|0.|改自PerActResNet|
+|Xception|2.2M|00|0.863|0.598|改自PerActResNet|
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
 |DPN|00|00|0.|0.|
 |SENet|00|00|0.|0.|
