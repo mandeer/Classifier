@@ -522,7 +522,7 @@ are trained jointly, not independently.”
 ------
 ### MobileNets
 [MobileNets](https://arxiv.org/abs/1704.04861)
-基于深度可分离卷积构建了一种轻量化网络。据说本文早于[ResNet](#resnet)
+基于深度可分离卷积构建了一种轻量化网络。据说本文成果早于[ResNet](#resnet)，故网络结构比较简单。
 
 ![MobileNets-V1](./imgs/MobileNets-V1.png)
 #### 主要创新点
@@ -613,7 +613,7 @@ ResNet与MobileNetV2的微结构对比
 |DPN|00|00|0.|0.|
 |SENet|00|00|0.|0.|
 SqueezeNet|00|00|0.|0.|
-|MobileNets_V1|4.2M|00|0.842|0.546|
+|MobileNets_V1|4.2M|00|0.842|0.546|有删减|
 |MobileNets_V2|00|00|0.|0.|
 |ShuffleNet|00|00|0.|0.|
 |CondenseNet|00|00|0.|0.|
