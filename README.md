@@ -612,7 +612,7 @@ ResNet与MobileNetV2的微结构对比
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
 |DPN|00|00|0.|0.|
 |SENet|00|00|0.|0.|
-SqueezeNet|00|00|0.|0.|
+|SqueezeNet|2.8M|00|0.792|0.|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
 |MobileNets_V2|00|00|0.|0.|
 |ShuffleNet|00|00|0.|0.|
