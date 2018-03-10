@@ -12,3 +12,4 @@ from .SqueezeNet import SqueezeNet
 from .DenseNet import DenseNet
 from .DenseNet_CIFAR import DenseNet_CIFAR
 from .Xception import Xception_CIFAR
+from .MobileNet import MobileNet
