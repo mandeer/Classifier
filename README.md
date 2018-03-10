@@ -524,6 +524,7 @@ are trained jointly, not independently.”
 [MobileNets](https://arxiv.org/abs/1704.04861)
 基于深度可分离卷积构建了一种轻量化网络。据说本文早于[ResNet](#resnet)
 
+![MobileNets-V1](./imgs/MobileNets-V1.png)
 #### 主要创新点
 * 利用深度可分离卷积，同时减少了参数数量和计算量
 * 将计算和参数的大部分转移到优化比较好的1\*1卷积
@@ -535,9 +536,9 @@ are trained jointly, not independently.”
 ### MobileNet_V2
 [MobileNet_V2](https://arxiv.org/abs/1801.04381)
 
-MobileNetV1与V2的微结构对比
-![MobileNetV1-2](./imgs/MobileNetV1-2.svg)
-ResNet与MobileNetV2的微结构对比
+MobileNetV1与V2的微结构对比  
+![MobileNetV1-2](./imgs/MobileNetV1-2.svg)  
+ResNet与MobileNetV2的微结构对比  
 ![MobileNet-V2VSResNet](imgs/MobileNet-V2VSResNet.svg)
 
 [返回顶部](#classifier)
