@@ -535,11 +535,22 @@ are trained jointly, not independently.”
 ------
 ### MobileNet_V2
 [MobileNet_V2](https://arxiv.org/abs/1801.04381)
+是对[MobileNets](#mobilenets)的改进，保留了其简单性并显着提高了其准确性。
 
-MobileNetV1与V2的微结构对比  
+#### MobileNetV1与V2的微结构对比
+* DW之前多了一个1\*1的“扩张”层，目的是为了提升通道数，获得更多特征；
+* 为防止Relu破坏特征，使用Linear代替。
 ![MobileNetV1-2](./imgs/MobileNetV1-2.svg)  
-ResNet与MobileNetV2的微结构对比  
+#### ResNet与MobileNetV2的微结构对比
+* ResNet: 压缩 -> 卷积提特征 -> 扩张
+* MobileNetV2: 扩张 -> 卷积提特征 -> 压缩
 ![MobileNet-V2VSResNet](imgs/MobileNet-V2VSResNet.svg)
+
+#### 主要创新点
+* 线性瓶颈(Linear Bottlenecks): 参考MobileNetV1与V2的微结构对比，最后一层的ReLu6
+被替换成了Linear层。
+* 倒残差结构(Inverted residuals): 参考ResNet与MobileNetV2的微结构对比，中间3\*3的
+卷积层使用更多的通道数。
 
 [返回顶部](#classifier)
 

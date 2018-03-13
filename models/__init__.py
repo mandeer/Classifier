@@ -13,3 +13,4 @@ from .DenseNet import DenseNet
 from .DenseNet_CIFAR import DenseNet_CIFAR
 from .Xception import Xception_CIFAR
 from .MobileNet import MobileNet
+from .MobuleNet2 import MobileNetV2

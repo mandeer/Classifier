@@ -1,43 +1,41 @@
 import torch.nn as nn
 import math
+from.BasicModule import BasicModule
 
 
-def conv_bn(inp, oup, stride):
-    return nn.Sequential(
-        nn.Conv2d(inp, oup, 3, stride, 1, bias=False),
-        nn.BatchNorm2d(oup),
-        nn.ReLU(inplace=True)
-    )
+class Conv_BN(nn.Module):
+    def __init__(self, in_planes, opt_planes, kernel_size=1, stride=1, padding=0, bias=False):
+        super(Conv_BN, self).__init__()
+        self.conv = nn.Conv2d(in_planes, opt_planes, kernel_size=kernel_size, stride=stride, padding=padding, bias=bias)
+        self.bn   = nn.BatchNorm2d(opt_planes)
+        self.relu = nn.ReLU(inplace=True)
 
-
-def conv_1x1_bn(inp, oup):
-    return nn.Sequential(
-        nn.Conv2d(inp, oup, 1, 1, 0, bias=False),
-        nn.BatchNorm2d(oup),
-        nn.ReLU(inplace=True)
-    )
+    def forward(self, x):
+        out = self.conv(x)
+        out = self.bn(out)
+        out = self.relu(out)
+        return out
 
 
 class InvertedResidual(nn.Module):
-    def __init__(self, inp, oup, stride, expand_ratio):
+    def __init__(self, in_planes, opt_planes, stride, expand_ratio):
         super(InvertedResidual, self).__init__()
         self.stride = stride
         assert stride in [1, 2]
-
-        self.use_res_connect = self.stride == 1 and inp == oup
-
+        self.use_res_connect = self.stride == 1 and in_planes == opt_planes
+        self.hidden_planes = in_planes * expand_ratio
         self.conv = nn.Sequential(
             # pw
-            nn.Conv2d(inp, inp * expand_ratio, 1, 1, 0, bias=False),
-            nn.BatchNorm2d(inp * expand_ratio),
+            nn.Conv2d(in_planes, self.hidden_planes, 1, 1, 0, bias=False),
+            nn.BatchNorm2d(in_planes * expand_ratio),
             nn.ReLU6(inplace=True),
             # dw
-            nn.Conv2d(inp * expand_ratio, inp * expand_ratio, 3, stride, 1, groups=inp * expand_ratio, bias=False),
-            nn.BatchNorm2d(inp * expand_ratio),
+            nn.Conv2d(self.hidden_planes, self.hidden_planes, 3, stride, 1, groups=self.hidden_planes, bias=False),
+            nn.BatchNorm2d(self.hidden_planes),
             nn.ReLU6(inplace=True),
             # pw-linear
-            nn.Conv2d(inp * expand_ratio, oup, 1, 1, 0, bias=False),
-            nn.BatchNorm2d(oup),
+            nn.Conv2d(self.hidden_planes, opt_planes, 1, 1, 0, bias=False),
+            nn.BatchNorm2d(opt_planes),
         )
 
     def forward(self, x):
@@ -47,54 +45,37 @@ class InvertedResidual(nn.Module):
             return self.conv(x)
 
 
-class MobileNetV2(nn.Module):
-    def __init__(self, n_class=1000, input_size=224, width_mult=1.):
+class MobileNetV2(BasicModule):
+    def __init__(self, num_classes=10):
         super(MobileNetV2, self).__init__()
-        # setting of inverted residual blocks
-        self.interverted_residual_setting = [
-            # t, c, n, s
-            [1, 16, 1, 1],
-            [6, 24, 2, 2],
-            [6, 32, 3, 2],
-            [6, 64, 4, 2],
-            [6, 96, 3, 1],
-            [6, 160, 3, 2],
-            [6, 320, 1, 1],
-        ]
+        self.model_name = 'mobilenet2'
 
-        # building first layer
-        assert input_size % 32 == 0
-        input_channel = int(32 * width_mult)
-        self.last_channel = int(1280 * width_mult) if width_mult > 1.0 else 1280
-        self.features = [conv_bn(3, input_channel, 2)]
-        # building inverted residual blocks
-        for t, c, n, s in self.interverted_residual_setting:
-            output_channel = int(c * width_mult)
-            for i in range(n):
-                if i == 0:
-                    self.features.append(InvertedResidual(input_channel, output_channel, s, t))
-                else:
-                    self.features.append(InvertedResidual(input_channel, output_channel, 1, t))
-                input_channel = output_channel
-        # building last several layers
-        self.features.append(conv_1x1_bn(input_channel, self.last_channel))
-        self.features.append(nn.AvgPool2d(input_size/32))
-        # make it nn.Sequential
-        self.features = nn.Sequential(*self.features)
-
-        # building classifier
+        self.features = nn.Sequential(
+            Conv_BN(3, 32, kernel_size=3, stride=1, padding=1, bias=False),
+            InvertedResidual( 32,  64, 1, 6),
+            InvertedResidual( 64, 128, 2, 6),
+            InvertedResidual(128, 128, 1, 6),
+            InvertedResidual(128, 256, 2, 6),
+            InvertedResidual(256, 256, 1, 6),
+            InvertedResidual(256, 512, 2, 6),
+            InvertedResidual(512, 512, 1, 6),
+            InvertedResidual(512, 512, 1, 6),
+            InvertedResidual(512, 512, 1, 6),
+            Conv_BN(512, 256, kernel_size=1, stride=1, padding=0, bias=False),
+            nn.AvgPool2d(kernel_size=4, stride=1),
+        )
         self.classifier = nn.Sequential(
             nn.Dropout(),
-            nn.Linear(self.last_channel, n_class),
+            nn.Linear(256, num_classes),
         )
 
         self._initialize_weights()
 
     def forward(self, x):
-        x = self.features(x)
-        x = x.view(-1, self.last_channel)
-        x = self.classifier(x)
-        return x
+        out = self.features(x)
+        out = out.view(out.size(0), -1)
+        out = self.classifier(out)
+        return out
 
     def _initialize_weights(self):
         for m in self.modules():
@@ -110,4 +91,3 @@ class MobileNetV2(nn.Module):
                 n = m.weight.size(1)
                 m.weight.data.normal_(0, 0.01)
                 m.bias.data.zero_()
-                

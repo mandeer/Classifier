@@ -55,6 +55,7 @@ class Inception(nn.Module):
 class Inception2(BasicModule):
     def __init__(self, num_classes=10):
         super(Inception2, self).__init__()
+        self.model_name = 'inception2'
         self.num_classes = num_classes
         self.pre_layers = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=3, padding=1),
