@@ -538,7 +538,7 @@ are trained jointly, not independently.”
 是对[MobileNets](#mobilenets)的改进，保留了其简单性并显着提高了其准确性。
 
 #### MobileNetV1与V2的微结构对比
-* DW之前多了一个1\*1的“扩张”层，目的是为了提升通道数，获得更多特征；
+* DW之前多了一个1\*1的“扩张”层，目的是提升通道数，以便获得更多特征；
 * 为防止Relu破坏特征，使用Linear代替。
 ![MobileNetV1-2](./imgs/MobileNetV1-2.svg)  
 #### ResNet与MobileNetV2的微结构对比
@@ -625,7 +625,7 @@ are trained jointly, not independently.”
 |SENet|00|00|0.|0.|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
-|MobileNets_V2|00|00|0.|0.|
+|MobileNets_V2|48M|00|0.|0.658|结构同V1|
 |ShuffleNet|00|00|0.|0.|
 |CondenseNet|00|00|0.|0.|
 
