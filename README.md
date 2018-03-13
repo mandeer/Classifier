@@ -28,7 +28,7 @@
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
-        * [MobileNet-V2](#mobilenet_v2)(2018.1)
+        * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [ShuffleNet](#shufflenet)(2017.4)
     * [CondenseNet](#condensenet)(2017.11)
 * [实验结果](#实验结果)
