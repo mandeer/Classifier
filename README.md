@@ -640,7 +640,7 @@ are trained jointly, not independently.”
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
 |MobileNets_V2|3.5M|00|0.867|0.614|有删减|
-|ShuffleNet|00|00|0.|0.|
+|ShuffleNet|484K|00|0.773|0.494|模型比较小|
 |CondenseNet|00|00|0.|0.|
 
 数据预处理：
