@@ -557,6 +557,20 @@ are trained jointly, not independently.”
 ------
 ### ShuffleNet
 [ShuffleNet](https://arxiv.org/abs/1707.01083)
+利用逐点分组卷积和通道重排技术，在保持准确率的前提下极大地减少计算量。 
+
+#### channel shuffle
+![ShuffleNet](./imgs/ShuffleNet.png)
+#### ShuffleNet Units
+![ShuffleNet-Units](./imgs/ShuffleNet-Units.png)
+
+#### 主要创新点
+* 分组逐点卷积(pointwise group convolution): 把bottleneck中的1\*1卷积换成分组卷积，
+因为在Xception、ResNeXt等模型中，逐点卷积成为了新的计算瓶颈。
+* 通道重排(channel shuffle): 引入组间信息交换的机制，以解决分组卷积中信息不流通的问题。
+* 修改了bottleneck中stride=2的层(ShuffleNet Units: C)
+    * kernel_size 从1改成3
+    * sum改成Concat
 
 [返回顶部](#classifier)
 
