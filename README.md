@@ -29,7 +29,7 @@
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
-    * [ShuffleNet](#shufflenet)(2017.4)
+    * [ShuffleNet](#shufflenet)(2017.7)
     * [CondenseNet](#condensenet)(2017.11)
 * [实验结果](#实验结果)
 
@@ -547,10 +547,10 @@ are trained jointly, not independently.”
 ![MobileNet-V2VSResNet](imgs/MobileNet-V2VSResNet.svg)
 
 #### 主要创新点
-* 线性瓶颈(Linear Bottlenecks): 参考MobileNetV1与V2的微结构对比，最后一层的ReLu6
-被替换成了Linear层。
-* 倒残差结构(Inverted residuals): 参考ResNet与MobileNetV2的微结构对比，中间3\*3的
-卷积层使用更多的通道数。
+* 线性瓶颈(Linear Bottlenecks): 参考MobileNetV1与V2的微结构对比，
+为防止Relu破坏特征，最后一层的ReLu6被替换成了Linear层。
+* 倒残差结构(Inverted residuals): 参考ResNet与MobileNetV2的微结构对比，
+中间3\*3的卷积层使用更多的通道数，以便获得更多特征。
 
 [返回顶部](#classifier)
 
@@ -625,7 +625,7 @@ are trained jointly, not independently.”
 |SENet|00|00|0.|0.|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
-|MobileNets_V2|48M|00|0.890|0.658|结构同V1|
+|MobileNets_V2|3.5M|00|0.867|0.614|有删减|
 |ShuffleNet|00|00|0.|0.|
 |CondenseNet|00|00|0.|0.|
 

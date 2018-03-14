@@ -52,16 +52,17 @@ class MobileNetV2(BasicModule):
 
         self.features = nn.Sequential(
             Conv_BN(3, 32, kernel_size=3, stride=1, padding=1, bias=False),
-            InvertedResidual( 32,  64, 1, 6),
+            InvertedResidual( 32,  16, 1, 2),
+            InvertedResidual( 16,  32, 2, 6),
+            InvertedResidual( 32,  32, 1, 6),
+            InvertedResidual( 32,  64, 2, 6),
+            InvertedResidual( 64,  64, 1, 6),
+            InvertedResidual( 64,  64, 1, 6),
             InvertedResidual( 64, 128, 2, 6),
             InvertedResidual(128, 128, 1, 6),
-            InvertedResidual(128, 256, 2, 6),
-            InvertedResidual(256, 256, 1, 6),
-            InvertedResidual(256, 512, 2, 6),
-            InvertedResidual(512, 512, 1, 6),
-            InvertedResidual(512, 512, 1, 6),
-            InvertedResidual(512, 512, 1, 6),
-            Conv_BN(512, 256, kernel_size=1, stride=1, padding=0, bias=False),
+            InvertedResidual(128, 128, 1, 6),
+            InvertedResidual(128, 128, 1, 6),
+            Conv_BN(128, 256, kernel_size=1, stride=1, padding=0, bias=False),
             nn.AvgPool2d(kernel_size=4, stride=1),
         )
         self.classifier = nn.Sequential(
