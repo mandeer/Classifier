@@ -13,15 +13,16 @@ class ShuffleBlock(nn.Module):
         '''Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]'''
         N,C,H,W = x.size()
         g = self.groups
-        return x.view(N,g,C/g,H,W).permute(0,2,1,3,4).contiguous().view(N,C,H,W)
+        return x.view(N,g,C//g,H,W).permute(0,2,1,3,4).contiguous().view(N,C,H,W)
 
 
 class Bottleneck(nn.Module):
     def __init__(self, in_planes, out_planes, stride, groups=1):
         super(Bottleneck, self).__init__()
-        self.stride = stride
-
+        AssertionError(stride == 1 or stride == 2)
         mid_planes = out_planes // 4
+        if stride == 2:
+            out_planes = out_planes - in_planes
         self.conv1 = nn.Conv2d(in_planes, mid_planes, kernel_size=1, groups=groups, bias=False)
         self.bn1   = nn.BatchNorm2d(mid_planes)
         self.shuffle = ShuffleBlock(groups=groups)
@@ -37,24 +38,24 @@ class Bottleneck(nn.Module):
 
     def forward(self, x):
         out = self.conv1(x)
-        out = self.bn1(x)
-        out = self.relu(x)
+        out = self.bn1(out)
+        out = self.relu(out)
         out = self.shuffle(out)
 
         out = self.conv2(out)
-        out = self.bn2(x)
-        out = self.relu(x)
+        out = self.bn2(out)
+        out = self.relu(out)
 
         out = self.conv3(out)
-        out = self.bn3(x)
+        out = self.bn3(out)
 
         if self.shortcut == None:
             out += x
-            out = self.relu(x)
+            out = self.relu(out)
         else:
             res = self.shortcut(x)
-            out = torch.cat([out,res], 1)
-            out = self.relu(x)
+            out = torch.cat([out, res], 1)
+            out = self.relu(out)
         return out
 
 
@@ -65,16 +66,16 @@ class ShuffleNet(BasicModule):
         self.features = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=1, bias=False),
             nn.BatchNorm2d(32),
-            Bottleneck( 32,  64, stride=2, groups=4),
-            Bottleneck( 64,  64, stride=1, groups=4),
-            Bottleneck( 64, 128, stride=2, groups=4),
+            Bottleneck( 32, 128, stride=2, groups=4),
             Bottleneck(128, 128, stride=1, groups=4),
             Bottleneck(128, 256, stride=2, groups=4),
             Bottleneck(256, 256, stride=1, groups=4),
-            Bottleneck(256, 256, stride=1, groups=4),
+            Bottleneck(256, 512, stride=2, groups=4),
+            Bottleneck(512, 512, stride=1, groups=4),
+            Bottleneck(512, 512, stride=1, groups=4),
             nn.AvgPool2d(kernel_size=4, stride=1),
         )
-        self.fc = nn.Linear(256, num_classes)
+        self.fc = nn.Linear(512, num_classes)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
