@@ -28,7 +28,7 @@
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
-        * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
+    * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [ShuffleNet](#shufflenet)(2017.4)
     * [CondenseNet](#condensenet)(2017.11)
 * [实验结果](#实验结果)
@@ -625,7 +625,7 @@ are trained jointly, not independently.”
 |SENet|00|00|0.|0.|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
-|MobileNets_V2|48M|00|0.|0.658|结构同V1|
+|MobileNets_V2|48M|00|0.890|0.658|结构同V1|
 |ShuffleNet|00|00|0.|0.|
 |CondenseNet|00|00|0.|0.|
 
@@ -637,6 +637,7 @@ are trained jointly, not independently.”
     
 batch size: 128  
 优化器：Adam(weight_decay=1e-4)  
-损失函数：CrossEntropyLoss()
+损失函数：CrossEntropyLoss()  
+迭代次数：50
 
 [返回顶部](#classifier)
