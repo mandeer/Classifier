@@ -68,5 +68,5 @@ class MobileNet(BasicModule):
     def forward(self, x):
         out = self.model(x)
         out = out.view(out.size(0), -1)
-        x = self.fc(out)
-        return x
+        out = self.fc(out)
+        return out
