@@ -6,7 +6,7 @@ import random
 import torch
 from torch.autograd import Variable
 from utils.tools import str2bool
-from dataLoader.dataLoader import getDataLoader
+from dataLoader import getDataLoader
 import models
 
 class Solver(object):
