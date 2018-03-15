@@ -484,10 +484,18 @@ are trained jointly, not independently.”
 ------
 ### MSDNet
 [MSDNet](https://arxiv.org/abs/1703.09844)
-是自适应推理的多尺度DenseNet，可以提高深度学习模型的推理效率。
+是自适应推理的Multi-Scale DenseNet，可以提高深度学习模型的推理效率。
 其主要思想是用浅层的特征来预测相对「简单」的图片，用深层的特征来预测比较「难」的图片，
 在不损失精度的前提下，有效的降低了深度模型推理时的**平均**计算开销。
-作者提供了torch的[源码](https://github.com/gaohuang/MSDNet)
+作者提供了torch的[源码](https://github.com/gaohuang/MSDNet)  
+![MSDNet_3](./imgs/MSDNet_3.png)
+![MSDNet](./imgs/MSDNet.png)
+
+#### 主要创新点
+* “级联分类器”：设置一个阈值，当某个分类器的输出超出该阈值时，输出该结果。
+不再运行后面的网络。
+* 多尺度特征图: 解决前面的分类器中缺少抽象特征(coarse-level features)问题。
+* 密集链接: 解决前面的分类器干扰后面分类器的问题。
 
 [返回顶部](#classifier)
 
