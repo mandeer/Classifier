@@ -598,9 +598,11 @@ are trained jointly, not independently.”
 #### DenseNet and CondenseNet Block
 ![LGR_block](./imgs/LGR_block.png)
 #### 主要创新点
-* Learned Group Convolution：训练时剪枝，测试时使用使用分组卷积。训练和测试时网络
+* 自学习分组卷积：训练时剪枝（稀疏正则化），测试时使用使用分组卷积。训练和测试时网络
 分别是[CondenseNet Block](#densenet and condensenet block)的中图和右图。
 学习过程参考[LGR](#learned group convolutions)。
+* 完全密集连接：特征图大小不同时，使用average pooling
+* 增长率随着特征图变小而指数递增：高层的卷积层更依赖于中高层的特征，较少依赖于底层的特征。
 
 [返回顶部](#classifier)
 
