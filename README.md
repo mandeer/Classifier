@@ -591,12 +591,16 @@ are trained jointly, not independently.”
 ------
 ### CondenseNet
 [CondenseNet](https://arxiv.org/abs/1711.09224)
-
-![](./imgs/CondenseNet.png)
+优化了DenseNet网络，通过训练时剪枝以及分组卷积提高了计算效率及参数利用率。
+![CondenseNet](./imgs/CondenseNet.png)
 #### Learned Group Convolutions
-![LGR_3](./imgs/LGR_3.png)
-#### LGC VS GC
 ![LGR](./imgs/LGR.png)
+#### DenseNet and CondenseNet Block
+![LGR_block](./imgs/LGR_block.png)
+#### 主要创新点
+* Learned Group Convolution：训练时剪枝，测试时使用使用分组卷积。训练和测试时网络
+分别是[CondenseNet Block](#densenet and condensenet block)的中图和右图。
+学习过程参考[LGR](#learned group convolutions)。
 
 [返回顶部](#classifier)
 
