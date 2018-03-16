@@ -592,6 +592,12 @@ are trained jointly, not independently.”
 ### CondenseNet
 [CondenseNet](https://arxiv.org/abs/1711.09224)
 
+![](./imgs/CondenseNet.png)
+#### Learned Group Convolutions
+![LGR_3](./imgs/LGR_3.png)
+#### LGC VS GC
+![LGR](./imgs/LGR.png)
+
 [返回顶部](#classifier)
 
 
