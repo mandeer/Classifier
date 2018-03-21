@@ -13,7 +13,7 @@ class Solver(object):
     def __init__(self, config, model, trainLoader, testLoader):
         self.trainLoader = trainLoader
         self.testLoader  = testLoader
-        self.n_class     = config.n_class
+        self.num_classes = config.num_classes
         self.use_cuda    = config.use_cuda
         self.model_name  = config.model
         self.model       = model
@@ -31,9 +31,9 @@ class Solver(object):
         model = self.model
         testLoader = self.testLoader
         model.eval()  # 验证模式
-        class_correct = list(0. for i in range(self.n_class))
-        class_total   = list(0. for i in range(self.n_class))
-        accuracy      = list(0. for i in range(self.n_class + 1))
+        class_correct = list(0. for i in range(self.num_classes))
+        class_total   = list(0. for i in range(self.num_classes))
+        accuracy      = list(0. for i in range(self.num_classes + 1))
         loss = 0.0
         for ii, (datas, labels) in enumerate(testLoader):
             val_inputs = Variable(datas, volatile=True)
@@ -53,21 +53,21 @@ class Solver(object):
 
         correct = 0
         total = 0
-        for ii in range(self.n_class):
+        for ii in range(self.num_classes):
             if class_total[ii] == 0:
                 accuracy[ii] = 0
             else:
                 correct = correct + class_correct[ii]
                 total = total + class_total[ii]
                 accuracy[ii] = class_correct[ii] / class_total[ii]
-        accuracy[self.n_class] = correct / total
+        accuracy[self.num_classes] = correct / total
 
         model.train()  # 训练模式
         return accuracy, loss.cpu().data.numpy()
 
     def train(self):
         val_accuracy, val_loss = self.val()
-        print('begin with accuracy: ', val_accuracy[self.n_class])
+        print('begin with accuracy: ', val_accuracy[self.num_classes])
 
         model = self.model
         for epoch in range(self.n_epochs):
@@ -87,20 +87,20 @@ class Solver(object):
                     print('epoch: ', epoch + 1, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
 
             val_accuracy, val_loss = self.val()
-            print('val accuracy: ', val_accuracy[self.n_class])
+            print('val accuracy: ', val_accuracy[self.num_classes])
             print('val loss:     ', val_loss[0])
 
             if (epoch + 1) % 10 == 0:
                 model.save(root=self.out_path,
-                           name=self.model_name + '_cifar' + str(self.n_class) + '_' + str(epoch+1) + '.pth')
+                           name=self.model_name + '_cifar' + str(self.num_classes) + '_' + str(epoch+1) + '.pth')
         return
 
     def test(self):
         accuracy, loss = self.val()
 
-        for jj in range(self.n_class):
+        for jj in range(self.num_classes):
             print('accuracy_', jj, ': ', accuracy[jj])
-        print('accuracy total: ', accuracy[self.n_class])
+        print('accuracy total: ', accuracy[self.num_classes])
         return
 
 
@@ -125,10 +125,20 @@ def main(config):
     if not os.path.exists(config.out_path):
         os.makedirs(config.out_path)
 
+    # data
+    if config.dataset == 'CIFAR10':
+        config.data_path = './data/cifar10'
+        config.num_classes = 10
+    elif config.dataset == 'CIFAR100':
+        config.data_path = './data/cifar100'
+        config.num_classes = 100
+    else:
+        print('Only support CIFAR10 and CIFAR100!!')
+        return
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    model = getattr(models, config.model)(num_classes=config.n_class)
+    model = getattr(models, config.model)(num_classes=config.num_classes)
     if config.pretrained != '':
         print('use pretrained model: ', config.pretrained)
         model.load(config.model_preTrained)
@@ -155,12 +165,10 @@ if __name__ == '__main__':
     parser.add_argument('--log-step',   type=int,      default=100)
     parser.add_argument('--use-cuda',   type=str2bool, default=True,        help='enables cuda')
 
-    parser.add_argument('--data-path',  type=str,      default='./data/cifar100')
-    parser.add_argument('--n-class',    type=int,      default=100, help='10, 100')
-    parser.add_argument('--dataset',    type=str,      default='CIFAR100', help='CIFAR10 or CIFAR100')
-    parser.add_argument('--mode',       type=str,      default='train', help='train, test')
-    parser.add_argument('--model',      type=str,      default='ShuffleNet', help='model')
-    parser.add_argument('--model-preTrained', type=str, default='', help='model for test or retrain')
+    parser.add_argument('--dataset',    type=str,      default='CIFAR100',  help='CIFAR10 or CIFAR100')
+    parser.add_argument('--mode',       type=str,      default='train',     help='train, test')
+    parser.add_argument('--model',      type=str,      default='LeNet', help='model')
+    parser.add_argument('--pretrained', type=str,      default='',          help='model for test or retrain')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():

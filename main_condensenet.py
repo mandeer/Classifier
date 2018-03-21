@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument('--n-class',    type=int,       default=100,        help='10, 100')
     parser.add_argument('--dataset',    type=str,       default='CIFAR100', help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode',       type=str,       default='train',    help='train, test')
-    parser.add_argument('--model',      type=str,       default='ShuffleNet', help='model')
+    parser.add_argument('--model',      type=str,       default='CondenseNet', help='model')
     parser.add_argument('--pretrained', type=str,       default='',         help='model for test or retrain')
 
     config = parser.parse_args()

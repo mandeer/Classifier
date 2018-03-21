@@ -2,7 +2,7 @@ from torch import nn
 from.BasicModule import BasicModule
 
 class LeNet(BasicModule):
-    def __init__(self, inChannels, n_class, use_ReLU=True):
+    def __init__(self, num_classes, inChannels=3, use_ReLU=True):
         super(LeNet, self).__init__()
         self.model_name = 'lenet'
         if use_ReLU:
@@ -28,7 +28,7 @@ class LeNet(BasicModule):
             nn.ReLU(),
             nn.Linear(120, 84),
             nn.ReLU(),
-            nn.Linear(84, n_class)
+            nn.Linear(84, num_classes)
         )
 
     def forward(self, x):
