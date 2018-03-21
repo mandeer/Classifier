@@ -129,8 +129,8 @@ def main(config):
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
     model = getattr(models, config.model)(num_classes=config.n_class)
-    if config.model_preTrained != '':
-        print('use pretrained model: ', config.model_preTrained)
+    if config.pretrained != '':
+        print('use pretrained model: ', config.pretrained)
         model.load(config.model_preTrained)
     print(model)
     solver = Solver(config, model, trainLoader, testLoader)

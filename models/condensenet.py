@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import math
+from.BasicModule import BasicModule
 
 class Conv(nn.Sequential):
     def __init__(self, in_channels, out_channels, ksize=1, stride=1, padding=0, groups=1):
@@ -175,11 +176,11 @@ class _Transition(nn.Module):
         return x
 
 
-class CondenseNet(nn.Module):
+class CondenseNet(BasicModule):
     def __init__(self, args):
 
         super(CondenseNet, self).__init__()
-
+        self.model_name = 'condensenet'
         self.stages = args.stages
         self.growth = args.growth
         assert len(self.stages) == len(self.growth)
