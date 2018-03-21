@@ -32,10 +32,20 @@ def main(config):
     if not os.path.exists(config.out_path):
         os.makedirs(config.out_path)
 
+    # data
+    if config.dataset == 'CIFAR10':
+        config.data_path = './data/cifar10'
+        config.num_classes = 10
+    elif config.dataset == 'CIFAR100':
+        config.data_path = './data/cifar100'
+        config.num_classes = 100
+    else:
+        print('Only support CIFAR10 and CIFAR100!!')
+        return
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    model = getattr(models, config.model)(num_classes=config.n_class)
+    model = getattr(models, config.model)(num_classes=config.num_classes)
     if config.pretrained != '':
         print('use pretrained model: ', config.pretrained)
         model.load(config.model_preTrained)
