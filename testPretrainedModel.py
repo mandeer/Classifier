@@ -6,6 +6,7 @@ import torch
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 from utils.tools import str2bool
+from utils import measure_model
 import models
 
 
@@ -97,8 +98,14 @@ def main(config):
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
+    # Calculate FLOPs & Params
+    # model = getattr(models, config.model)()
+    # n_flops, n_params = measure_model(model, config.image_size, config.image_size)
+    # print('FLOPs: %.2fM, Params: %.2fM' % (n_flops / 1e6, n_params / 1e6))
+    # del (model)
+
     # model
-    model = getattr(models, config.model)(depth=152)
+    model = getattr(models, config.model)()
     print(model)
     model.load(config.model_name)
     criterion = torch.nn.CrossEntropyLoss().cuda()
@@ -110,7 +117,7 @@ def main(config):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
     test_data = datasets.ImageFolder(config.data_path, transforms.Compose([
-        transforms.Resize(256),
+        transforms.Resize(320),
         transforms.CenterCrop(config.image_size),
         transforms.ToTensor(),
         normalize]))
@@ -124,7 +131,7 @@ def main(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--image-size', type=int, default=224)
+    parser.add_argument('--image-size', type=int, default=299)
     parser.add_argument('--batch-size', type=int, default=128)
     parser.add_argument('--n-workers', type=int, default=4)
     parser.add_argument('--out-path', type=str, default='./output')
@@ -133,9 +140,9 @@ if __name__ == '__main__':
 
     parser.add_argument('--data-path', type=str, default='../data/imageNet2012/val')
     parser.add_argument('--dataset', type=str, default='ImageNet2012', help='ImageNet2012')
-    parser.add_argument('--model', type=str, default='ResNet', help='model')
+    parser.add_argument('--model', type=str, default='Inception3', help='model')
     parser.add_argument('--model-name', type=str,
-                        default='./pretrained_models/models_pretrained/resnet152-b121ed2d.pth', help='model for test')
+                        default='./pretrained_models/models_pretrained/inception_v3_google-1a9a5a14.pth', help='model for test')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():
