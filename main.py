@@ -173,14 +173,14 @@ def main():
     if args.data == "cifar10":
         normalize = transforms.Normalize(mean=[0.4914, 0.4824, 0.4467],
                                          std=[0.2471, 0.2435, 0.2616])
-        train_set = datasets.CIFAR10('../data', train=True, download=True,
+        train_set = datasets.CIFAR10('./data/cifar10', train=True, download=True,
                                      transform=transforms.Compose([
                                          transforms.RandomCrop(32, padding=4),
                                          transforms.RandomHorizontalFlip(),
                                          transforms.ToTensor(),
                                          normalize,
                                      ]))
-        val_set = datasets.CIFAR10('../data', train=False,
+        val_set = datasets.CIFAR10('./data/cifar10', train=False,
                                    transform=transforms.Compose([
                                        transforms.ToTensor(),
                                        normalize,
@@ -188,14 +188,14 @@ def main():
     elif args.data == "cifar100":
         normalize = transforms.Normalize(mean=[0.5071, 0.4867, 0.4408],
                                          std=[0.2675, 0.2565, 0.2761])
-        train_set = datasets.CIFAR100('../data', train=True, download=True,
+        train_set = datasets.CIFAR100('./data/cifar100', train=True, download=True,
                                      transform=transforms.Compose([
                                          transforms.RandomCrop(32, padding=4),
                                          transforms.RandomHorizontalFlip(),
                                          transforms.ToTensor(),
                                          normalize,
                                      ]))
-        val_set = datasets.CIFAR100('../data', train=False,
+        val_set = datasets.CIFAR100('./data/cifar100', train=False,
                                    transform=transforms.Compose([
                                        transforms.ToTensor(),
                                        normalize,

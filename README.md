@@ -30,7 +30,7 @@
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [**ShuffleNet**](#shufflenet)(2017.7)
-    * [CondenseNet](#condensenet)(2017.11)
+    * [**CondenseNet**](#condensenet)(2017.11)
 * [实验结果](#实验结果)
 
 ------
