@@ -53,10 +53,10 @@ class DPN(BasicModule):
         in_planes, out_planes = cfg['in_planes'], cfg['out_planes']
         num_blocks, dense_depth = cfg['num_blocks'], cfg['dense_depth']
 
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
-        self.bn1 = nn.BatchNorm2d(64)
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(32)
         self.relu = nn.ReLU(inplace=True)
-        self.last_planes = 64
+        self.last_planes = 32
         self.layer1 = self._make_layer(in_planes[0], out_planes[0], num_blocks[0], dense_depth[0], stride=1)
         self.layer2 = self._make_layer(in_planes[1], out_planes[1], num_blocks[1], dense_depth[1], stride=2)
         self.layer3 = self._make_layer(in_planes[2], out_planes[2], num_blocks[2], dense_depth[2], stride=2)
@@ -97,12 +97,12 @@ class DPN(BasicModule):
         return out
 
 
-def DPN26(num_classes):
+def DPN_CIFAR(num_classes):
     cfg = {
-        'in_planes': (96,192,384,768),
-        'out_planes': (256,512,1024,2048),
-        'num_blocks': (2,2,2,2),
-        'dense_depth': (16,32,24,128)
+        'in_planes': (64, 96, 128, 256),
+        'out_planes': (96, 128, 256, 512),
+        'num_blocks': (2, 2, 2, 2),
+        'dense_depth': (16, 24, 32, 48)
     }
     return DPN(cfg, num_classes)
 
