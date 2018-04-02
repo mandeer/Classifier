@@ -23,7 +23,7 @@
 * [**DenseNet**](#densenet)(2016.8)
     * [MSDNet](#msdnet)(2017.3)
 * [**DPN**](#dpn)(2017.7)
-* [SENet](#senet)(2017.9)
+* [**SENet**](#senet)(2017.9)
 * [NASNet](#nasnet)(2017.7)
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
@@ -676,7 +676,7 @@ pytorch的[源码](#https://github.com/ShichenLiu/CondenseNet)
 |ResNeXt|19M|00|0.888|0.653|ResNeXt29_32x4d|
 |Xception|2.2M|00|0.863|0.598|改自PerActResNet|
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
-|DPN|4.3M|00|0.830|0.|
+|DPN|4.3M|00|0.830|0.526|
 |SENet|00|00|0.|0.|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
