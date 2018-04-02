@@ -62,12 +62,8 @@ class CondenseNet(nn.Module):
         assert len(self.stages) == len(self.growth)
         self.args = args
         self.progress = 0.0
-        if args.data in ['cifar10', 'cifar100']:
-            self.init_stride = 1
-            self.pool_size = 8
-        else:
-            self.init_stride = 2
-            self.pool_size = 7
+        self.init_stride = 1
+        self.pool_size = 8
 
         self.features = nn.Sequential()
         ### Initial nChannels should be 3
