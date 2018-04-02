@@ -138,7 +138,8 @@ def main(config):
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    model = getattr(models, config.model)(num_classes=config.num_classes)
+    # model = getattr(models, config.model)()
+    model = models.DPN26()
     if config.pretrained != '':
         print('use pretrained model: ', config.pretrained)
         model.load(config.model_preTrained)
@@ -167,7 +168,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--dataset',    type=str,      default='CIFAR100',  help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode',       type=str,      default='train',     help='train, test')
-    parser.add_argument('--model',      type=str,      default='LeNet', help='model')
+    parser.add_argument('--model',      type=str,      default='DPN', help='model')
     parser.add_argument('--pretrained', type=str,      default='',          help='model for test or retrain')
 
     config = parser.parse_args()

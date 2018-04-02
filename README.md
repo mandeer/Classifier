@@ -513,8 +513,8 @@ are trained jointly, not independently.”
 
 ### 主要创新点
 * 通过HORNN统一了ResNet和DenseNet的数学表达。
-* ResNet侧重于特征的再利用，但不善于发掘新的特征；
-* DenseNet侧重于新特征的发掘，但又会产生很多冗余。
+* ResNet通过残差旁支通路再利用特征，但不善于探索新特征；
+* DenseNet通过密集连接通路探索新特征，但会产生高冗余度。
 * 结合[ResNeXt](#resnext)和DenseNet，提出了一类新的网络拓补结构
 DPN(Dual Path Networks)。
 
