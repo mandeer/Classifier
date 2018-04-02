@@ -47,7 +47,7 @@ class Bottleneck(nn.Module):
 
 
 class DPN(BasicModule):
-    def __init__(self, cfg):
+    def __init__(self, cfg, num_classes):
         super(DPN, self).__init__()
         self.model_name = 'dpn'
         in_planes, out_planes = cfg['in_planes'], cfg['out_planes']
@@ -62,7 +62,7 @@ class DPN(BasicModule):
         self.layer3 = self._make_layer(in_planes[2], out_planes[2], num_blocks[2], dense_depth[2], stride=2)
         self.layer4 = self._make_layer(in_planes[3], out_planes[3], num_blocks[3], dense_depth[3], stride=2)
         self.avgpool = nn.AvgPool2d(4, stride=1)
-        self.linear = nn.Linear(out_planes[3]+(num_blocks[3]+1)*dense_depth[3], 10)
+        self.linear = nn.Linear(out_planes[3]+(num_blocks[3]+1)*dense_depth[3], num_classes)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -97,14 +97,14 @@ class DPN(BasicModule):
         return out
 
 
-def DPN26():
+def DPN26(num_classes):
     cfg = {
         'in_planes': (96,192,384,768),
         'out_planes': (256,512,1024,2048),
         'num_blocks': (2,2,2,2),
         'dense_depth': (16,32,24,128)
     }
-    return DPN(cfg)
+    return DPN(cfg, num_classes)
 
 def DPN92():
     cfg = {
