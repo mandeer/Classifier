@@ -502,6 +502,20 @@ are trained jointly, not independently.”
 ------
 ## DPN
 [DPN](https://arxiv.org/abs/1707.01629)
+用High Order RNN结构把[DenseNet](#densenet)和[ResNet](#resnet)联系到了一起，
+证明了DenseNet能从靠前的层级中提取到新的特征，
+而ResNet本质上是对之前层级中已提取特征的复用。
+通过把这两种结构的优点结合到一起，提高了准确率和参数利用率。
+
+### HORNN & DenseNet
+![HORNN](./imgs/HORNN.png)
+
+### DPN Architecture
+![DPN](./imgs/DPN.png)
+
+### 主要创新点
+
+
 
 [返回顶部](#classifier)
 
