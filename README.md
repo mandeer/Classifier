@@ -15,6 +15,7 @@
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
     * [**Xception**](#xception)(2016.10)
+* [Highway Networks](#highway networks)
 * [**ResNet**](#resnet)(2015.12)
     * [**PerActResNet**](#peractresnet)(2016.3)
     * [**ResNeXt**](#resnext)(2016.11)
@@ -353,6 +354,12 @@ Inception Module并获得了更好的性能。
 将深度卷积的通道输出映射到新的通道空间。
 * Inception Module是介于普通卷积和深度可分离卷积的中间结构
 * 深度可分离卷积之间不使用非线性激活层的效果会更好。
+
+[返回顶部](#classifier)
+
+------
+## Highway Networks
+[Highway Networks](https://arxiv.org/abs/1507.06228)
 
 [返回顶部](#classifier)
 
