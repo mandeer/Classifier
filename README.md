@@ -681,7 +681,7 @@ pytorch的[源码](#https://github.com/ShichenLiu/CondenseNet)
 |Xception|2.2M|00|0.863|0.598|改自PerActResNet|
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
 |DPN|4.3M|00|0.830|0.526|需要调参？|
-|SENet|17M|00|0.880|0.572|需要调参？|
+|SENet|17M|00|0.880|0.619|PerAct_ResNet|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
 |MobileNets_V2|3.5M|00|0.867|0.614|有删减|
