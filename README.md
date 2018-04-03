@@ -361,7 +361,7 @@ Inception Module并获得了更好的性能。
 ## Highway
 [Highway Networks](https://arxiv.org/abs/1507.06228)
 通过自适应门机制让信息流没有衰减的通过一些网络层，解决了深层次网络训练困难的问题。
-后面的[ResNet](#resnet)可以看做是Highway Networks的一种特例。
+后面的[ResNet](#resnet)可以看做是Highway Networks的一种特例。  
 ![Highway-Networks](./imgs/Highway-Networks.png)
 
 [返回顶部](#classifier)
