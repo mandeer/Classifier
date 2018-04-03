@@ -522,12 +522,23 @@ are trained jointly, not independently.”
 ------
 ## SENet
 [SENet](https://arxiv.org/abs/1709.01507)
+是最后一届 ImageNet(2017) 竞赛 Image Classification 任务的冠军。
+通过学习的方式来自动获取到每个特征通道的重要程度，
+然后依照这个重要程度去提升有用的特征并抑制对当前任务用处不大的特征。
+相对于2016年的冠军取得了∼25%的提升。
+
+### SE-Block
+![SE-Block](./imgs/SE-Block.png)
 
 ### SENet Module
 ![SE-ResNet](./imgs/SE-ResNet-Module.png)
 ![SE-Inception](./imgs/SE-Inception-Module.png)
 
 ### 主要创新点
+* SE Block: 以微小的计算成本为现有的最先进的深层架构产生了显著的性能改进。
+* 引入注意力机制：进行‘特征校准(feature recalibration)’,
+选择性地强调信息特征并抑制不太有用的特征。
+* 
 
 [返回顶部](#classifier)
 
