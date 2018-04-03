@@ -364,7 +364,7 @@ Inception Module并获得了更好的性能。
 后面的[ResNet](#resnet)可以看做是Highway Networks的一种特例。  
 ![Highway-Networks](./imgs/Highway-Networks.png)
 
-### 主要贡献
+### 主要创新点
 * 快捷链接：解决了深层次网络训练困难的问题
 
 [返回顶部](#classifier)
@@ -564,10 +564,18 @@ are trained jointly, not independently.”
 
 ------
 ## NASNet
-[NASNet](https://arxiv.org/abs/1707.07012)
+[NASNet1](https://arxiv.org/abs/1611.01578)
+利用一个RNN通过强化学习生成了一个效果不错的CNN网络结构或者一个新的Recurrent Cell。
+但因为搜索空间太大，最终的效果不算特别明显。  
+[NASNet2](https://arxiv.org/abs/1707.07012)
+是对前一篇论文的改进, 改成搜索效果最好的Conv cell。
+再用这些Conv cell来构建一个更好的网络。
+最终在特征提取和目标检测准确率都获得了全方位提升。
 
 ### best convolutional cells
 ![NAS-Cell](./imgs/NAS-Cell.png)
+
+### 主要创新点
 
 [返回顶部](#classifier)
 
