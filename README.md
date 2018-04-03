@@ -364,6 +364,9 @@ Inception Module并获得了更好的性能。
 后面的[ResNet](#resnet)可以看做是Highway Networks的一种特例。  
 ![Highway-Networks](./imgs/Highway-Networks.png)
 
+### 主要贡献
+* 快捷链接：解决了深层次网络训练困难的问题
+
 [返回顶部](#classifier)
 
 ------
