@@ -385,6 +385,10 @@ ResNet有152层，之后的[改进版](#resnet-v2)
 to view our method as ensembling, because the members to be aggregated 
 are trained jointly, not independently.”
 
+### 等效于RNN
+![ResNet&RNN](./imgs/ResNet&RNN.png)
+详情请参考这篇[论文](#https://arxiv.org/abs/1604.03640)
+
 [返回顶部](#classifier)
 
 ------
