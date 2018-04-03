@@ -540,9 +540,12 @@ are trained jointly, not independently.”
 
 ### 主要创新点
 * SE Block: 以微小的计算成本为现有的最先进的深层架构产生了显著的性能改进。
-* 引入注意力机制：进行‘特征校准(feature recalibration)’,
-选择性地强调信息特征并抑制不太有用的特征。
-* 
+* 引入注意力机制：进行‘特征重标定(feature recalibration)’,
+通过学习的方式来自动获取到每个特征通道的重要程度。
+    * Squeeze: 全局平均池化，获得了全局的感受野，使得网络低层也能利用全局信息;
+    * Excitation: 自适应重新校准，类似于RNN中门的机制，为每个特征通道生成权重;
+    * Scale: 逐通道加权。
+* SENet 构造非常简单，而且很容易被部署，不需要引入新的函数或者层。
 
 [返回顶部](#classifier)
 
