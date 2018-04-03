@@ -15,7 +15,7 @@
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
     * [**Xception**](#xception)(2016.10)
-* [Highway](#highway)
+* [Highway](#highway)(2015.7)
 * [**ResNet**](#resnet)(2015.12)
     * [**PerActResNet**](#peractresnet)(2016.3)
     * [**ResNeXt**](#resnext)(2016.11)
@@ -565,6 +565,9 @@ are trained jointly, not independently.”
 ------
 ## NASNet
 [NASNet](https://arxiv.org/abs/1707.07012)
+
+### best convolutional cells
+![NAS-Cell](./imgs/NAS-Cell.png)
 
 [返回顶部](#classifier)
 
