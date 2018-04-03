@@ -15,7 +15,7 @@
     * [**Inception-V3**](#inception3)(2015.12)
     * [Inception-V4](#inception4)(2016.2)
     * [**Xception**](#xception)(2016.10)
-* [Highway Networks](#highway networks)
+* [Highway](#highway)
 * [**ResNet**](#resnet)(2015.12)
     * [**PerActResNet**](#peractresnet)(2016.3)
     * [**ResNeXt**](#resnext)(2016.11)
@@ -358,7 +358,7 @@ Inception Module并获得了更好的性能。
 [返回顶部](#classifier)
 
 ------
-## Highway Networks
+## Highway
 [Highway Networks](https://arxiv.org/abs/1507.06228)
 
 [返回顶部](#classifier)
