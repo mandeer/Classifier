@@ -515,15 +515,19 @@ are trained jointly, not independently.”
 * 通过HORNN统一了ResNet和DenseNet的数学表达。
 * ResNet通过残差旁支通路再利用特征，但不善于探索新特征；
 * DenseNet通过密集连接通路探索新特征，但会产生高冗余度。
-* 结合[ResNeXt](#resnext)和DenseNet，提出了一类新的网络拓补结构
-DPN(Dual Path Networks)。
-
+* 结合[ResNeXt](#resnext)和DenseNet，提出了一类新的网络拓补结构DPN(Dual Path Networks)。
 
 [返回顶部](#classifier)
 
 ------
 ## SENet
 [SENet](https://arxiv.org/abs/1709.01507)
+
+### SENet Module
+![SE-ResNet](./imgs/SE-ResNet-Module.png)
+![SE-Inception](./imgs/SE-Inception-Module.png)
+
+### 主要创新点
 
 [返回顶部](#classifier)
 
@@ -677,7 +681,7 @@ pytorch的[源码](#https://github.com/ShichenLiu/CondenseNet)
 |Xception|2.2M|00|0.863|0.598|改自PerActResNet|
 |DenseNet|4.1M|00|0.881|0.623|DenseNet121|
 |DPN|4.3M|00|0.830|0.526|需要调参？|
-|SENet|11M|00|0.854|0.572|需要调参？|
+|SENet|17M|00|0.880|0.572|需要调参？|
 |SqueezeNet|2.8M|00|0.792|0.417|SqueezeNet_V1.1|
 |MobileNets_V1|4.2M|00|0.842|0.546|有删减|
 |MobileNets_V2|3.5M|00|0.867|0.614|有删减|
