@@ -572,6 +572,9 @@ are trained jointly, not independently.”
 再用这些Conv cell来构建一个更好的网络。
 最终在特征提取和目标检测准确率都获得了全方位提升。
 
+## Neural Architecture Search
+![NASearch](./imgs/NASearch.png)
+
 ### best convolutional cells
 ![NAS-Cell](./imgs/NAS-Cell.png)
 
