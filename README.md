@@ -572,13 +572,19 @@ are trained jointly, not independently.”
 再用这些Conv cell来构建一个更好的网络。
 最终在特征提取和目标检测准确率都获得了全方位提升。
 
-## Neural Architecture Search
+### Neural Architecture Search
 ![NASearch](./imgs/NASearch.png)
 
-### best convolutional cells
+### Best Convolutional Cells
 ![NAS-Cell](./imgs/NAS-Cell.png)
 
 ### 主要创新点
+* 自动生成网络结构(Conv Cell): 利用RNN控制器去预测一个网络结构，接着训练这个网络直到收敛，
+去验证集上测试得到一个准确率R，然后将这个R作为回报信号反馈给RNN控制器去更新RNN控制器的参数，
+从而产生更好的网络结构。
+* 有效的网络结构，不一定特别规整。
+* 有钱任性(500-800块GPU)
+* 要失业了, 要失业了, 要失业了...
 
 [返回顶部](#classifier)
 
