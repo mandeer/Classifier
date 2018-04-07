@@ -601,14 +601,16 @@ are trained jointly, not independently.”
 * 边表示信息流
 * 红色箭头定义了搜索空间中的一个子模型
 * 子模型中，节点1表示输入；节点3和6表示输出。
-* 搜索时RNN控制器需要决定激活那些边，以及每个节点执行什么操作。
+* 搜索时RNN控制器需要决定激活那些边(或者每个节点的输入)，以及每个节点执行什么操作。
 
-### 
+### 搜索示例
 ![ENAS](./imgs/ENAS.png)
 
 ### 主要创新点
 * NAS的模型搜索空间可以用一个有向无环图(directed acyclic graph, DAG)来进行表示。
 * 模型搜索时，子模型间共享权重：借鉴了迁移学习和多任务学习的思想，使搜索时间缩短了1000倍以上。
+* 搜索出的RNN模型中只有ReLU和tanh，尽管搜索空间中包含identity和sigmoid。
+* micro search space 优于 macro search space ???
 * 仅用了一块1080Ti，且训练时间不足一天。
 * 真的要失业了, 真的要失业了, 真的要失业了...
 
