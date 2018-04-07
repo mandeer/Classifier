@@ -592,11 +592,21 @@ are trained jointly, not independently.”
 ------
 ## ENAS
 [ENAS](https://arxiv.org/abs/1802.03268)
-通过在NAS期间共享子模型权重的方法，克服了NAS类算法计算复杂且耗时的缺陷，
+通过在NAS时子模型间共享权重的方法，克服了NAS类算法计算复杂且耗时的缺陷，
 模型搜索时间缩短了1000倍以上。
 
+### DAG 示例
+![ENAS_DAG](./imgs/ENAS_DAG.png)
+* 节点表示操作
+* 边表示信息流
+* 红色箭头定义了搜索空间中的一个子模型
+* 子模型中，节点1表示输入；节点3和6表示输出。
+
+### 
+![ENAS](./imgs/ENAS.png)
+
 ### 主要创新点
-* 
+* NAS的模型搜索空间可以用一个有向无环图(directed acyclic graph, DAG)来进行表示。
 
 [返回顶部](#classifier)
 
