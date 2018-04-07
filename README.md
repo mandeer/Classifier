@@ -592,6 +592,11 @@ are trained jointly, not independently.”
 ------
 ## ENAS
 [ENAS](https://arxiv.org/abs/1802.03268)
+通过在NAS期间共享子模型权重的方法，克服了NAS类算法计算复杂且耗时的缺陷，
+模型搜索时间缩短了1000倍以上。
+
+### 主要创新点
+* 
 
 [返回顶部](#classifier)
 
