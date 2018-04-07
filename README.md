@@ -26,6 +26,7 @@
 * [**DPN**](#dpn)(2017.7)
 * [**SENet**](#senet)(2017.9)
 * [NASNet](#nasnet)(2017.7)
+* [ENAS](#enas)(2018.2)
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
@@ -585,6 +586,12 @@ are trained jointly, not independently.”
 * 有效的网络结构，不一定特别规整。
 * 有钱任性(500-800块GPU)
 * 要失业了, 要失业了, 要失业了...
+
+[返回顶部](#classifier)
+
+------
+## ENAS
+[ENAS](https://arxiv.org/abs/1802.03268)
 
 [返回顶部](#classifier)
 
