@@ -691,7 +691,7 @@ are trained jointly, not independently.”
 ### CondenseNet
 [CondenseNet](https://arxiv.org/abs/1711.09224)
 优化了DenseNet网络，通过训练时剪枝以及分组卷积提高了计算效率及参数利用率。作者提供了
-pytorch的[源码](#https://github.com/ShichenLiu/CondenseNet)
+pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
 ![CondenseNet](./imgs/CondenseNet.png)
 #### 自学习分组卷积
 ![LGR](./imgs/LGR.png)
