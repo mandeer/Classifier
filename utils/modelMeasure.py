@@ -73,30 +73,22 @@ def measure_layer(layer, x):
                 layer.kernel_size[1] * out_h * out_w / layer.groups * multi_add
         delta_params = get_layer_param(layer)
 
-    ### ops_learned_conv
-    elif type_name in ['LearnedGroupConv']:
-        measure_layer(layer.relu, x)
-        measure_layer(layer.norm, x)
-        conv = layer.conv
-        out_h = int((x.size()[2] + 2 * conv.padding[0] - conv.kernel_size[0]) /
-                    conv.stride[0] + 1)
-        out_w = int((x.size()[3] + 2 * conv.padding[1] - conv.kernel_size[1]) /
-                    conv.stride[1] + 1)
-        delta_ops = conv.in_channels * conv.out_channels * conv.kernel_size[0] * \
-                conv.kernel_size[1] * out_h * out_w / layer.condense_factor * multi_add
-        delta_params = get_layer_param(conv) / layer.condense_factor
-
     ### ops_nonlinearity
     elif type_name in ['ReLU']:
         delta_ops = x.numel()
         delta_params = get_layer_param(layer)
 
     ### ops_pooling
+    elif type_name in ['MaxPool2d']:
+        delta_ops = x.size()[0] * x.size()[1] * x.size()[2] * x.size()[3]
+        delta_params = get_layer_param(layer)
+
     elif type_name in ['AvgPool2d']:
-        in_w = x.size()[2]
+        in_w = x.size()[3]
+        in_h = x.size()[2]
         kernel_ops = layer.kernel_size * layer.kernel_size
         out_w = int((in_w + 2 * layer.padding - layer.kernel_size) / layer.stride + 1)
-        out_h = int((in_w + 2 * layer.padding - layer.kernel_size) / layer.stride + 1)
+        out_h = int((in_h + 2 * layer.padding - layer.kernel_size) / layer.stride + 1)
         delta_ops = x.size()[0] * x.size()[1] * out_w * out_h * kernel_ops
         delta_params = get_layer_param(layer)
 
