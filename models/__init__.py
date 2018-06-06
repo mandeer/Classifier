@@ -15,6 +15,5 @@ from .Xception import Xception_CIFAR
 from .MobileNet import MobileNet
 from .MobuleNet2 import MobileNetV2
 from .ShuffleNet import ShuffleNet
-from .condensenet import CondenseNet as condensenet
 from .DPN import DPN_CIFAR
 from .SENet import SENet_CIFAR
