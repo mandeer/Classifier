@@ -33,6 +33,7 @@
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [**ShuffleNet**](#shufflenet)(2017.7)
     * [**CondenseNet**](#condensenet)(2017.11)
+    * [IGCNets](#igcnets)(2017.07, 2018.04)
 * [实验结果](#实验结果)
 
 ------
@@ -702,6 +703,10 @@ pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
 训练和测试时过程参考[LGR](#自学习分组卷积)。
 * 完全密集连接：特征图大小不同时，使用average pooling
 * 增长率随着特征图变小而指数递增：高层的卷积层更依赖于中高层的特征，较少依赖于底层的特征。
+
+### IGCNets
+[IGCNets](https://arxiv.org/abs/1707.02725)
+[IGCV2](https://arxiv.org/abs/1804.06202)
 
 [返回顶部](#classifier)
 
