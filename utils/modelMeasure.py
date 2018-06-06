@@ -84,11 +84,11 @@ def measure_layer(layer, x):
         delta_params = get_layer_param(layer)
 
     elif type_name in ['AvgPool2d']:
-        in_w = x.size()[3]
         in_h = x.size()[2]
-        kernel_ops = layer.kernel_size * layer.kernel_size
-        out_w = int((in_w + 2 * layer.padding - layer.kernel_size) / layer.stride + 1)
-        out_h = int((in_h + 2 * layer.padding - layer.kernel_size) / layer.stride + 1)
+        in_w = x.size()[3]
+        kernel_ops = layer.kernel_size[0] * layer.kernel_size[1]
+        out_h = int((in_h + 2 * layer.padding[0] - layer.kernel_size[0]) / layer.stride[0] + 1)
+        out_w = int((in_w + 2 * layer.padding[1] - layer.kernel_size[1]) / layer.stride[1] + 1)
         delta_ops = x.size()[0] * x.size()[1] * out_w * out_h * kernel_ops
         delta_params = get_layer_param(layer)
 
