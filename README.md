@@ -716,8 +716,11 @@ pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
 
 #### 交错组卷积
 ![IGC](./imgs/IGC.png)
+* 第二次组卷积过程中，每组的输入通道均来自于第一次组卷积过程中不同的组，以达到交错互补的目的。
+* 第一次组卷积的kernel_size=3,第二次组卷积的kernel_size=1.
 
 #### 主要创新点
+* 交错组卷积
 
 
 [返回顶部](#classifier)
