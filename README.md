@@ -32,7 +32,7 @@
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [**ShuffleNet**](#shufflenet)(2017.7)
-    * [IGCNets](#igcnets)(2017.07, 2018.04)
+    * [IGCNets](#igcnets)(2017.07, 2018.04, 2018.06)
     * [**CondenseNet**](#condensenet)(2017.11)
 * [实验结果](#实验结果)
 
@@ -718,6 +718,9 @@ are trained jointly, not independently.”
 
 #### 交错低秩组卷积
 ![IGCV3](./imgs/IGCV3.png)
+* Conv1: kernel_size=1, group=2, 升维
+* Conv2: kernel_size=3, group=channel
+* Conv3: kernel_size=1, group=2, 降维
 
 #### 主要创新点
 * 交错组卷积(Interleaved Group Convolution)
