@@ -713,7 +713,8 @@ are trained jointly, not independently.”
 #### 交错结构稀疏卷积
 ![IGCV2](./imgs/IGCV2.png)
 * W代表分组卷积; P代表通道重排序
-* 
+* 第一次组卷积的kernel_size=3,第二次和第三次组卷积的kernel_size=1.
+* 将V1中的第二个组卷积分解
 
 #### 交错低秩组卷积
 ![IGCV3](./imgs/IGCV3.png)
