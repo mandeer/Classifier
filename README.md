@@ -32,8 +32,8 @@
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [**ShuffleNet**](#shufflenet)(2017.7)
-    * [**CondenseNet**](#condensenet)(2017.11)
     * [IGCNets](#igcnets)(2017.07, 2018.04)
+    * [**CondenseNet**](#condensenet)(2017.11)
 * [实验结果](#实验结果)
 
 ------
@@ -690,6 +690,27 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
+### IGCNets
+[IGCNets](https://arxiv.org/abs/1707.02725)
+论文中提出了一种全新的通用卷积神经网络交错组卷积（Interleaved Group Convolution，简称 IGC）模块，
+解决了神经网络基本卷积单元中的冗余问题，可以在无损性能的前提下，缩减模型、提升计算速度，
+有助于深度网络在移动端的部署。  
+[IGCV2](https://arxiv.org/abs/1804.06202)
+
+#### 交错组卷积
+![IGC](./imgs/IGC.png)
+* 第二次组卷积过程中，每组的输入通道均来自于第一次组卷积过程中不同的组，以达到交错互补的目的。
+* 第一次组卷积的kernel_size=3,第二次组卷积的kernel_size=1.
+* M=2,即第一个组卷积，每组有2个featureMap时，效果最好。
+* IGC + BN + ReLU
+
+#### 主要创新点
+* 交错组卷积
+
+
+[返回顶部](#classifier)
+
+------
 ### CondenseNet
 [CondenseNet](https://arxiv.org/abs/1711.09224)
 优化了DenseNet网络，通过训练时剪枝以及分组卷积提高了计算效率及参数利用率。作者提供了
@@ -705,26 +726,6 @@ pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
 * 增长率随着特征图变小而指数递增：高层的卷积层更依赖于中高层的特征，较少依赖于底层的特征。
 
 [返回顶部](#classifier)
-
-------
-### IGCNets
-[IGCNets](https://arxiv.org/abs/1707.02725)
-论文中提出了一种全新的通用卷积神经网络交错组卷积（Interleaved Group Convolution，简称 IGC）模块，
-解决了神经网络基本卷积单元中的冗余问题，可以在无损性能的前提下，缩减模型、提升计算速度，
-有助于深度网络在移动端的部署。  
-[IGCV2](https://arxiv.org/abs/1804.06202)
-
-#### 交错组卷积
-![IGC](./imgs/IGC.png)
-* 第二次组卷积过程中，每组的输入通道均来自于第一次组卷积过程中不同的组，以达到交错互补的目的。
-* 第一次组卷积的kernel_size=3,第二次组卷积的kernel_size=1.
-
-#### 主要创新点
-* 交错组卷积
-
-
-[返回顶部](#classifier)
-
 
 ------
 ## 实验结果
