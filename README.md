@@ -697,7 +697,9 @@ are trained jointly, not independently.”
 有助于深度网络在移动端的部署。  
 [IGCV2](https://arxiv.org/abs/1804.06202)
 是IGC-V1的一个推广和泛化，将V1的两个结构稀疏的卷积核矩阵的乘积，
-推广为多个结构稀疏的卷积核矩阵的乘积，从而进一步了消除冗余性。
+推广为多个结构稀疏的卷积核矩阵的乘积，从而进一步了消除冗余性。  
+[IGCV3](https://arxiv.org/abs/1806.00178v1)
+
 
 作者给出了IGCV3的mxnet[代码](https://github.com/homles11/IGCV3)
 
@@ -710,10 +712,18 @@ are trained jointly, not independently.”
 
 #### 交错结构稀疏卷积
 ![IGCV2](./imgs/IGCV2.png)
+* W代表分组卷积; P代表通道重排序
+* 
+
+#### 交错低秩组卷积
+![IGCV3](./imgs/IGCV3.png)
 
 #### 主要创新点
-* 交错组卷积
-
+* 交错组卷积(Interleaved Group Convolution)
+* 交错结构稀疏卷积(Interleaved Structured Sparse Convolution)
+    * 互补条件: 分组卷积的同一个分支中的通道分别在另一个分组卷积的不同分支中。
+    * 平衡条件: 每个结构稀疏的的每个分支的通道数需要尽可能相等。
+* 交错低秩组卷积(Interleaved Low-Rank Group Convolutions)
 
 [返回顶部](#classifier)
 
