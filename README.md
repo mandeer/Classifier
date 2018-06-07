@@ -697,6 +697,8 @@ are trained jointly, not independently.”
 有助于深度网络在移动端的部署。  
 [IGCV2](https://arxiv.org/abs/1804.06202)
 
+作者给出了IGCV3的mxnet[代码](https://github.com/homles11/IGCV3)
+
 #### 交错组卷积
 ![IGC](./imgs/IGC.png)
 * 第二次组卷积过程中，每组的输入通道均来自于第一次组卷积过程中不同的组，以达到交错互补的目的。
