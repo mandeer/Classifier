@@ -696,6 +696,8 @@ are trained jointly, not independently.”
 解决了神经网络基本卷积单元中的冗余问题，可以在无损性能的前提下，缩减模型、提升计算速度，
 有助于深度网络在移动端的部署。  
 [IGCV2](https://arxiv.org/abs/1804.06202)
+是IGC-V1的一个推广和泛化，将V1的两个结构稀疏的卷积核矩阵的乘积，
+推广为多个结构稀疏的卷积核矩阵的乘积，从而进一步了消除冗余性。
 
 作者给出了IGCV3的mxnet[代码](https://github.com/homles11/IGCV3)
 
@@ -705,6 +707,9 @@ are trained jointly, not independently.”
 * 第一次组卷积的kernel_size=3,第二次组卷积的kernel_size=1.
 * M=2,即第一个组卷积，每组有2个featureMap时，效果最好。
 * IGC + BN + ReLU
+
+#### 交错结构稀疏卷积
+![IGCV2](./imgs/IGCV2.png)
 
 #### 主要创新点
 * 交错组卷积
