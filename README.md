@@ -704,9 +704,21 @@ pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
 * 完全密集连接：特征图大小不同时，使用average pooling
 * 增长率随着特征图变小而指数递增：高层的卷积层更依赖于中高层的特征，较少依赖于底层的特征。
 
+[返回顶部](#classifier)
+
+------
 ### IGCNets
 [IGCNets](https://arxiv.org/abs/1707.02725)
+论文中提出了一种全新的通用卷积神经网络交错组卷积（Interleaved Group Convolution，简称 IGC）模块，
+解决了神经网络基本卷积单元中的冗余问题，可以在无损性能的前提下，缩减模型、提升计算速度，
+有助于深度网络在移动端的部署。  
 [IGCV2](https://arxiv.org/abs/1804.06202)
+
+#### 交错组卷积
+![IGC](./imgs/IGC.png)
+
+#### 主要创新点
+
 
 [返回顶部](#classifier)
 
