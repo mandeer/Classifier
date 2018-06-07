@@ -1,15 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
-
-import torch
-import torch.nn as nn
-from torch.autograd import Variable
 from functools import reduce
 import operator
-from layers import LearnedGroupConv, CondensingLinear, CondensingConv, Conv
-
+import torch
+from torch.autograd import Variable
 
 count_ops = 0
 count_params = 0
@@ -29,20 +27,6 @@ def is_pruned(layer):
 
 def is_leaf(model):
     return get_num_gen(model.children()) == 0
-
-
-def convert_model(model, args):
-    for m in model._modules:
-        child = model._modules[m]
-        if is_leaf(child):
-            if isinstance(child, nn.Linear):
-                model._modules[m] = CondensingLinear(child, 0.5)
-                del(child)
-        elif is_pruned(child):
-            model._modules[m] = CondensingConv(child)
-            del(child)
-        else:
-            convert_model(child, args)
 
 
 def get_layer_info(layer):
@@ -73,8 +57,14 @@ def measure_layer(layer, x):
                 layer.kernel_size[1] * out_h * out_w / layer.groups * multi_add
         delta_params = get_layer_param(layer)
 
+    ### ops_ConvTranspose
+    elif type_name in ['ConvTranspose2d']:
+        delta_ops = layer.in_channels * layer.out_channels * layer.kernel_size[0] * \
+                    layer.kernel_size[1] * x.size()[2] * x.size()[3] / layer.groups * multi_add
+        delta_params = get_layer_param(layer)
+
     ### ops_nonlinearity
-    elif type_name in ['ReLU']:
+    elif type_name in ['ReLU', 'LeakyReLU']:
         delta_ops = x.numel()
         delta_params = get_layer_param(layer)
 
@@ -87,8 +77,8 @@ def measure_layer(layer, x):
         in_h = x.size()[2]
         in_w = x.size()[3]
         kernel_ops = layer.kernel_size[0] * layer.kernel_size[1]
-        out_h = int((in_h + 2 * layer.padding[0] - layer.kernel_size[0]) / layer.stride[0] + 1)
-        out_w = int((in_w + 2 * layer.padding[1] - layer.kernel_size[1]) / layer.stride[1] + 1)
+        out_h = int((in_h + 2 * layer.padding - layer.kernel_size[0]) / layer.stride[0] + 1)
+        out_w = int((in_w + 2 * layer.padding - layer.kernel_size[1]) / layer.stride[1] + 1)
         delta_ops = x.size()[0] * x.size()[1] * out_w * out_h * kernel_ops
         delta_params = get_layer_param(layer)
 
@@ -116,11 +106,11 @@ def measure_layer(layer, x):
     return
 
 
-def measure_model(model, H, W):
+def measure_model(model, channel, height, width):
     global count_ops, count_params
     count_ops = 0
     count_params = 0
-    data = Variable(torch.zeros(1, 3, H, W))
+    data = Variable(torch.zeros(1, channel, height, width))
 
     def should_measure(x):
         return is_leaf(x) or is_pruned(x)
