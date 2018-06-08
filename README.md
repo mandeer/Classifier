@@ -27,6 +27,7 @@
 * [**SENet**](#senet)(2017.9)
 * [NASNet](#nasnet)(2017.7)
 * [ENAS](#enas)(2018.2)
+* [AmoebaNet](#amoebanet)(2018.02)
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
@@ -619,6 +620,12 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
+## AmoebaNet
+[AmoebaNet](https://arxiv.org/abs/1802.01548)
+
+[返回顶部](#classifier)
+
+------
 ## 轻量化网络
 ------
 ### SqueezeNet
@@ -699,7 +706,7 @@ are trained jointly, not independently.”
 是IGC-V1的一个推广和泛化，将V1的两个结构稀疏的卷积核矩阵的乘积，
 推广为多个结构稀疏的卷积核矩阵的乘积，从而进一步了消除冗余性。  
 [IGCV3](https://arxiv.org/abs/1806.00178v1)
-
+融合了IGC和bottleneck modules(低秩kernel)的优点, 又进一步提升了性能。
 
 作者给出了IGCV3的mxnet[代码](https://github.com/homles11/IGCV3)
 
@@ -728,6 +735,7 @@ are trained jointly, not independently.”
     * 互补条件: 分组卷积的同一个分支中的通道分别在另一个分组卷积的不同分支中。
     * 平衡条件: 每个结构稀疏的的每个分支的通道数需要尽可能相等。
 * 交错低秩组卷积(Interleaved Low-Rank Group Convolutions)
+* 深层网络可以删除block中间的ReLU层，浅层网络建议保留。
 
 [返回顶部](#classifier)
 
