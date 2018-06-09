@@ -659,6 +659,18 @@ are trained jointly, not independently.”
 ## AmoebaNet
 [AmoebaNet](https://arxiv.org/abs/1802.01548)
 
+
+### AmoebaNet building blocks
+![AmoebaNet](./imgs/AmoebaNet.png)
+
+### 主要创新点
+* 正则化的进化算法: killed最老的而非最弱的
+* 搜索block而非搜索整个网络结构
+* 进化学习与强化学习([RL](#nasnet))的对比:
+    * 正则化的进化算法的收敛速度更快
+    * 进化算法不需要re-tuning
+* TPU加速
+
 [返回顶部](#classifier)
 
 ------
