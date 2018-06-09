@@ -623,6 +623,8 @@ are trained jointly, not independently.”
 ------
 ## Evolution
 [Evolution](https://arxiv.org/abs/1703.01041)
+以空前的规模, 使用简单的进化技术, 从平凡的初始条件出发，
+发现了可用于 CIFAR-10 和 CIFAR-100 数据集的模型。
 
 ### 演化过程
 ![Evolution](./imgs/Evolution.png)
@@ -645,6 +647,11 @@ are trained jointly, not independently.”
         * 插入或删除卷积层
         * 改变卷积参数(stride, channel_num, kernel_size)
         * 插入或删除恒等连接
+* 尽量减少人类的参与:  
+    * 从开始进化，到产出一个完全训练的模型，中间不需要人参与。
+    * 人类的活动包括：
+        * 设计突变方向
+        * 调节超参数(人群数量, 迭代次数等)
 
 [返回顶部](#classifier)
 
