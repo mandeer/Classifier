@@ -27,13 +27,14 @@
 * [**SENet**](#senet)(2017.9)
 * [NASNet](#nasnet)(2017.7)
 * [ENAS](#enas)(2018.2)
-* [AmoebaNet](#amoebanet)(2018.02)
+* [Evolution](#evolution)(2017.3)
+* [AmoebaNet](#amoebanet)(2018.2)
 * [轻量化网络](#轻量化网络)
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
     * [**ShuffleNet**](#shufflenet)(2017.7)
-    * [IGCNets](#igcnets)(2017.07, 2018.04, 2018.06)
+    * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
     * [**CondenseNet**](#condensenet)(2017.11)
 * [实验结果](#实验结果)
 
@@ -616,6 +617,12 @@ are trained jointly, not independently.”
 * micro search space 优于 macro search space ???
 * 仅用了一块1080Ti，且训练时间不足一天。
 * 真的要失业了, 真的要失业了, 真的要失业了...
+
+[返回顶部](#classifier)
+
+------
+## Evolution
+[Evolution](https://arxiv.org/abs/1703.01041)
 
 [返回顶部](#classifier)
 
