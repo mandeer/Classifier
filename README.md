@@ -626,6 +626,25 @@ are trained jointly, not independently.”
 
 ### 演化过程
 ![Evolution](./imgs/Evolution.png)
+* 蓝色的是最终存活的, 黑色的已被杀死
+* 最右边的是最优个体，左边三个是其祖先
+* C表示卷积, BN表示[Batch Norm](#batchnorm), R表示[ReLU](#relu)
+    
+### 主要创新点
+* 演化方法
+    * 人群数量: 1000, 竞技场: 250(人口数量的1/4)
+    * 竞技场规则
+        * 两两竞赛: 比较两者在验证集上的准确率, 优胜劣汰
+        * 弱者: 淘汰(killed)
+        * 胜者: 获得繁殖的权利, 自我复制得到一个孩子
+        * 孩子: 复制自胜者, 基因突变(可能变好, 也可能变差), 长大(训练, 尽可能继承权重)后进入人群
+    * 突变方向
+        * 改变学习率
+        * 不变(keep training)
+        * 重置权重
+        * 插入或删除卷积层
+        * 改变卷积参数(stride, channel_num, kernel_size)
+        * 插入或删除恒等连接
 
 [返回顶部](#classifier)
 
