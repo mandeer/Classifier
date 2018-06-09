@@ -658,17 +658,20 @@ are trained jointly, not independently.”
 ------
 ## AmoebaNet
 [AmoebaNet](https://arxiv.org/abs/1802.01548)
+将正则化的进化算法应用到搜索卷积模块上，并与[NASNet2](#nasnet)进行了比较，
+证明正则化进化算法优于强化学习(NASNet2)算法。
 
+注: amoeba(变形虫, 阿米巴)是单细胞生物, 最低等的原始生物之一。
 
 ### AmoebaNet building blocks
 ![AmoebaNet](./imgs/AmoebaNet.png)
+* 搜索空间与NASNet2相同
+* 突变修改为随机重新连接输入或随机替换运算
+* 没有权重继承，所有的网络模型都需要从头开始训练
 
 ### 主要创新点
 * 正则化的进化算法: killed最老的而非最弱的
 * 搜索block而非搜索整个网络结构
-* 进化学习与强化学习([RL](#nasnet))的对比:
-    * 正则化的进化算法的收敛速度更快
-    * 进化算法不需要re-tuning
 * TPU加速
 
 [返回顶部](#classifier)
