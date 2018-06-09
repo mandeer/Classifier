@@ -624,6 +624,9 @@ are trained jointly, not independently.”
 ## Evolution
 [Evolution](https://arxiv.org/abs/1703.01041)
 
+### 演化过程
+![Evolution](./imgs/Evolution.png)
+
 [返回顶部](#classifier)
 
 ------
