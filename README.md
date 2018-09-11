@@ -261,8 +261,9 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V2, V3版本。
 * 提高了模型的容纳能力
 
 #### 缺点
-* 计算代价：有文章称使用Batch Norm会带来30%的额外计算开销。
+* 计算代价：有文章称使用Batch Norm会带来30%的额外计算开销(可以使用一些技巧去除测试时的开销)。
 * 对浅层网络效果不理想
+* Batch size 比较小时效果不理想
 * RNN、LSTM上效果不理想
 * GANs上效果不理想
 * 不适合在线学习：mini-batch=1
@@ -301,6 +302,14 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V2, V3版本。
 直接的对单幅图像进行的归一化操作，且没有scale和shift。
     * 在图片视频分类等特征提取网络中大多数情况下BN效果优于IN
     * 在超分辨率、生成式类任务中的网络IN优于BN，因为BN破坏了图像原本的对比度信息
+* [Group Normalization](https://arxiv.org/abs/1803.08494)
+GN介于LN和IN之间，其首先将channel分为许多组(group), 然后对每一组做归一化。
+    * GN的性能与BN接近, 但不受batch size大小的影响。
+    * GN的均值和方差在训练和测试时计算是一致的, 但也因此丧失了BN正则化的功能
+    * LN和IN是GN的两个极限
+    * GN与Group卷积是独立的, 不使用Group卷积的网络也可以使用GN
+    * GN适合用于目标检测、分割、视频等batch size比较小的场景。
+![Group_Norm](./imgs/Group_Norm.png)
 
 [返回顶部](#classifier)
 
