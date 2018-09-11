@@ -310,6 +310,11 @@ GN介于LN和IN之间，其首先将channel分为许多组(group), 然后对每�
     * GN与Group卷积是独立的, 不使用Group卷积的网络也可以使用GN
     * GN适合用于目标检测、分割、视频等batch size比较小的场景。
 ![Group_Norm](./imgs/Group_Norm.png)
+* [IBN](https://arxiv.org/abs/1807.09441)
+巧妙的结合了BN和IN, 最终提高了模型的学习和泛化能力。
+    * IN学习了对外观变化不变的特征, 例如颜色, 风格等。
+    * BN保存了与内容相关的鉴别信息。
+    * IBN可以集成到已有的网络结构中并提升其性能。
 
 [返回顶部](#classifier)
 
