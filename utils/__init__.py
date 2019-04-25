@@ -2,4 +2,4 @@
 
 from .visualize import Visualizer
 from .tools import str2bool
-from .modelMeasure import convert_model, measure_model
+from .modelMeasure import measure_model

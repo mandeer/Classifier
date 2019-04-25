@@ -1,106 +1,96 @@
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append('./')
 
 import argparse
 import os
+import time
 import random
 import torch
-from torch.autograd import Variable
 from utils.tools import str2bool
 from dataLoader import getDataLoader
 import models
 
 class Solver(object):
     def __init__(self, config, model, trainLoader, testLoader):
+        self.config      = config
         self.trainLoader = trainLoader
         self.testLoader  = testLoader
-        self.num_classes = config.num_classes
-        self.use_cuda    = config.use_cuda
-        self.model_name  = config.model
-        self.model       = model
+        self.model       = model.to(self.config.device)
+        if self.config.device == 'cuda':
+            self.model = torch.nn.DataParallel(self.model)
         self.optimizer   = torch.optim.Adam(self.model.parameters(), weight_decay=1e-4)
         self.criterion   = torch.nn.CrossEntropyLoss()
-        if self.use_cuda:
-            self.model = self.model.cuda()
-            self.criterion = self.criterion.cuda()
-
-        self.n_epochs = config.n_epochs
-        self.log_step = config.log_step
-        self.out_path = config.out_path
 
     def val(self):
-        model = self.model
-        testLoader = self.testLoader
-        model.eval()  # 验证模式
-        class_correct = list(0. for i in range(self.num_classes))
-        class_total   = list(0. for i in range(self.num_classes))
-        accuracy      = list(0. for i in range(self.num_classes + 1))
+        self.model.eval()  # 验证模式
+        class_correct = list(0. for i in range(self.config.num_classes))
+        class_total   = list(0. for i in range(self.config.num_classes))
+        accuracy      = list(0. for i in range(self.config.num_classes + 1))
         loss = 0.0
-        for ii, (datas, labels) in enumerate(testLoader):
-            val_inputs = Variable(datas, volatile=True)
-            target = Variable(labels)
-            if self.use_cuda:
-                val_inputs = val_inputs.cuda()
-                target = target.cuda()
-            # print(labels)
-            score = model(val_inputs)
-            loss += self.criterion(score, target)
-            _, predicted = torch.max(score.data, 1)
-            c = (predicted.cpu() == labels).squeeze()
-            for jj in range(labels.size()[0]):
-                label = labels[jj]
-                class_correct[label] += c[jj]
-                class_total[label] += 1
+        with torch.no_grad():
+            for ii, (datas, labels) in enumerate(self.testLoader):
+                datas, labels = datas.to(self.config.device), labels.to(self.config.device)
+                score = self.model(datas)
+                loss += self.criterion(score, labels)
+                _, predicted = torch.max(score.data, 1)
+                c = (predicted == labels)
+                for jj in range(labels.size()[0]):
+                    label = labels[jj]
+                    class_correct[label] += int(c[jj])
+                    class_total[label] += 1
 
         correct = 0
         total = 0
-        for ii in range(self.num_classes):
+        for ii in range(self.config.num_classes):
             if class_total[ii] == 0:
                 accuracy[ii] = 0
             else:
-                correct = correct + class_correct[ii]
+                correct = correct + int(class_correct[ii])
                 total = total + class_total[ii]
-                accuracy[ii] = class_correct[ii] / class_total[ii]
-        accuracy[self.num_classes] = correct / total
+                accuracy[ii] = int(class_correct[ii]) / class_total[ii]
+        accuracy[self.config.num_classes] = correct / total
 
-        model.train()  # 训练模式
-        return accuracy, loss.cpu().data.numpy()
+        loss /= len(self.testLoader)
+        return accuracy, loss
 
     def train(self):
         val_accuracy, val_loss = self.val()
-        print('begin with accuracy: ', val_accuracy[self.num_classes])
+        print('begin with accuracy: %.6f; loss: %.6f' % (val_accuracy[self.config.num_classes], val_loss))
 
-        model = self.model
-        for epoch in range(self.n_epochs):
-            for ii, (data, label) in enumerate(self.trainLoader):
-                input  = Variable(data)
-                target = Variable(label)
-                if self.use_cuda:
-                    input = input.cuda()
-                    target = target.cuda()
+        self.model.train()  # 训练模式
+        for epoch in range(self.config.n_epochs):
+            train_loss = 0.0
+            for ii, (datas, labels) in enumerate(self.trainLoader):
+                datas, labels = datas.to(self.config.device), labels.to(self.config.device)
                 self.optimizer.zero_grad()
-                score = model(input)
-                loss = self.criterion(score, target)
+                score = self.model(datas)
+                loss = self.criterion(score, labels)
                 loss.backward()
                 self.optimizer.step()
 
-                if (ii + 1) % self.log_step == 0:
-                    print('epoch: ', epoch + 1, 'train_num: ', ii + 1, loss.cpu().data.numpy()[0])
+                train_loss += float(loss)
+                if (ii + 1) % self.config.log_step == 0:
+                    current_lr = self.optimizer.param_groups[0]['lr']
+                    print('epoch=%d, [%d/%d], loss=%.6f, lr=%.6f' % (epoch + 1, ii + 1, len(self.trainLoader),
+                                                                     train_loss / (ii + 1), current_lr), end=' | ')
+                    print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
             val_accuracy, val_loss = self.val()
-            print('val accuracy: ', val_accuracy[self.num_classes])
-            print('val loss:     ', val_loss[0])
+            print('val_accuracy=%.6f, val_loss=%.6f' % (val_accuracy[self.config.num_classes], val_loss), end=' | ')
+            print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
             if (epoch + 1) % 10 == 0:
-                model.save(root=self.out_path,
-                           name=self.model_name + '_cifar' + str(self.num_classes) + '_' + str(epoch+1) + '.pth')
+                self.model.save(root=self.config.out_path,
+                           name=self.config.model_name + '_cifar' + str(self.config.num_classes) + '_' + str(epoch+1) + '.pth')
         return
 
     def test(self):
         accuracy, loss = self.val()
 
-        for jj in range(self.num_classes):
-            print('accuracy_', jj, ': ', accuracy[jj])
-        print('accuracy total: ', accuracy[self.num_classes])
+        for jj in range(self.config.num_classes):
+            print('accuracy_%d: %.6f' % (jj, accuracy[jj]))
+        print('accuracy : %.6f' % (accuracy[self.config.num_classes]))
         return
 
 
@@ -111,6 +101,7 @@ def main(config):
         cudnn.benchmark = True
     elif torch.cuda.is_available():
         print("WARNING: You have a CUDA device, so you should probably run with --cuda")
+    config.device = 'cuda' if config.use_cuda else 'cpu'
 
     # seed
     if config.seed == 0:
@@ -138,11 +129,11 @@ def main(config):
     trainLoader, testLoader = getDataLoader(config)
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
-    # model = getattr(models, config.model)(num_classes=config.num_classes)
-    model = models.SENet_CIFAR(num_classes=config.num_classes)
+    model = getattr(models, config.model)(num_classes=config.num_classes)
+    # model = models.SENet_CIFAR(num_classes=config.num_classes)
     if config.pretrained != '':
         print('use pretrained model: ', config.pretrained)
-        model.load(config.model_preTrained)
+        model.load(config.pretrained)
     print(model)
     solver = Solver(config, model, trainLoader, testLoader)
 
@@ -158,7 +149,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--image-size', type=int,      default=32)
     parser.add_argument('--n-epochs',   type=int,      default=50)
-    parser.add_argument('--batch-size', type=int,      default=128)
+    parser.add_argument('--batch-size', type=int,      default=32)
     parser.add_argument('--n-workers',  type=int,      default=4)
     parser.add_argument('--lr',         type=float,    default=0.001)
     parser.add_argument('--out-path',   type=str,      default='./output')
@@ -166,10 +157,11 @@ if __name__ == '__main__':
     parser.add_argument('--log-step',   type=int,      default=100)
     parser.add_argument('--use-cuda',   type=str2bool, default=True,        help='enables cuda')
 
-    parser.add_argument('--dataset',    type=str,      default='CIFAR100',  help='CIFAR10 or CIFAR100')
+    parser.add_argument('--dataset',    type=str,      default='CIFAR10',  help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode',       type=str,      default='train',     help='train, test')
-    parser.add_argument('--model',      type=str,      default='SENet', help='model')
-    parser.add_argument('--pretrained', type=str,      default='',          help='model for test or retrain')
+    parser.add_argument('--model',      type=str,      default='MobileNetV2', help='model')
+    parser.add_argument('--pretrained', type=str,      default='')
+    # parser.add_argument('--pretrained', type=str,      default='./pretrained_models/MobileNetV2_cifar10_50.pth')
 
     config = parser.parse_args()
     if config.use_cuda and not torch.cuda.is_available():

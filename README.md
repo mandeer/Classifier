@@ -25,6 +25,7 @@
     * [MSDNet](#msdnet)(2017.3)
 * [**DPN**](#dpn)(2017.7)
 * [**SENet**](#senet)(2017.9)
+* [**CliqueNet**](#cliquenet)(2018.2)
 * [NASNet](#nasnet)(2017.7)
 * [ENAS](#enas)(2018.2)
 * [Evolution](#evolution)(2017.3)
@@ -578,6 +579,12 @@ are trained jointly, not independently.”
     * Excitation: 自适应重新校准，类似于RNN中门的机制，为每个特征通道生成权重;
     * Scale: 逐通道加权。
 * SENet 构造非常简单，而且很容易被部署，不需要引入新的函数或者层。
+
+[返回顶部](#classifier)
+
+## CliqueNet
+[CliqueNet](https://arxiv.org/abs/1802.10419)
+
 
 [返回顶部](#classifier)
 
