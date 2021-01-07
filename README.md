@@ -38,7 +38,6 @@
     * [**ShuffleNet**](#shufflenet)(2017.7)
     * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
     * [**CondenseNet**](#condensenet)(2017.11)
-* [实验结果](#实验结果)
 
 ------
 ## Requisites:
@@ -49,13 +48,13 @@
 
 ------
 分类网络的发展历程参考[这里](https://www.leiphone.com/news/201802/31oWxcSnayBIUJhE.html)
-![发展历程](./imgs/time.jpeg)
+![发展历程](imgs/time.jpeg)
 
 ------
 ## LeNet
 [LeNet](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
 是卷积神经网络的开山之作，麻雀虽小但五脏俱全。
-![LeNet-5](./imgs/LeNet-5.png)
+![LeNet-5](imgs/LeNet-5.png)
 ### 主要创新点
 * 局部感受野(local receptive fields):  
 卷积本质上是多个堆叠的可学习滤波器, 感受野是指某个节点所能看到的输入图像的范围.
@@ -67,7 +66,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 特征图的个数通常随着空间分辨率的降低而增加
 
 #### 卷积
-![conv](./imgs/conv.gif)
+![conv](imgs/conv.gif)
 #### max pooling
 ![pooling](./imgs/pooling.gif)
 
