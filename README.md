@@ -68,7 +68,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 #### 卷积
 ![conv](imgs/conv.gif)
 #### max pooling
-![pooling](./imgs/pooling.gif)
+![pooling](imgs/pooling.gif)
 
 [返回顶部](#classifier)
 
@@ -77,7 +77,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 在2012年的ImageNet图像分类竞赛中，top-5错误率比上一年的冠军下降了十个百分点，
 且远远超过当年的第二名。将沉寂多年的神经网络重新引入了大众的视野。
-![AlexNet](./imgs/AlexNet.png)
+![AlexNet](imgs/AlexNet.png)
 ### 主要创新点
 * 非线性激活函数: [**ReLU**](#relu)
 * 防止过拟合的方法: [Dropout](#dropout), Data augmentation
@@ -94,7 +94,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 ### 训练结果
 * 在cifar10数据集上没有达到论文中给出的结果，cifarNet在6个epochs后达到了0.688，
 最终达到了0.791  
-![AlexNet_cifar10](./imgs/AlexNet_cifar10.png)
+![AlexNet_cifar10](imgs/AlexNet_cifar10.png)
 
 [返回顶部](#classifier)
 
@@ -102,7 +102,7 @@ pooling层，下采样可以有效的降低输出对尺度和形变的敏感性�
 ### ReLU
 修正线性单元([ReLU](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf), Rectified linear unit)
 能够有效缓解梯度消失的问题，从而直接以监督的方式训练深度神经网络，无需依赖无监督的逐层预训练。  
-![AvtFunc](./imgs/ActFunc.png)
+![AvtFunc](imgs/ActFunc.png)
 
 #### 优点
 * 收敛速度快:  
@@ -133,7 +133,7 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
 按照一定的概率将其**暂时**从网络中丢弃。
 对于随机梯度下降来说，每一个mini-batch都是在训练不同的网络。
 
-![dropout](./imgs/dropout.png)
+![dropout](imgs/dropout.png)
 
 ### dropout有效的原因
 1. 集成论  
@@ -150,7 +150,7 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
 ## ZFNet
 [ZFNet](https://arxiv.org/abs/1311.2901v3)
 是2013年ILSVRC的冠军。其网络结构是在[AlexNet](#alexnet)上进行了微调：
-![ZFNet](./imgs/ZFNet.png)
+![ZFNet](imgs/ZFNet.png)
 ### 主要创新点
 * 卷积网络的可视化技术: 反卷积(Deconvolution), 也被称作转置卷积(Transpose convolution)
 * 依据可视化的结果，优化了[AlexNet](#alexnet):
@@ -158,7 +158,7 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
     * 去掉了[AlexNet](#alexnet)中的group
 
 #### 卷积与转置卷积
-![Conv2D](./imgs/Conv2D.gif) ![ConvTrans2D](./imgs/ConvTrans2D.gif)  
+![Conv2D](imgs/Conv2D.gif) ![ConvTrans2D](imgs/ConvTrans2D.gif)  
 图片来自[这里](https://github.com/vdumoulin/conv_arithmetic)
 
 [返回顶部](#classifier)
@@ -170,7 +170,7 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
 该模型可以很好的推广到其他数据集上，是最常用的base网络之一。
 本工程实现了ABDE 4个网络及其添加了[BatchNorm](#batchnorm)的ABDE网络。
 
-![VGG](./imgs/VGG.png)
+![VGG](imgs/VGG.png)
 
 ### 主要创新点
 * 具有小过滤器的深度网络优于具有较大过滤器的浅层网络
@@ -184,8 +184,8 @@ dropout是指在深度学习网络的训练过程中，对于神经网络单元�
 [NIN](https://arxiv.org/abs/1312.4400)
 对cnn的结构进行了改进。其提出的1*1卷积和全局均值池化已经成为了后来网络设计的标准结构。
 
-![NIN](./imgs/Mlpconv.png)
-![NIN](./imgs/NIN.png)
+![NIN](imgs/Mlpconv.png)
+![NIN](imgs/NIN.png)
 
 ### 主要创新点
 * 使用Mlpconv替代卷积：
@@ -211,9 +211,9 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V2, V3版本。
 ### Inception1
 * [Inception V1](https://arxiv.org/abs/1409.4842) 
 : Going Deeper with Convolutions [2014.9] [top5: 6.67%]
-![Inception module](./imgs/Inception_module.png)
-![GoogLeNet](./imgs/GoogLeNet.png)
-![architecture](./imgs/GoogLeNet_architecture.png)
+![Inception module](imgs/Inception_module.png)
+![GoogLeNet](imgs/GoogLeNet.png)
+![architecture](imgs/GoogLeNet_architecture.png)
 #### 主要创新点
 * 提出了Inception， 在利用密集矩阵的高计算性能的基础上，保持了网络结构的稀疏性。
 22层网络，参数却只有AlexNet的约1/12。
@@ -228,7 +228,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V2, V3版本。
 * [Inception V2](https://arxiv.org/abs/1502.03167)
 : Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
  [2015.2] [top5: 4.8%]
- ![GoogLeNetV2](./imgs/GoogLeNetV2.png)
+ ![GoogLeNetV2](imgs/GoogLeNetV2.png)
  #### 主要创新点
  * 提出了[**BatchNorm**](#batchnorm)
     * 提高SGD中的初始学习率： 加快了学习速度，而不会发生梯度弥散
@@ -238,7 +238,7 @@ GoogLeNet包括V1-V4共四个版本，本工程实现了V2, V3版本。
     * 去掉了LRN层： 都是Normalization
     * 更彻底地打乱训练样本： why??
     * 减少图像扭曲的使用： epoch数减少，需要多学习真实的数据
- ![BatchNorm](./imgs/BatchNorm.png)
+ ![BatchNorm](imgs/BatchNorm.png)
  
  [返回顶部](#classifier)
  
@@ -310,7 +310,7 @@ GN介于LN和IN之间，其首先将channel分为许多组(group), 然后对每�
     * LN和IN是GN的两个极限
     * GN与Group卷积是独立的, 不使用Group卷积的网络也可以使用GN
     * GN适合用于目标检测、分割、视频等batch size比较小的场景。
-![Group_Norm](./imgs/Group_Norm.png)
+![Group_Norm](imgs/Group_Norm.png)
 * [IBN](https://arxiv.org/abs/1807.09441)
 巧妙的结合了BN和IN, 最终提高了模型的学习和泛化能力。
     * IN学习了对外观变化不变的特征, 例如颜色, 风格等。
@@ -336,10 +336,10 @@ GN介于LN和IN之间，其首先将channel分为许多组(group), 然后对每�
 在每个卷积层后面添加激活函数会比不添加更好。
 * 非对称卷积：n\*n的卷积核可以分解成1\*n和n\*1非的卷积核。
 在中等大小的feature map中效果比较好。  
-![Mini-network](./imgs/Mini-network.png)
+![Mini-network](imgs/Mini-network.png)
 * 优化辅助分类器：辅助分类器起到了正则化(??)的作用，而不是V1中提到的作用。
 * 混合poolong：避免了表示瓶颈(representational bottleneck)  
-![new-pooling](./imgs/new-pooling.png)
+![new-pooling](imgs/new-pooling.png)
 * 标签平滑(Label Smoothing): 对网络输出进行正则化。
 * 低分辨率图像的识别；在相同计算量的前提下，
 低分辨率的网络需要更长的时间去训练，但最终的结果与高分辨率网络的差别不大。
@@ -367,8 +367,8 @@ GN介于LN和IN之间，其首先将channel分为许多组(group), 然后对每�
 表示Extreme Inception(极致的Inception)。使用深度可分类卷积替换掉了原来的
 Inception Module并获得了更好的性能。
 
-![Xception1](./imgs/Xception_1.png)
-![Xception2](./imgs/Xception_2.png)
+![Xception1](imgs/Xception_1.png)
+![Xception2](imgs/Xception_2.png)
 #### 主要创新点
 * 深度可分离卷积：在输入的每个通道独立执行空间卷积，然后进行逐点卷积，即1×1卷积，
 将深度卷积的通道输出映射到新的通道空间。
@@ -382,7 +382,7 @@ Inception Module并获得了更好的性能。
 [Highway Networks](https://arxiv.org/abs/1507.06228)
 通过自适应门机制让信息流没有衰减的通过一些网络层，解决了深层次网络训练困难的问题。
 后面的[ResNet](#resnet)可以看做是Highway Networks的一种特例。  
-![Highway-Networks](./imgs/Highway-Networks.png)
+![Highway-Networks](imgs/Highway-Networks.png)
 
 ### 主要创新点
 * 快捷链接：解决了深层次网络训练困难的问题
@@ -397,8 +397,8 @@ localization以及COCO的detection和segmentation上均斩获了第一名的成�
 且获得了CVPR2016的best paper。
 ResNet有152层，之后的[改进版](#resnet-v2)
 甚至达到了1001层之多。  
-![ResNet](./imgs/ResNet.png)
-![ResBlock](./imgs/Res-block.png)
+![ResNet](imgs/ResNet.png)
+![ResBlock](imgs/Res-block.png)
 
 ### 主要创新点
 * 解决了网络退化问题：随着网络深度的增加，误差趋向于饱和，然后会随之上升。
@@ -408,7 +408,7 @@ ResNet有152层，之后的[改进版](#resnet-v2)
 比使用一组堆叠的非线性层来拟合恒等映射要容易的多。
 
 ### 集成(ensemble)
-![Res-ensemble](./imgs/Res-ensemble.png)  
+![Res-ensemble](imgs/Res-ensemble.png)  
 [残差网络单元可以分解成右图的形式](https://arxiv.org/abs/1605.06431)。
 从图中可以看出，残差网络其实是由多种路径组合的一个网络，
 换句话说，残差网络其实是很多并行子网络的组合，残差网络其实相当于一个多人投票系统。
@@ -419,7 +419,7 @@ to view our method as ensembling, because the members to be aggregated
 are trained jointly, not independently.”
 
 ### 等效于RNN
-![ResNet&RNN](./imgs/ResNet&RNN.png)
+![ResNet&RNN](imgs/ResNet&RNN.png)
 详情请参考这篇[论文](https://arxiv.org/abs/1604.03640)
 
 [返回顶部](#classifier)
@@ -428,7 +428,7 @@ are trained jointly, not independently.”
 ### PerActResNet
 [ResNet-V2](https://arxiv.org/abs/1603.05027)
 重新设计了一种残差网络基本单元（预激活），使得网络更易于训练并且泛化性能也得到了提升。
-![Res-Unit-V2](./imgs/Res-Unit-V2.png)
+![Res-Unit-V2](imgs/Res-Unit-V2.png)
 
 #### 主要创新点
 * 深层单元的特征可以由浅层单元的特征和残差函数相加得到。残差网络是连加，普通网络是连乘。
@@ -436,7 +436,7 @@ are trained jointly, not independently.”
 * 回传的梯度不会消失。
 * 使用gating或1x1卷积作为快捷链接，其表达能力更强，但是它们的训练误差反而比恒等映射更大，
 造成这种结果的原因是优化问题，而不是表达能力的问题。  
-![Res-equ](./imgs/Res-equ.png)
+![Res-equ](imgs/Res-equ.png)
 
 [返回顶部](#classifier)
 
@@ -447,7 +447,7 @@ are trained jointly, not independently.”
 提供了一种新的方式来调整模型容量。这是一个和网络深度、宽度同等重要的因素。
 
 #### ResNeXt Block
-![ResNeXt](./imgs/ResNeXt.png)
+![ResNeXt](imgs/ResNeXt.png)
 #### ResNeXt Block的等价形式
 ![ResNeXt-Blocks-Equ](imgs/ResNeXt-Blocks-Equ.png)
 #### 主要创新点
@@ -464,7 +464,7 @@ are trained jointly, not independently.”
 [WRN](https://arxiv.org/abs/1605.07146)
 从“宽度”的角度入手，提出了wide residual networks。作者提供了PyTorch的
 [源码](https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch)
-![WRN](./imgs/WRN.png)
+![WRN](imgs/WRN.png)
 
 #### 主要创新点
 * 增加深度和宽度都有好处
@@ -498,8 +498,8 @@ are trained jointly, not independently.”
 也就是说，网络每一层的输入都是前面所有层输出的并集，
 而该层所学习的特征图也会被直接传给其后面所有层作为输入。
 参考了作者对DenseNet的[解读](http://www.sohu.com/a/161923204_651893)
-![DenseBlock](./imgs/DenseBlock.png)
-![DenseNet](./imgs/DenseNet.png)
+![DenseBlock](imgs/DenseBlock.png)
+![DenseNet](imgs/DenseNet.png)
 
 ### DenseNet与其他Net的区别
 * 网络中的每一层都直接与其前面层相连，从而实现了实现特征的重复利用。
@@ -525,8 +525,8 @@ are trained jointly, not independently.”
 其主要思想是用浅层的特征来预测相对「简单」的图片，用深层的特征来预测比较「难」的图片，
 在不损失精度的前提下，有效的降低了深度模型推理时的**平均**计算开销。
 作者提供了torch的[源码](https://github.com/gaohuang/MSDNet)  
-![MSDNet_3](./imgs/MSDNet_3.png)
-![MSDNet](./imgs/MSDNet.png)
+![MSDNet_3](imgs/MSDNet_3.png)
+![MSDNet](imgs/MSDNet.png)
 
 #### 主要创新点
 * “级联分类器”：设置一个阈值，当某个分类器的输出超出该阈值时，输出该结果。
@@ -543,10 +543,10 @@ are trained jointly, not independently.”
 并通过把这两种结构的优点结合到一起，最终提高了准确率和参数利用率。
 
 ### HORNN & DenseNet
-![HORNN](./imgs/HORNN.png)
+![HORNN](imgs/HORNN.png)
 
 ### DPN Architecture
-![DPN](./imgs/DPN.png)
+![DPN](imgs/DPN.png)
 
 ### 主要创新点
 * 通过HORNN统一了ResNet和DenseNet的数学表达。
@@ -565,11 +565,11 @@ are trained jointly, not independently.”
 相对于2016年的冠军取得了∼25%的提升。
 
 ### SE-Block
-![SE-Block](./imgs/SE-Block.png)
+![SE-Block](imgs/SE-Block.png)
 
 ### SENet Module
-![SE-ResNet](./imgs/SE-ResNet-Module.png)
-![SE-Inception](./imgs/SE-Inception-Module.png)
+![SE-ResNet](imgs/SE-ResNet-Module.png)
+![SE-Inception](imgs/SE-Inception-Module.png)
 
 ### 主要创新点
 * SE Block: 以微小的计算成本为现有的最先进的深层架构产生了显著的性能改进。
@@ -599,10 +599,10 @@ are trained jointly, not independently.”
 最终在特征提取和目标检测准确率都获得了全方位提升。
 
 ### Neural Architecture Search
-![NASearch](./imgs/NASearch.png)
+![NASearch](imgs/NASearch.png)
 
 ### Best Convolutional Cells
-![NAS-Cell](./imgs/NAS-Cell.png)
+![NAS-Cell](imgs/NAS-Cell.png)
 
 ### 主要创新点
 * 自动生成网络结构(Conv Cell): 利用RNN控制器去预测一个网络结构，接着训练这个网络直到收敛，
@@ -621,7 +621,7 @@ are trained jointly, not independently.”
 模型搜索时间缩短了1000倍以上。
 
 ### DAG 示例
-![ENAS_DAG](./imgs/ENAS_DAG.png)
+![ENAS_DAG](imgs/ENAS_DAG.png)
 * 节点表示操作
 * 边表示信息流
 * 红色箭头定义了搜索空间中的一个子模型
@@ -629,7 +629,7 @@ are trained jointly, not independently.”
 * 搜索时RNN控制器需要决定激活那些边(或者每个节点的输入)，以及每个节点执行什么操作。
 
 ### 搜索示例
-![ENAS](./imgs/ENAS.png)
+![ENAS](imgs/ENAS.png)
 
 ### 主要创新点
 * NAS的模型搜索空间可以用一个有向无环图(directed acyclic graph, DAG)来进行表示。
@@ -648,7 +648,7 @@ are trained jointly, not independently.”
 发现了可用于 CIFAR-10 和 CIFAR-100 数据集的模型。
 
 ### 演化过程
-![Evolution](./imgs/Evolution.png)
+![Evolution](imgs/Evolution.png)
 * 蓝色的是最终存活的, 黑色的已被杀死
 * 最右边的是最优个体，左边三个是其祖先
 * C表示卷积, BN表示[Batch Norm](#batchnorm), R表示[ReLU](#relu)
@@ -685,7 +685,7 @@ are trained jointly, not independently.”
 注: amoeba(变形虫, 阿米巴)是单细胞生物, 最低等的原始生物之一。
 
 ### AmoebaNet building blocks
-![AmoebaNet](./imgs/AmoebaNet.png)
+![AmoebaNet](imgs/AmoebaNet.png)
 * 搜索空间与NASNet2相同
 * 突变修改为随机重新连接输入或随机替换运算
 * 没有权重继承，所有的网络模型都需要从头开始训练
@@ -704,7 +704,7 @@ are trained jointly, not independently.”
 [SqueezeNet](https://arxiv.org/abs/1602.07360)
 使用[AlexNet](#alexnet)1/50的参数，实现了近似的准确率。
 
-![FireModule](./imgs/FireModule.png)  
+![FireModule](imgs/FireModule.png)  
 #### 主要创新点
 * Fire Module
     * squeeze层，大幅度减小feature map的数量
@@ -718,7 +718,7 @@ are trained jointly, not independently.”
 [MobileNets](https://arxiv.org/abs/1704.04861)
 基于深度可分离卷积构建了一种轻量化网络。据说本文成果早于[ResNet](#resnet)，故网络结构比较简单。
 
-![MobileNets-V1](./imgs/MobileNets-V1.png)
+![MobileNets-V1](imgs/MobileNets-V1.png)
 #### 主要创新点
 * 利用深度可分离卷积，减少了计算量的同时也降低了参数量
 * 将计算和参数的大部分转移到优化做的比较好的1\*1卷积
@@ -734,7 +734,7 @@ are trained jointly, not independently.”
 #### MobileNetV1与V2的微结构对比
 * DW之前多了一个1\*1的“扩张”层，目的是提升通道数，以便获得更多特征；
 * 为防止Relu破坏特征，使用Linear代替。
-![MobileNetV1-2](./imgs/MobileNetV1-2.svg)  
+![MobileNetV1-2](imgs/MobileNetV1-2.svg)  
 #### ResNet与MobileNetV2的微结构对比
 * ResNet: 压缩 -> 卷积提特征 -> 扩张
 * MobileNetV2: 扩张 -> 卷积提特征 -> 压缩
@@ -760,9 +760,9 @@ are trained jointly, not independently.”
 利用逐点分组卷积和通道重排技术，在保持准确率的前提下极大地减少计算量。 
 
 #### channel shuffle
-![ShuffleNet](./imgs/ShuffleNet.png)
+![ShuffleNet](imgs/ShuffleNet.png)
 #### ShuffleNet Units
-![ShuffleNet-Units](./imgs/ShuffleNet-Units.png)
+![ShuffleNet-Units](imgs/ShuffleNet-Units.png)
 
 #### 主要创新点
 * 分组逐点卷积(pointwise group convolution): 把bottleneck中的1\*1卷积换成分组卷积，
@@ -789,20 +789,20 @@ are trained jointly, not independently.”
 作者给出了IGCV3的mxnet[代码](https://github.com/homles11/IGCV3)
 
 #### 交错组卷积
-![IGC](./imgs/IGC.png)
+![IGC](imgs/IGC.png)
 * 第二次组卷积过程中，每组的输入通道均来自于第一次组卷积过程中不同的组，以达到交错互补的目的。
 * 第一次组卷积的kernel_size=3,第二次组卷积的kernel_size=1.
 * M=2,即第一个组卷积，每组有2个featureMap时，效果最好。
 * IGC + BN + ReLU
 
 #### 交错结构稀疏卷积
-![IGCV2](./imgs/IGCV2.png)
+![IGCV2](imgs/IGCV2.png)
 * W代表分组卷积; P代表通道重排序
 * 第一次组卷积的kernel_size=3,第二次和第三次组卷积的kernel_size=1.
 * 将V1中的第二个组卷积分解
 
 #### 交错低秩组卷积
-![IGCV3](./imgs/IGCV3.png)
+![IGCV3](imgs/IGCV3.png)
 * Conv1: kernel_size=1, group=2, 升维
 * Conv2: kernel_size=3, group=channel
 * Conv3: kernel_size=1, group=2, 降维
@@ -822,9 +822,9 @@ are trained jointly, not independently.”
 [CondenseNet](https://arxiv.org/abs/1711.09224)
 优化了DenseNet网络，通过训练时剪枝以及分组卷积提高了计算效率及参数利用率。作者提供了
 pytorch的[源码](https://github.com/ShichenLiu/CondenseNet)
-![CondenseNet](./imgs/CondenseNet.png)
+![CondenseNet](imgs/CondenseNet.png)
 #### 自学习分组卷积
-![LGR](./imgs/LGR.png)
+![LGR](imgs/LGR.png)
 #### 主要创新点
 * 自学习分组卷积(Learned Group Convolutions)：
 训练时剪枝（稀疏正则化），测试时使用使用分组卷积。
