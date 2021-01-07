@@ -34,6 +34,7 @@
     * [**SqueezeNet**](#squeezenet)(2016.2)
     * [**MobileNets**](#mobilenets)(2017.4)
     * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
+    * [**MobileNet-V3**](#mobilenet_v3)(2019.5)
     * [**ShuffleNet**](#shufflenet)(2017.7)
     * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
     * [**CondenseNet**](#condensenet)(2017.11)
@@ -57,7 +58,7 @@
 ![LeNet-5](./imgs/LeNet-5.png)
 ### 主要创新点
 * 局部感受野(local receptive fields):  
-卷积层, 用于提取特征
+卷积本质上是多个堆叠的可学习滤波器, 感受野是指某个节点所能看到的输入图像的范围.
 * 权值共享(shared weights):  
 因为目标可能出现在图像的任何位置，所以同一特征图中不同的节点需要在图像的不同位置执行相同的操作。
 即，同一层的不同节点拥有相同的权重。该操作使提取的特征拥有了位移不变性，同时大大降低了参数的数量。
@@ -745,6 +746,12 @@ are trained jointly, not independently.”
 为防止Relu破坏特征，最后一层的ReLu6被替换成了Linear层。
 * 倒残差结构(Inverted residuals): 参考ResNet与MobileNetV2的微结构对比，
 中间3\*3的卷积层使用更多的通道数，以便获得更多特征。
+
+[返回顶部](#classifier)
+
+-----
+### MobileNet_V3
+[MobileNet_V3](http://xxx.itp.ac.cn/abs/1905.02244)
 
 [返回顶部](#classifier)
 
