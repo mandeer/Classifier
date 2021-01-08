@@ -31,13 +31,6 @@
 * [Evolution](#evolution)(2017.3)
 * [AmoebaNet](#amoebanet)(2018.2)
 * [轻量化网络](#轻量化网络)
-    * [**SqueezeNet**](#squeezenet)(2016.2)
-    * [**MobileNets**](#mobilenets)(2017.4)
-    * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
-    * [**MobileNet-V3**](#mobilenet_v3)(2019.5)
-    * [**ShuffleNet**](#shufflenet)(2017.7)
-    * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
-    * [**CondenseNet**](#condensenet)(2017.11)
 
 ------
 ## Requisites:
@@ -701,5 +694,17 @@ are trained jointly, not independently.”
 ## 轻量化网络
 ------
 [轻量化网络](EfficientNets.md)
+通过设计网络结构, 在不损失网络性能的前提下, 尽可能的减少模型的参数.
+提高了cnn在cpu上的运行效率, 从而将复杂的cnn模型精简并移植到移动端.
+本文介绍了以下轻量化网络:
+**SqueezeNet**(2016.2)
+
+**MobileNets**(2017.4, 2018.1, 2019.5)
+
+**ShuffleNets**(2017.7, 2018.7)
+
+IGCNets(2017.7, 2018.4, 2018.6)
+
+**CondenseNet**(2017.11)
 
 [返回顶部](#classifier)

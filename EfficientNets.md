@@ -4,6 +4,7 @@
 * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
 * [**MobileNet-V3**](#mobilenet_v3)(2019.5)
 * [**ShuffleNet**](#shufflenet)(2017.7)
+* [ShuffleNet-V2](#shufflenet_v2)(2018.7)
 * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
 * [**CondenseNet**](#condensenet)(2017.11)
 
@@ -79,6 +80,12 @@
 * 修改了bottleneck中stride=2的层(ShuffleNet Units: C)
     * kernel_size 从1改成3
     * sum改成Concat
+
+[返回顶部](#轻量化网络)
+
+-----
+### Shufflenet_v2
+[Shufflenet_v2](https://arxiv.org/abs/1807.11164)
 
 [返回顶部](#轻量化网络)
 
