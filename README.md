@@ -699,7 +699,7 @@ are trained jointly, not independently.”
 本文介绍了以下轻量化网络:
 **SqueezeNet**(2016.2)
 
-**MobileNets**(2017.4, 2018.1, 2019.5)
+**MobileNets**(2017.4, 2018.1, 2018.7 2019.5)
 
 **ShuffleNets**(2017.7, 2018.7)
 

@@ -2,9 +2,10 @@
 * [**SqueezeNet**](#squeezenet)(2016.2)
 * [**MobileNets**](#mobilenets)(2017.4)
 * [**MobileNet-V2**](#mobilenet_v2)(2018.1)
+* [MnasNet](#mnasnet)(2018.7)
 * [**MobileNet-V3**](#mobilenet_v3)(2019.5)
 * [**ShuffleNet**](#shufflenet)(2017.7)
-* [ShuffleNet-V2](#shufflenet_v2)(2018.7)
+* [**ShuffleNet-V2**](#shufflenet_v2)(2018.7)
 * [IGCNets](#igcnets)(2017.7, 2018.4, 2018.6)
 * [**CondenseNet**](#condensenet)(2017.11)
 
@@ -54,6 +55,12 @@
 为防止Relu破坏特征，最后一层的ReLu6被替换成了Linear层。
 * 倒残差结构(Inverted residuals): 参考ResNet与MobileNetV2的微结构对比，
 中间3\*3的卷积层使用更多的通道数，以便获得更多特征。
+
+[返回顶部](#轻量化网络)
+
+-----
+### MnasNet
+[MnasNet](https://arxiv.org/abs/1807.11626)
 
 [返回顶部](#轻量化网络)
 
