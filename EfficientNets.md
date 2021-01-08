@@ -86,7 +86,25 @@
 -----
 ### Shufflenet_v2
 [Shufflenet_v2](https://arxiv.org/abs/1807.11164)
+认为高效的网络应该直接在目标平台上评估速度而不是计算模型的FLOPs, 
+并提出了高效的网络设计应遵循的4条指导原则.进而设计了ShuffleNet-V2.
 
+![ShuffleNet](imgs/ShuffleNet_v2.png)
+
+#### 主要创新点
+* 指出了轻量化网络设计不能只考虑计算复杂度(FLOPs), 
+还需要考虑存储器访问成本和目标平台特性等其他因素.
+* 原则1: Equal channel width minimizes memory access cost (MAC).
+卷积前后通道个数相等时, 速度最快.
+* 原则2: Excessive group convolution increases MAC.
+组卷积降低了FLOPs但提高了MAC.
+* 原则3: Network fragmentation reduces degree of parallelism.
+多路结构经常造成网络的碎片化, 这虽然有利于提高模型的精确度,
+但在GPU上会降低模型的运行速度(CPU上影响较小).
+* 原则4: Element-wise operations are non-negligible.
+ReLU, AddTensor, AddBias等Element-wise operations的MAC/FLOPs很大.
+* 在上述原则的指导下, 设计了"channel split"和shuffleNet-V2.
+shuffleNet-V2还借鉴了DenseNet中的re-use结构.
 [返回顶部](#轻量化网络)
 
 ------
