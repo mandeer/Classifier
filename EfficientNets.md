@@ -61,6 +61,22 @@
 -----
 ### MnasNet
 [MnasNet](https://arxiv.org/abs/1807.11626)
+在神经网络架构搜索时, 同时优化模型的精度和目标平台的速度.
+
+#### Objective Function
+![MnasNet_func](imgs/MnasNet_func.png)
+
+#### MnasNet model
+![MnasNet](imgs/MnasNet.png)
+* 有很多5*5的卷积
+* 模型不是一个模块的简单堆叠
+
+#### 主要创新点
+* 将模型设计问题转化为多目标优化问题, 
+同时考虑模型的精度和目标平台的速度.
+* 层级搜索空间: 
+将模型划分成多个groups, 对每个group都单独搜索其结构,
+而不是简单的堆叠一个搜索出的较优结构.
 
 [返回顶部](#轻量化网络)
 
