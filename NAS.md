@@ -3,7 +3,6 @@
 * [ENAS](#enas)(2018.2)
 * [Evolution](#evolution)(2017.3)
 * [AmoebaNet](#amoebanet)(2018.2)
-* [轻量化网络](#轻量化网络)
 
 ------
 ## NASNet

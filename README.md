@@ -579,6 +579,8 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
+## 神经结构搜索
+------
 [神经结构搜索](NAS.md)
 是一种自动设计神经网络的技术, 
 可以通过算法根据样本集自动设计出高性能的网络结构, 
