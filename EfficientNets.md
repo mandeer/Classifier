@@ -61,7 +61,7 @@
 -----
 ### MnasNet
 [MnasNet](https://arxiv.org/abs/1807.11626)
-在神经网络架构搜索时, 同时优化模型的精度和目标平台的速度.
+在神经网络架构搜索时, 同时优化模型的精度和在目标平台的速度.
 
 #### Objective Function
 ![MnasNet_func](imgs/MnasNet_func.png)
@@ -83,6 +83,7 @@
 -----
 ### MobileNet_V3
 [MobileNet_V3](http://xxx.itp.ac.cn/abs/1905.02244)
+
 
 [返回顶部](#轻量化网络)
 

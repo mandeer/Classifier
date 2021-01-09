@@ -5,7 +5,6 @@ import torch.nn as nn
 from.BasicModule import BasicModule
 
 
-
 class Bottleneck(nn.Module):
     def __init__(self, last_planes, in_planes, out_planes, dense_depth, stride, first_layer):
         super(Bottleneck, self).__init__()
