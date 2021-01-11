@@ -83,8 +83,30 @@
 -----
 ### MobileNet_V3
 [MobileNet_V3](http://xxx.itp.ac.cn/abs/1905.02244)
+结合神经结构搜索和人工网络设计的方法, 并达到了state of the art的结果.
+
+#### MobileNet_V3 block
+![block](imgs/Mobilenet-v3-block.png)
+* MobileNetV2 + Squeeze-and-Excite(MnasNet里已经使用)
+
+#### MobileNat_V3 head
+![head](imgs/MobileNet-v3-head.png)
 
 
+#### h-swish
+![h-swish](imgs/h-swish.png)
+* ![func](imgs/h-swish_func.png)
+* h-swish在比较深的层里更有效
+
+#### 主要创新点
+* 神经结构搜索: 
+    * 使用[MnasNet](#mnasnet)中的神经结构搜索方法得到全局网络结构.
+    * 使用NetAdapt算法用于分层搜索
+* 人工网络设计
+    * 优化了耗时较多的头和尾
+        * MobileNat_V3 head
+        * 将第一层卷积的个数降低一半, 后接两个不同的非线性层(RELU and switch)
+    * h-swish
 [返回顶部](#轻量化网络)
 
 ------
