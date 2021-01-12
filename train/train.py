@@ -137,7 +137,6 @@ def main(config):
     print('train samples num: ', len(trainLoader), '  test samples num: ', len(testLoader))
 
     model = getattr(models, config.model)(num_classes=config.num_classes)
-    # model = models.SENet_CIFAR(num_classes=config.num_classes)
     if config.pretrained != '':
         print('use pretrained model: ', config.pretrained)
         model.load(config.pretrained)
@@ -164,7 +163,7 @@ if __name__ == '__main__':
     parser.add_argument('--use-cuda',   type=str2bool, default=True,        help='enables cuda')
     parser.add_argument('--dataset',    type=str,      default='CIFAR10',  help='CIFAR10 or CIFAR100')
     parser.add_argument('--mode',       type=str,      default='train',     help='train, test')
-    parser.add_argument('--model',      type=str,      default='MobileNetV2', help='model')
+    parser.add_argument('--model',      type=str,      default='MobileNetV3', help='model')
     parser.add_argument('--pretrained', type=str,      default='')
 
     config = parser.parse_args()

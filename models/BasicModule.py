@@ -16,7 +16,7 @@ class BasicModule(nn.Module):
     def save(self, root=None, name=None, device='cuda'):
         if root is None:
             root = './checkpoints/'
-        if root[-1] is not '/':
+        if root[-1] != '/':
             root = root + '/'
         if name is None:
             prefix = self.model_name + '_'

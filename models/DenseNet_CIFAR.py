@@ -1,7 +1,7 @@
 import math
 import torch
 import torch.nn as nn
-from.BasicModule import BasicModule
+from .BasicModule import BasicModule
 
 class Bottleneck(nn.Module):
     def __init__(self, in_planes, growth_rate):

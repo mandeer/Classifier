@@ -13,7 +13,8 @@ from .DenseNet import DenseNet
 from .DenseNet_CIFAR import DenseNet_CIFAR
 from .Xception import Xception_CIFAR
 from .MobileNet import MobileNet
-from .MobuleNet2 import MobileNetV2
+from .MobileNet2 import MobileNetV2
+from .MobileNet3 import MobileNetV3
 from .ShuffleNet import ShuffleNet
 from .DPN import DPN_CIFAR
 from .SENet import SENet_CIFAR
