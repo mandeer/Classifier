@@ -16,5 +16,6 @@ from .MobileNet import MobileNet
 from .MobileNet2 import MobileNetV2
 from .MobileNet3 import MobileNetV3
 from .ShuffleNet import ShuffleNet
+from .ShuffleNet2 import ShuffleNetV2
 from .DPN import DPN_CIFAR
 from .SENet import SENet_CIFAR
