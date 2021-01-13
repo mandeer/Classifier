@@ -92,7 +92,6 @@
 #### MobileNat_V3 head
 ![head](imgs/MobileNet-v3-head.png)
 
-
 #### h-swish
 ![h-swish](imgs/h-swish.png)
 * ![func](imgs/h-swish_func.png)

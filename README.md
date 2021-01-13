@@ -600,6 +600,24 @@ are trained jointly, not independently.”
 ------
 ## EfficientNet
 [EfficientNet](https://arxiv.org/abs/1905.11946)
+提出了一种简单的[模型缩放](#compound scaling method)方法, 
+在网络缩放时平衡好网络的深度, 宽度和输入图像的分辨率.
+
+### Model Scaling
+![ModelScaling](imgs/ModelScaling.png)
+
+### compound scaling method
+![ScalingMethod](imgs/ScalingMethod.png)
+* α=1.2, β=1.1, γ=1.15, (1.2x1.1x1.1x1.15x1.15=1.92)
+* FLOPs以2的倍数增加
+
+### 主要创新点
+* small baseline network
+* compound scaling method
+* 需要仔细的平衡网络的width, depth, resolution.
+
+作者公布了其Tensorflow
+[code](https://github.com/tensorflow/tpu/tree/master/models/official/efficientnet)
 
 [返回顶部](#classifier)
 
