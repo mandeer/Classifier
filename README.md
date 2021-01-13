@@ -1,5 +1,6 @@
 # Classifier
-使用PyTorch实现了经典的深度学习分类算法：  
+简要介绍了经典的深度学习分类算法, 
+并使用PyTorch实现了其中的部分算法(粗体)：  
 
 * [**LeNet**](#lenet)(1998)
 * [**AlexNet**](#alexnet)(2012)
@@ -26,6 +27,8 @@
 * [**DPN**](#dpn)(2017.7)
 * [**SENet**](#senet)(2017.9)
 * [**CliqueNet**](#cliquenet)(2018.2)
+* [EfficientNet](#efficientnet)(2019.05)
+* [**VIT**](#vit)(2020.10)
 * [神经结构搜索](#神经结构搜索)
 * [轻量化网络](#轻量化网络)
 
@@ -574,7 +577,23 @@ are trained jointly, not independently.”
 
 ## CliqueNet
 [CliqueNet](https://arxiv.org/abs/1802.10419)
+在DenseNet的基础上提出了一种更加“紧密”的卷积网络结构. 
+在同一个block中, 不同的layer互为输入和输出.
 
+### CliqueNet Block
+![CliqueBlock](imgs/CliqueNet_block.png)
+* stageI = DenseNet Block
+* stageII, 将其他层的最新输出作为本层的输入
+信息流可以从浅层的卷积单元传递到深层的卷积单元, 
+也可以从深层的卷积单元再传回浅层的卷积单元, 
+
+### CliqueNet
+![CliqueNet](imgs/CliqueNet.png)
+* 仅stageII的输出进入下一个block, 特征图个数增加较其他模型较少.
+
+### 主要创新点
+* Clique block: 循环链接, 交替更新, 在同一个block中, 不同的layer互为输入和输出.
+* 多尺度的特征策略, 可以有效避免参数的快速增长.
 
 [返回顶部](#classifier)
 
