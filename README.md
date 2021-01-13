@@ -579,6 +579,18 @@ are trained jointly, not independently.”
 [返回顶部](#classifier)
 
 ------
+## EfficientNet
+[EfficientNet](https://arxiv.org/abs/1905.11946)
+
+[返回顶部](#classifier)
+
+------
+## VIT
+[VIT](https://arxiv.org/abs/2010.11929)
+
+[返回顶部](#classifier)
+
+------
 ## 神经结构搜索
 ------
 [神经结构搜索](NAS.md)
